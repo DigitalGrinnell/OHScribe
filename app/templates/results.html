@@ -1,0 +1,18 @@
+{# This is the 'results' page #}
+
+{% extends "base.html" %}
+
+{% block app_content %}
+<h1>Results</h1>
+
+<table>
+   {% for key, value in result.items() %}
+      <tr class='bordered'>
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+      </tr>
+   {% endfor %}
+</table>
+<br>
+<div class='bordered'> {{ message }} </div>
+{% endblock %}

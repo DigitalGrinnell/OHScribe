@@ -1,0 +1,27 @@
+{# This is the 'main' or 'control' page #}
+
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Main/Control Screen</h1>
+    <form action="{{ url_for('results') }}" method="POST">
+        <hr>
+        {{ form.browse }}
+        <hr>
+        <div class='bordered'>
+          <table class='padded-left' border='0'>
+            <div class='t-heading'>
+              <span class='padded-left'> {{ form.actions.label }} </span>
+            </div>
+            {% for action in form.actions %}
+              <tr>
+                <td class='padded-left'>{{ action }}</td>
+                <td class='padded-left'>{{ action.label }}</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <hr>
+        {{ form.go }} <br>
+    </form>
+{% endblock %}
