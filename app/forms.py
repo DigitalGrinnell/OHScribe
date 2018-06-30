@@ -1,13 +1,33 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField, RadioField
-from wtforms.validators import DataRequired, Regexp
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
+from wtforms.validators import DataRequired
+from flask_wtf.file import FileField
+
 
 class MainForm(FlaskForm):
-    browse = FileField('Browse', validators=[DataRequired()])
-    actions = RadioField('Action', choices=[('cleanup','Clean-Up'), ('transform', 'Transform'), ('convert',
-      'Convert hh:mm:ss to Seconds'), ('speakers', 'Format Speakers'), ('analyze', 'Analyze'), ('exit', 'Exit')])
-    go = SubmitField('Go')
+  browse = FileField('Select an XML File to Upload')
+  
+  actions = RadioField('Action', choices=[
+    ('cleanup','Clean-Up the XML'),
+    ('transform', 'Transform XML to IOH'),
+    ('convert','Convert hh:mm:ss to Seconds'),
+    ('speakers', 'Format Speaker Tags'),
+    ('analyze', 'Analyze Cue Times')])
     
+  all = SubmitField('Do All of the Above')
+  go = SubmitField('Do Single Action')
+  exit = SubmitField('Exit')
+
+  
+class LoginForm(FlaskForm):
+  username = StringField('Username', validators=[DataRequired()])
+  password = PasswordField('Password', validators=[DataRequired()])
+  # remember_me = BooleanField('Remember Me')
+  submit = SubmitField('Sign In')
+
+
+
+
 # exit = SubmitField('Exit')
 # transform = SubmitField('Transform')
 # convert = SubmitField('Convert hh:mm:ss to Seconds')

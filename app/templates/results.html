@@ -3,16 +3,40 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<h1>Results</h1>
 
-<table>
-   {% for key, value in result.items() %}
-      <tr class='bordered'>
-        <th> {{ key }} </th>
-        <td> {{ value }} </td>
-      </tr>
-   {% endfor %}
-</table>
+{#
+  <h1>Results</h1>
+  <table>
+  {% for key, value in result.items() %}
+     <tr class='bordered'>
+       <th> {{ key }} </th>
+       <td> {{ value }} </td>
+     </tr>
+  {% endfor %}
+  </table>
+#}
+
 <br>
-<div class='bordered'> {{ message }} </div>
+
+{%  if message|length > 0 %}
+  <fieldset>
+    <legend class="custom"><span>Message</span></legend>
+    <div class="bordered message titled"> {{ message }} </div>
+  </fieldset>
+{% endif %}
+
+{%  if details|length > 0 %}
+  <fieldset>
+    <legend class="custom"><span>Details</span></legend>
+    <pre class="bordered details titled"> {{ details }} </pre>
+  </fieldset>
+{% endif %}
+
+{% if guidance|length > 0 %}
+  <fieldset>
+    <legend class="custom"><span>Guidance</span></legend>
+    <div class="bordered guidance titled"> {{ guidance }} </div>
+  </fieldset>
+{% endif %}
+
 {% endblock %}

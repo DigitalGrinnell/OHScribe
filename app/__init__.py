@@ -1,20 +1,14 @@
-from flask import Flask
-from config import Config
+from os import environ
 from flask_bootstrap import Bootstrap
-from lxml import etree
-from bs4 import BeautifulSoup
+from flask import Flask
 
+# Constants/secrets moved to .env, accessed using os.environ below
+
+# Initialize the app... populate app.config[]
 app = Flask(__name__)
 app.static_folder = 'static'
-app.config.from_object(Config)
-
-# # For Docker
-# app.config['UPLOAD_FOLDER'] = '/home/ohscribe/data'
-# app.config['UPLOAD_ALIAS'] = '~/Projects/Docker/OHScribe/data'
-
-# For PyCharm development
-app.config['UPLOAD_FOLDER'] = '/Users/markmcfate/data'
-app.config['UPLOAD_ALIAS'] = '/Users/markmcfate/data'
+app.config['UPLOAD_FOLDER'] = environ.get('UPLOAD_FOLDER')
+app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
 
 bootstrap = Bootstrap(app)
 
