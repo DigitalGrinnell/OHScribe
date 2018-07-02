@@ -12,7 +12,7 @@ import sys
 def login():
   form = LoginForm(request.form)
   if request.method == 'POST':
-    if (form.username.data == "admin" and form.password.data == "Grinn311C0113g3"):
+    if (form.username.data == "admin" and form.password.data == "${OHSCRIBE_ADMIN_PASSWORD}"):
       flash("Login permitted for user '{}'".format(form.username.data))
       return redirect(url_for('main'))
     else:
