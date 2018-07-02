@@ -4,6 +4,7 @@ from app.forms import MainForm, LoginForm
 from app.actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, \
   upload_to_server
 import sys
+import os
 
 
 # Route for handling the login page logic
@@ -12,7 +13,7 @@ import sys
 def login():
   form = LoginForm(request.form)
   if request.method == 'POST':
-    if (form.username.data == "admin" and form.password.data == "${OHSCRIBE_ADMIN_PASSWORD}"):
+    if (form.username.data == "admin" and form.password.data == os.getenv('OHSCRIBE_ADMIN_PASSWORD'):
       flash("Login permitted for user '{}'".format(form.username.data))
       return redirect(url_for('main'))
     else:
