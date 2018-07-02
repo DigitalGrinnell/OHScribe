@@ -13,7 +13,7 @@ import os
 def login():
   form = LoginForm(request.form)
   if request.method == 'POST':
-    if (form.username.data == "admin" and form.password.data == os.getenv('OHSCRIBE_ADMIN_PASSWORD'):
+    if (form.username.data == "admin" and form.password.data == os.getenv('OHSCRIBE_ADMIN_PASSWORD')):
       flash("Login permitted for user '{}'".format(form.username.data))
       return redirect(url_for('main'))
     else:
@@ -50,7 +50,7 @@ def results():
   else:
     flash("For any Action you must select a file to process.  Try again or 'Exit'?", 'error')
     return redirect(url_for('main'))
-  
+
   try:
     result['all']
   except:
@@ -92,5 +92,3 @@ def results():
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
     return redirect(url_for('main'))
-  
-

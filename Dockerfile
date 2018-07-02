@@ -4,6 +4,8 @@ RUN adduser -D ohscribe
 
 WORKDIR /home/ohscribe
 
+RUN apk add --update --no-cache g++ gcc libxslt-dev
+
 COPY requirements.txt requirements.txt
 RUN python -m venv venv
 RUN venv/bin/pip install -r requirements.txt
@@ -13,7 +15,7 @@ ENV UPLOAD_FOLDER /home/ohscribe/data
 COPY data /home/ohscribe/data
 
 COPY app app
-COPY ohscribe.py config.py boot.sh ./
+COPY ohscribe.py boot.sh ./
 RUN chmod +x boot.sh
 
 ENV FLASK_APP ohscribe.py

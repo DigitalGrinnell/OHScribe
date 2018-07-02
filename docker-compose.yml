@@ -11,13 +11,14 @@ services:
   ohscribe:
     build: .
     container_name: "ohscribe"
-    ports: 5001:5000
+    ports:
+      - 5001:5000
     command: ./boot.sh
     volumes:
-      - .:code
+      - ./app:/app
     networks:
-#      - internal
       - proxy
+#      - internal
     labels:
       - traefik.backend=ohscribe
       - traefik.port=5001
