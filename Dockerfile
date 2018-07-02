@@ -22,5 +22,5 @@ ENV FLASK_DEBUG 1
 RUN chown -R ohscribe:ohscribe ./
 USER ohscribe
 
-EXPOSE 5000
+EXPOSE 5001
 ENTRYPOINT ["./boot.sh"]
