@@ -1,0 +1,25 @@
+version: '3.5'
+
+networks:
+  proxy:
+    external: true
+#  internal:
+#    external: false
+
+services:
+
+  ohscribe:
+    build: .
+    container_name: "ohscribe"
+    ports: 5001:5000
+    command: ./boot.sh
+    volumes:
+      - .:code
+    networks:
+#      - internal
+      - proxy
+    labels:
+      - traefik.backend=ohscribe
+      - traefik.port=5001
+      - traefik.frontend.rule=Host:${OHSCRIBE_PROJECT_FULL_URL}
+      - traefik.docker.network=proxy
