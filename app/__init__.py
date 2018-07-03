@@ -15,4 +15,4 @@ bootstrap = Bootstrap(app)
 from app import routes, errors, actions
 
 # Use the host's IP address per https://stackoverflow.com/questions/7023052/configure-flask-dev-server-to-be-visible-across-the-network
-app.run(host= '0.0.0.0', port=5001)
+app.run(host= '0.0.0.0', port=5000)

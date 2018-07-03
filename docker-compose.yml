@@ -12,7 +12,7 @@ services:
     build: .
     container_name: "ohscribe"
     ports:
-      - 5001:5000
+      - 5000:5000
     command: ./boot.sh
     volumes:
       - ./app:/app
@@ -21,6 +21,6 @@ services:
 #      - internal
     labels:
       - traefik.backend=ohscribe
-      - traefik.port=5001
+      - traefik.port=5000
       - traefik.frontend.rule=Host:${OHSCRIBE_PROJECT_FULL_URL}
       - traefik.docker.network=proxy
