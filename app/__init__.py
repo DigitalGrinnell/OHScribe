@@ -7,8 +7,8 @@ from flask import Flask
 # Initialize the app... populate app.config[]
 app = Flask(__name__)
 app.static_folder = 'static'
-app.config['UPLOAD_FOLDER'] = environ.get('UPLOAD_FOLDER')
-app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
+app.config['UPLOAD_FOLDER'] = environ.get('OHSCRIBE_UPLOAD_FOLDER')
+app.config['SECRET_KEY'] = environ.get('OHSCRIBE_SECRET_KEY')
 
 bootstrap = Bootstrap(app)
 
