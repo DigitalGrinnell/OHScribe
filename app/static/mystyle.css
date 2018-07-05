@@ -26,6 +26,15 @@ input#go {
   margin-top: 5px;
 }
 
+#control, #upload {
+  padding: 15px;
+  margin-left: 25px;
+}
+
+ul.single-line {
+  float: left;
+}
+
 /*span.padded-left*/
   /*{ padding-left: 15px; }*/
 

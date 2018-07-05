@@ -162,12 +162,32 @@ def do_transform(filename):
       msg = "XML transformation output is in {}".format(ioh)
       flash(msg, 'info')
 
-    with open(ioh, 'r') as transfile:
-      msg = "XSLT transformation is complete and the results are in '{}'.".format(ioh)
+    with open(ioh, 'r') as xfile:
+      # Number all the <cue> tags
+      q = etree.parse(xfile)
+      cue_tags = q.findall('.//cue')
+      num = 0
+
+      for tag in cue_tags:
+        tag.set('cuenum', str(num))
+        num += 1
+
+      string = etree.tostring(q, pretty_print=True)
+
+      iohx = make_new_filename(filepath, 'IOHx')
+
+      ioh_file = open(iohx, "wb")
+      ioh_file.write(string)
+      ioh_file.close()
+      msg = "XML transformation output with numbered cues is in {}".format(iohx)
+      flash(msg, 'info')
+
+    with open(iohx, 'r') as transfile:
+      msg = "XSLT transformation is complete and the cue-numbered results are in '{}'.".format(iohx)
       detail = " ".join(transfile.readlines( )[0:10])
       guidance = "Please return to Main/Control and engage the 'Convert hh:mm:ss...' feature to change time references in '{}'".format(ioh_file)
 
-    return ioh, msg, detail, guidance
+    return iohx, msg, detail, guidance
 
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
@@ -242,6 +262,7 @@ def do_speaker_tags(filename):
       cue_tags = q.findall('.//cue')
 
       for tag in cue_tags:
+        cuenum = tag.attrib['cuenum']
         t = tag.find('transcript')
         text = t.text.replace('\n', ' ').replace('  ', ' ').replace(' :', ':').replace(' |', '|')
 
@@ -276,9 +297,9 @@ def do_speaker_tags(filename):
         # Now build a proper <speaker> tag from the references found, and apply it
 
         if speaker not in speakers_found:
-          msg = "Speaker '{}' was found in a <cue> with NO correspinding <speaker> tag!".format(speaker)
-          flash(msg, 'error')
-          return redirect(url_for('main'))
+          msg = "Speaker '{0}' was found in a <cue> {1} with NO correspinding <speaker> tag!".format(speaker, cuenum)
+          flash(msg, 'warning')
+          # return redirect(url_for('main'))
 
         speaker_tag = ''
         for speaker in speakers_found:
