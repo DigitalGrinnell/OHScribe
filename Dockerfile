@@ -11,7 +11,6 @@ RUN python -m venv venv
 RUN venv/bin/pip install -r requirements.txt
 RUN venv/bin/pip install gunicorn
 
-ENV UPLOAD_FOLDER /home/ohscribe/data
 COPY data /home/ohscribe/data
 
 COPY app app
@@ -24,5 +23,5 @@ ENV FLASK_DEBUG 1
 RUN chown -R ohscribe:ohscribe ./
 USER ohscribe
 
-EXPOSE 5001
+EXPOSE 5000
 ENTRYPOINT ["./boot.sh"]

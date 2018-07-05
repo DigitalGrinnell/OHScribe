@@ -1,4 +1,5 @@
 from flask import flash, redirect, url_for
+from werkzeug.utils import secure_filename
 from app import app
 import os
 import io
@@ -10,9 +11,32 @@ from lxml import etree
 # -------------------------------------------------------------------------
 
 
-def upload_to_server(file):
-  flash("upload_to_server called with file '{}'.  Returning True".format(file), 'info')
-  return True
+def allowed_file(filename):
+  ALLOWED_EXTENSIONS = set(['xml'])
+  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def upload_to_server(request, file):
+  # flash("upload_to_server called with file '{}'.  Returning True".format(file), 'info')
+  if request.method == 'POST':
+    # Check if the post request has the file part
+    if 'file' not in request.files:
+      flash('No file part')
+      return redirect(request.url)
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+      filename = secure_filename(file.filename)
+      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      return True  # redirect(url_for('uploaded_file', filename=filename))
+  return '''
+  <!doctype html>
+  <title>Upload new File</title>
+  <h1>Upload new File</h1>
+  <form method=post enctype=multipart/form-data>
+  <input type=file name=file>
+  <input type=submit value=Upload>
+  </form>
+  '''
 
 
 def checkfile(filename):
@@ -35,7 +59,7 @@ def sanitize_xml(line):
 # Lifted from https://gist.github.com/revolunet/1154906
 
 def xsl_transformation(xmlfile, xslfile="./ohscribe.xsl"):
-  
+
   try:
     with open(xslfile, 'r') as xsl:
       xslt = xsl.read( )
@@ -50,7 +74,7 @@ def xsl_transformation(xmlfile, xslfile="./ohscribe.xsl"):
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
     return redirect(url_for('main'))
-  
+
   return result
 
 
@@ -146,7 +170,7 @@ def do_hms_conversion(filename):
   try:
     with open(filepath, 'r') as xmlfile, open(secname, 'w') as secfile:
       counter = 0
-      
+
       for line in xmlfile:
         matched = re.match(r'(.*)(\d\d:\d\d:\d\d\.\d\d)(.*)', line)
         if matched:
@@ -179,14 +203,14 @@ def do_hms_conversion(filename):
 def do_speaker_tags(filename):
   filepath = checkfile(filename)
   final = make_new_filename(filepath, 'final')
-  
+
   try:
     with open(filepath, 'r') as xmlfile, open(final, 'wb') as finalfile:
 
       # Identify all <speaker> tags
-    
+
       q = etree.parse(xmlfile)
-      
+
       speaker_tags = q.findall('.//speaker')
       speakers = dict()
       num = 1
@@ -201,9 +225,9 @@ def do_speaker_tags(filename):
             num += 1
 
       # Examine each <cue>. Identify speakers in the transcript.text and modify that text accordingly
-        
+
       cue_tags = q.findall('.//cue')
-      
+
       for tag in cue_tags:
         t = tag.find('transcript')
         text = t.text.replace('\n', ' ').replace('  ', ' ').replace(' :', ':').replace(' |', '|')
@@ -225,7 +249,7 @@ def do_speaker_tags(filename):
               if speaker not in speakers_found:
                 speakers_found.append(speaker)
               count += 1
-              
+
             else:
               msg = "Referenced speaker '{}' has no corresponding <speaker> tag!".format(speaker)
               flash(msg, 'error')
@@ -233,11 +257,11 @@ def do_speaker_tags(filename):
 
           else:
             t.text += " " + word
-  
+
         t.text += '</span></span>'
 
         # Now build a proper <speaker> tag from the references found, and apply it
-        
+
         if speaker not in speakers_found:
           msg = "Speaker '{}' was found in a <cue> with NO correspinding <speaker> tag!".format(speaker)
           flash(msg, 'error')
@@ -324,7 +348,7 @@ def do_analyze(filename):
         cue_num += 1
 
       # Analysis is complete.  Report
-      
+
       if problems > 0:
         msg = "One or more long cues were found in '{}'".format(filename)
         flash(msg, 'warning')
@@ -532,4 +556,3 @@ def do_all(filename):
 #     return redirect(url_for('main'))
 #
 #   return result
-

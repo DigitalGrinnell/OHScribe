@@ -2,13 +2,16 @@ from os import environ
 from flask_bootstrap import Bootstrap
 from flask import Flask
 
-# Constants/secrets moved to .env, accessed using os.environ below
+# Constants/secrets moved to .master.env, accessed using os.environ below
 
 # Initialize the app... populate app.config[]
 app = Flask(__name__)
 app.static_folder = 'static'
 app.config['UPLOAD_FOLDER'] = environ.get('OHSCRIBE_UPLOAD_FOLDER')
-app.config['SECRET_KEY'] = environ.get('OHSCRIBE_SECRET_KEY')
+app.config['SECRET_KEY'] = environ.get('OHSCRIBE_SECRET_KEY') or 'i-hope-you-never-guess-this'
+
+# print("UPLOAD_FOLDER is: {}".format(app.config['UPLOAD_FOLDER']))
+# print("SECRET_KEY is: {}".format(app.config['SECRET_KEY']))
 
 bootstrap = Bootstrap(app)
 

@@ -46,7 +46,7 @@ def results():
 
   filename = str(result['browse'])
   if filename:
-    uploaded = upload_to_server(filename)
+    uploaded = upload_to_server(request, filename)
   else:
     flash("For any Action you must select a file to process.  Try again or 'Exit'?", 'error')
     return redirect(url_for('main'))
