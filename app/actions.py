@@ -385,82 +385,17 @@ def do_analyze(filename):
 def do_all(filename):
   filepath = checkfile(filename)
   clean, msg, details, guidance = do_cleanup(filepath)
+  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', clean)
   xformed, msg, details, guidance = do_transform(clean)
+  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', xformed)
   times, msg, details, guidance = do_hms_conversion(xformed)
+  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', times)
   final, msg, details, guidance = do_speaker_tags(times)
+  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', final)
   analyzed, msg, details, guidance = do_analyze(final)
   return analyzed, msg, details, guidance
 
 
-  #
-  # def button_analyze_callback():
-  #   """ what to do when the "Analyze" button is pressed """
-  #
-  #   xmlfile = entry.get()
-  #
-  #   if xmlfile.rsplit(".")[-1] != "xml":
-  #     statusText.set("Filename must have a .xml extension!")
-  #     message.configure(fg="red")
-  #     return
-  #
-  #   else:
-  #     """ examine each cue, count number of lines of text and report any longer than 10 lines """
-  #     problem_cues = "Long cue start times: "
-  #     problems = 0
-  #     q = etree.parse(xmlfile)
-  #     cue_tags = q.findall('.//cue')
-  #     cue_num = 0
-  #
-  #     for tag in cue_tags:
-  #       t = tag.find('start')
-  #       start = int(float(t.text))
-  #       m, s = divmod(start, 60)
-  #       cue_start = '{:d}:{:02d} '.format(m, s)
-  #
-  #       t = tag.find('transcript')
-  #       text = t.text.replace('\n', ' ').replace('  ', ' ').replace(' :', ':').replace(' |', '|')
-  #
-  #       words = text.split()
-  #       cue_lines = 0
-  #       cue_chars = 0
-  #       assumed_line_max = 80  # assuming 80 characters per line for a max target
-  #
-  #       for word in words:
-  #         if word.endswith('>'):  # ignore all tags
-  #           continue
-  #         if word.startswith('<'):  # ignore all tags
-  #           continue
-  #
-  #         if word.endswith(':'):  # found a new speaker, new line
-  #           cue_lines += 1
-  #           cue_chars = len(word) - 20  # accounts for the class='oh_speaker_x'> tag
-  #
-  #         else:
-  #           cue_chars += len(word) + 1
-  #           if cue_chars > assumed_line_max:
-  #             cue_lines += 1
-  #             cue_chars = 0
-  #
-  #       """ done with cue text analysis...report if necessary """
-  #       if cue_lines == 0:
-  #         statusText.set("Cue `{}' is EMPTY. Remove it before proceeding!".format(cue_num))
-  #         message.configure(fg="red")
-  #         return
-  #       if cue_lines > 10:
-  #         problem_cues += str(cue_start)
-  #         problems += 1
-  #       cue_num += 1
-  #
-  #     """ analysis is complete.  report """
-  #     if problems == 0:
-  #       statusText.set("Analysis is complete, no problems found in transcript `{}'.".format(xmlfile))
-  #       message.configure(fg="dark green")
-  #       return
-  #
-  #     if problems > 0:
-  #       statusText.set(problem_cues)
-  #       message.configure(fg="red")
-  #       return
   #
   # def button_reformat_callback():
   #   """ what to do when the "Reformat" button is pressed """
