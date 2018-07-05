@@ -1,6 +1,6 @@
+from os import environ
 from flask import flash, redirect, url_for
-from werkzeug.utils import secure_filename
-from app import app
+# from werkzeug.utils import secure_filename
 import os
 import io
 import sys
@@ -16,34 +16,48 @@ def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def upload_to_server(request, file):
-  # flash("upload_to_server called with file '{}'.  Returning True".format(file), 'info')
-  if request.method == 'POST':
-    # Check if the post request has the file part
-    if 'file' not in request.files:
-      flash('No file part')
-      return redirect(request.url)
-    file = request.files['file']
-    if file and allowed_file(file.filename):
-      filename = secure_filename(file.filename)
-      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-      return True  # redirect(url_for('uploaded_file', filename=filename))
-  return '''
-  <!doctype html>
-  <title>Upload new File</title>
-  <h1>Upload new File</h1>
-  <form method=post enctype=multipart/form-data>
-  <input type=file name=file>
-  <input type=submit value=Upload>
-  </form>
-  '''
+# def upload_to_server(request, filename):
+#   flash("upload_to_server called with file '{}'".format(filename), 'info')
+#   if (allowed_file(filename)):
+#     filepath = checkfile(filename)
+#     with open(filepath, 'r') as xmlfile:
+#       flash("The file at path '{}' is open for upload".format(filepath), 'info')
+#       upfilename = secure_filename(xmlfile.filename)
+#       xmlfile.save(os.path.join(environ.get('OHSCRIBE_UPLOAD_FOLDER'), upfilename))
+#       flash("File has been uploaded and named '{}'".format(upfilename), 'info')
+#       return True
+#   else:
+#     flash("Only .xml files are allowed for upload.  Please Exit or choose a suitable file and try again.", 'error')
+#     return False
+#
+#   #
+#   #   # if request.method == 'POST':
+#   #   # Check if the post request has the file part
+#   #   # if 'file' not in request.files:
+#   #   #   flash('No file part')
+#   #   #   return redirect(request.url)
+#   #   file = request.files['file']
+#   #   if file and allowed_file(file.filename):
+#   #     filename = secure_filename(file.filename)
+#   #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+#   #     return True  # redirect(url_for('uploaded_file', filename=filename))
+#   # return '''
+#   # <!doctype html>
+#   # <title>Upload new File</title>
+#   # <h1>Upload new File</h1>
+#   # <form method=post enctype=multipart/form-data>
+#   # <input type=file name=file>
+#   # <input type=submit value=Upload>
+#   # </form>
+#   # '''
 
 
 def checkfile(filename):
+  folder = environ.get('OHSCRIBE_UPLOAD_FOLDER')
   if '/' in filename:
     filepath = filename
   else:
-    filepath = "{0}/{1}".format(app.config['UPLOAD_FOLDER'], filename)
+    filepath = "{0}/{1}".format(folder, filename)
   return filepath
 
 
@@ -115,7 +129,7 @@ def do_cleanup(filename):
       msg = "Clean-up is complete. {0} lines of '{1}' were processed to create '{2}'.".format(counter, filename, clean)
       flash(msg, 'info')
       detail = " ".join(cleanfile.readlines( )[0:10])
-      guidance = "Please engage the 'Transform' feature to change '{}' into proper IOH XML format.".format(clean)
+      guidance = "Please return to Main/Control and engage the 'Transform' feature to change '{}' into proper IOH XML format.".format(clean)
 
     return clean, msg, detail, guidance
 
@@ -151,7 +165,7 @@ def do_transform(filename):
     with open(ioh, 'r') as transfile:
       msg = "XSLT transformation is complete and the results are in '{}'.".format(ioh)
       detail = " ".join(transfile.readlines( )[0:10])
-      guidance = "Click the 'Proceed' button below to convert hh:mm:ss times to seconds."
+      guidance = "Please return to Main/Control and engage the 'Convert hh:mm:ss...' feature to change time references in '{}'".format(ioh_file)
 
     return ioh, msg, detail, guidance
 
@@ -187,8 +201,7 @@ def do_hms_conversion(filename):
     with open(secname, 'r') as secfile:
       msg = "Conversion of hh:mm:ss times to seconds is complete.  Results are in '{}'.".format(secname)
       detail = " ".join(secfile.readlines()[0:10])
-      guidance = "Consider using the 'Format Speaker Tags' action to properly format speaker names in '{}'.".format(
-        secname)
+      guidance = "Please return to Main/Control and engage the 'Format Speaker Tags' feature to change speaker tags in '{}'".format(secfile)
 
     return secname, msg, detail, guidance
 
@@ -281,7 +294,7 @@ def do_speaker_tags(filename):
       msg = "Speaker formatting in transcript '{}' is complete.".format(final)
       flash(msg, 'info')
       detail = " ".join(finalfile.readlines()[0:20])
-      guidance = "Consider performing an analysis of '{}' to flag <cues> that are potentially too long.".format(final)
+      guidance = "Please return to Main/Control and engage the 'Analyze' feature on '{}' to flag <cues> that are potentially too long.".format(final)
 
     return final, msg, detail, guidance
 

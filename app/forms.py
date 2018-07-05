@@ -5,7 +5,7 @@ from flask_wtf.file import FileField
 
 
 class MainForm(FlaskForm):
-  browse = FileField('Select an XML File to Upload')
+  # browse = FileField('Select an XML File to Upload')
   
   actions = RadioField('Action', choices=[
     ('cleanup','Clean-Up the XML'),

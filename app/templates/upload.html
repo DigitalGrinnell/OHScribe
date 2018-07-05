@@ -1,0 +1,13 @@
+{# This is the 'login' page #}
+
+{% extends "base.html" %}
+
+{% block app_content %}
+    <!doctype html>
+    <title>Upload an XML File</title>
+    <h1>Upload an XML File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+{% endblock %}
