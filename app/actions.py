@@ -63,7 +63,8 @@ def checkfile(filename):
 
 def sanitize_xml(line):
   line = line.replace('&lt;', '<').replace('&gt;', '>').replace(' & ', ' &amp; ').replace('<speaker>', '\n    <speaker>').strip('\n')
-  if len(line) > 0:                                                                   # don't return any empty lines!
+  line = ' '.join(line.split())      # change any 'whitespace' characters to legitimate spaces.  Removes things like vertical tabs, 0xb.
+  if len(line) > 0:                  # don't return any empty lines!
     return "{}\n".format(line)
   else:
     return False
