@@ -1,7 +1,47 @@
-{% extends "base.html" %}
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{super()}}
+  <link rel="stylesheet" href="{{url_for('.static', filename='mystyle.css')}}">
+{% endblock %}
+
+{% block title %}
+    {% if title %}{{ title }} - OHScribe!{% else %}Welcome to OHScribe!{% endif %}
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('main') }}">OHScribe!</a>
+            <ul class="single-line">
+              <span>
+              <a class="navbar-brand" id="control" href="{{ url_for('main') }}">Return to Control</a>
+              <a class="navbar-brand" id="upload" href="{{ url_for('upload_file') }}">Upload a File</a>
+              </span>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
 
 {% block content %}
-    <h1>An unexpected error has occurred</h1>
-    <p>The administrator has been notified. Sorry for the inconvenience!</p>
-    <p><a href="{{ url_for('main') }}">Back</a></p>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes bordered">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      {# application content needs to be provided in the app_content block #}
+      {% block app_content %}
+        <h1>An unexpected error has occurred</h1>
+        <p>The administrator has been notified. Sorry for the inconvenience!</p>
+        <p><a href="{{ url_for('main') }}">Return to Main/Control</a></p>
+      {% endblock %}
+    </div>
 {% endblock %}

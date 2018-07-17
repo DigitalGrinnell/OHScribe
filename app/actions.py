@@ -137,16 +137,12 @@ def do_cleanup(filename):
     except:
       num_errors = len(parser.error_log)
       msg = "{0} parsed with an error_log count of {1}".format(clean, num_errors)
-      if num_errors > 0:
-        flash(msg, 'error')
-        i = 0
-        error = parser.error_log[i]
-        msg = "Parser error: '{0}' at line {1}, column {2}".format(error.message, error.line, error.column)
-        flash(msg, 'error')
-      else:
-        flash(msg, 'info')
-      raise
-      
+      flash(msg, 'error')
+      error = parser.error_log[0]
+      msg = "Parser error: '{0}' at line {1}, column {2}".format(error.message, error.line, error.column)
+      flash(msg, 'error')
+      return redirect(url_for('main'))
+
     with open(clean, 'r') as cleanfile:
       msg = "Clean-up is complete. {0} lines of '{1}' were processed to create '{2}'.".format(counter, filename, clean)
       flash(msg, 'info')
