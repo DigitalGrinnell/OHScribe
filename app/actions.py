@@ -63,7 +63,10 @@ def checkfile(filename):
 
 def sanitize_xml(line):
   line = line.replace('&lt;', '<').replace('&gt;', '>').replace(' & ', ' &amp; ').replace('<speaker>', '\n    <speaker>').strip('\n')
-  line = ' '.join(line.split())      # change any 'whitespace' characters to legitimate spaces.  Removes things like vertical tabs, 0xb.
+  line = ' '.join(line.split())    # change any 'whitespace' characters to legitimate spaces.  Removes things like vertical tabs, 0xb.
+  # for pos in range(0, len(line)):  # from https://stackoverflow.com/questions/8888628/how-should-i-deal-with-an-xmlsyntaxerror-in-pythons-lxml-while-parsing-a-large
+  #   if chr(line[pos]) < 32:
+  #     line[pos] = ' '
   if len(line) > 0:                  # don't return any empty lines!
     return "{}\n".format(line)
   else:
@@ -125,7 +128,25 @@ def do_cleanup(filename):
         if cleaned:
           cleanfile.write(cleaned)
           counter += 1
-
+          
+    # Parse the cleaned XML per https://lxml.de/parsing.html just to see if it is valid.
+    parser = etree.XMLParser(ns_clean=True)
+    
+    try:
+      tree = etree.parse(clean, parser)
+    except:
+      num_errors = len(parser.error_log)
+      msg = "{0} parsed with an error_log count of {1}".format(clean, num_errors)
+      if num_errors > 0:
+        flash(msg, 'error')
+        i = 0
+        error = parser.error_log[i]
+        msg = "Parser error: '{0}' at line {1}, column {2}".format(error.message, error.line, error.column)
+        flash(msg, 'error')
+      else:
+        flash(msg, 'info')
+      raise
+      
     with open(clean, 'r') as cleanfile:
       msg = "Clean-up is complete. {0} lines of '{1}' were processed to create '{2}'.".format(counter, filename, clean)
       flash(msg, 'info')
