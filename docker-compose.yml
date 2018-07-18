@@ -1,10 +1,8 @@
 version: '3.5'
 
 networks:
-  proxy:
+  port-authority-proxy:
     external: true
-#  internal:
-#    external: false
 
 services:
 
@@ -17,10 +15,10 @@ services:
     volumes:
       - ./app:/app
     networks:
-      - proxy
-#      - internal
+      - port-authority-proxy
     labels:
       - traefik.backend=ohscribe
       - traefik.port=5000
-      - traefik.frontend.rule=Host:${OHSCRIBE_PROJECT_FULL_URL}
+      - traefik.frontend.rule=Host:${PROJECT_FULL_URL}
       - traefik.docker.network=proxy
+  
