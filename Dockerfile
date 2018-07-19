@@ -14,7 +14,7 @@ RUN venv/bin/pip install gunicorn
 COPY data /home/ohscribe/data
 
 COPY app app
-COPY ohscribe.py boot.sh ./
+COPY ohscribe.py config.py boot.sh ./
 RUN chmod +x boot.sh
 
 ENV FLASK_APP ohscribe.py
