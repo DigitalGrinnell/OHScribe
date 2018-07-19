@@ -1,10 +1,11 @@
-from os import environ
+from app import app
 from flask import flash, redirect, url_for
 # from werkzeug.utils import secure_filename
 import os
 import io
 import sys
 import re
+import logging
 from lxml import etree
 
 # Internal / support functions go here.
@@ -40,7 +41,7 @@ def allowed_file(filename):
 #   #   if file and allowed_file(file.filename):
 #   #     filename = secure_filename(file.filename)
 #   #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-#   #     return True  # redirect(url_for('uploaded_file', filename=filename))
+#   #     return True  # redirect(url_for('CURRENT_FILE', filename=filename))
 #   # return '''
 #   # <!doctype html>
 #   # <title>Upload new File</title>
@@ -53,7 +54,8 @@ def allowed_file(filename):
 
 
 def checkfile(filename):
-  folder = environ.get('OHSCRIBE_UPLOAD_FOLDER')
+  logging.info("checkfile( ) called with a filename of: '%s'", filename)
+  folder = app.config['UPLOAD_FOLDER']
   if '/' in filename:
     filepath = filename
   else:
@@ -64,10 +66,7 @@ def checkfile(filename):
 def sanitize_xml(line):
   line = line.replace('&lt;', '<').replace('&gt;', '>').replace(' & ', ' &amp; ').replace('<speaker>', '\n    <speaker>').strip('\n')
   line = ' '.join(line.split())    # change any 'whitespace' characters to legitimate spaces.  Removes things like vertical tabs, 0xb.
-  # for pos in range(0, len(line)):  # from https://stackoverflow.com/questions/8888628/how-should-i-deal-with-an-xmlsyntaxerror-in-pythons-lxml-while-parsing-a-large
-  #   if chr(line[pos]) < 32:
-  #     line[pos] = ' '
-  if len(line) > 0:                  # don't return any empty lines!
+  if len(line) > 0:                # don't return any empty lines!
     return "{}\n".format(line)
   else:
     return False
@@ -128,10 +127,10 @@ def do_cleanup(filename):
         if cleaned:
           cleanfile.write(cleaned)
           counter += 1
-          
+
     # Parse the cleaned XML per https://lxml.de/parsing.html just to see if it is valid.
     parser = etree.XMLParser(ns_clean=True)
-    
+
     try:
       tree = etree.parse(clean, parser)
     except:
@@ -424,13 +423,13 @@ def do_analyze(filename):
 def do_all(filename):
   filepath = checkfile(filename)
   clean, msg, details, guidance = do_cleanup(filepath)
-  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', clean)
+  app.config['CURRENT_FILE'] = clean
   xformed, msg, details, guidance = do_transform(clean)
-  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', xformed)
+  app.config['CURRENT_FILE'] = xformed
   times, msg, details, guidance = do_hms_conversion(xformed)
-  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', times)
+  app.config['CURRENT_FILE'] = times
   final, msg, details, guidance = do_speaker_tags(times)
-  os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', final)
+  app.config['CURRENT_FILE'] = final
   analyzed, msg, details, guidance = do_analyze(final)
   return analyzed, msg, details, guidance
 

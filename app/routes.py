@@ -1,10 +1,11 @@
-from flask import Flask, render_template, flash, redirect, url_for, request
+from flask import Flask, render_template, flash, redirect, url_for, request, current_app
 from app import app
 from app.forms import MainForm, LoginForm
 from app.actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
 from werkzeug.utils import secure_filename
 import sys
 import os
+import logging
 
 
 # Route for handling the login page logic
@@ -30,22 +31,27 @@ def upload_file():
     if 'file' not in request.files:
       flash('No file part', 'error')
       return redirect(request.url)
-        
+
     file = request.files['file']
-        
+
     # If user does not select file, browser also submit an empty part without filename
     if file.filename == '':
       flash('No selected file', 'error')
       return redirect(request.url)
-        
+
     # Good to go...
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
-      newpath = os.path.join(os.environ.get('OHSCRIBE_UPLOAD_FOLDER'), filename)
+
+      folder = app.config['UPLOAD_FOLDER']
+      logging.info("folder at line 47 in routes.py is: '%s'", folder)
+      newpath = os.path.join(folder, filename)
+      logging.info("newpath at line 49 in routes.py is: '%s'", newpath)
+
       try:
         file.save(newpath)
         flash("Your file has been successfully uploaded to {}".format(newpath), 'info')
-        os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', newpath)
+        app.config['CURRENT_FILE'] = newpath
         return redirect(url_for('main'))
       except:
         msg = "Unexpected error: {}".format(sys.exc_info()[0])
@@ -56,7 +62,7 @@ def upload_file():
 
 # # Route for displaying the uploaded file
 # @app.route('/uploads/<filename>')
-# def uploaded_file(filename):
+# def CURRENT_FILE(filename):
 #     return send_from_directory(os.environ.get('OHSCRIBE_UPLOAD_FOLDER'), filename)
 
 
@@ -82,15 +88,15 @@ def results( ):
   else:
     exit(0)
 
-  filename = os.environ.get('OHSCRIBE_UPLOADED_FILE')
-  
+  filename = app.config['CURRENT_FILE']
+
   try:
     result['all']
   except:
     pass
   else:
     file, msg, details, guidance = do_all(filename)
-    os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', file)
+    app.config['CURRENT_FILE'] = file
     return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
 
   try:
@@ -98,23 +104,23 @@ def results( ):
       action = str(result['actions'])
       if action == "cleanup":
         file, msg, details, guidance = do_cleanup(filename)
-        os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', file)
+        app.config['CURRENT_FILE'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "transform":
         file, msg, details, guidance = do_transform(filename)
-        os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', file)
+        app.config['CURRENT_FILE'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "convert":
         file, msg, details, guidance = do_hms_conversion(filename)
-        os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', file)
+        app.config['CURRENT_FILE'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "speakers":
         file, msg, details, guidance = do_speaker_tags(filename)
-        os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', file)
+        app.config['CURRENT_FILE'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "analyze":
         file, msg, details, guidance = do_analyze(filename)
-        os.environ.setdefault('OHSCRIBE_UPLOADED_FILE', file)
+        app.config['CURRENT_FILE'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
 
   except:

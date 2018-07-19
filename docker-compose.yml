@@ -17,8 +17,11 @@ services:
       - ./data:/tmp/ohscribe/data
     networks:
       - port-authority-proxy
+    environment:
+      - UPLOAD_FOLDER=${OHSCRIBE_UPLOAD_FOLDER}
+      - SECRET_KEY=${OHSCRIBE_SECRET_KEY}
     labels:
-      - traefik.backend=ohscribe
-      - traefik.port=5000
-      - traefik.frontend.rule=Host:${PROJECT_FULL_URL}
-      - traefik.docker.network=proxy
+      traefik.backend: ohscribe
+      traefik.port: 5000
+      traefik.frontend.rule: Host:${PROJECT_FULL_URL}
+      traefik.docker.network: port-authority-proxy

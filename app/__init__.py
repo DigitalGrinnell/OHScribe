@@ -1,7 +1,10 @@
+# Debugging is per https://stackoverflow.com/questions/17309889/how-to-debug-a-flask-app
+
 from os import environ
 from flask_bootstrap import Bootstrap
 from flask import Flask, flash
 from config import Config
+from flask_debugtoolbar import DebugToolbarExtension  # for debugging
 
 # Constants/secrets moved to .master.env, accessed using os.environ below
 
@@ -10,6 +13,9 @@ app = Flask(__name__)
 app.config.from_object(Config)
 host = environ.get('OHSCRIBE_HOST_ADDR')
 app.static_folder = 'static'
+app.debug = True                        # for debugging...set False to turn off the DebugToolbarExtension
+
+toolbar = DebugToolbarExtension(app)    # for debugging
 
 # Moved to config.py...
 #
@@ -30,4 +36,3 @@ from app import routes, errors, actions
 # Always encapsulate the '.run' call per https://stackoverflow.com/questions/29356224/error-errno-98-address-already-in-use
 if __name__ == '__main__':
   app.run(host=host, port=5000)    # for PROD host='0.0.0.0' and for DEV host='127.0.0.1'
-
