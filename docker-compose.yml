@@ -14,6 +14,7 @@ services:
     command: ./boot.sh
     volumes:
       - ./app:/app
+      - ./data:/tmp/ohscribe/data
     networks:
       - port-authority-proxy
     labels:
@@ -21,4 +22,3 @@ services:
       - traefik.port=5000
       - traefik.frontend.rule=Host:${PROJECT_FULL_URL}
       - traefik.docker.network=proxy
-  
