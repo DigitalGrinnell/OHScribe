@@ -54,12 +54,16 @@ def allowed_file(filename):
 
 
 def checkfile(filename):
-  logging.info("checkfile( ) called with a filename of: '%s'", filename)
+  app.logger.debug('checkfile(%s) called.', filename)
+
   folder = app.config['UPLOAD_FOLDER']
   if '/' in filename:
     filepath = filename
   else:
     filepath = "{0}/{1}".format(folder, filename)
+  msg = "checkfile( ) returning"
+  app.logger.debug('checkfile(%s) returning %s.', filename, filepath)
+
   return filepath
 
 
@@ -75,16 +79,25 @@ def sanitize_xml(line):
 # Transform any XML with a XSLT
 # Lifted from https://gist.github.com/revolunet/1154906
 
-def xsl_transformation(xmlfile, xslfile="./ohscribe.xsl"):
+def xsl_transformation(xmlfile, xslfile="/app/ohscribe.xsl"):
+  app.logger.debug('xsl_transformation(xmlfile, %s) called.', xslfile)
 
   try:
+    app.logger.debug('xsl_transformation calling open(xslfile).')
     with open(xslfile, 'r') as xsl:
+      app.logger.debug('xsl_transformation calling xsl.read( ).')
       xslt = xsl.read( )
+      app.logger.debug('xsl_transformation calling etree.XML(xslt).')
       root = etree.XML(xslt)
+      app.logger.debug('xsl_transformation calling etree.XSLT(root).')
       transform = etree.XSLT(root)
+      app.logger.debug('xsl_transformation calling xmlfile.read().')
       xml = xmlfile.read( )
+      app.logger.debug('xsl_transformation calling io.StringIO(xml).')
       f = io.StringIO(xml)
+      app.logger.debug('xsl_transformation calling etree.parse(f).')
       doc = etree.parse(f)
+      app.logger.debug('xsl_transformation calling transform(doc).')
       result = transform(doc)
 
   except:
@@ -92,6 +105,7 @@ def xsl_transformation(xmlfile, xslfile="./ohscribe.xsl"):
     flash(msg, 'error')
     return redirect(url_for('main'))
 
+  app.logger.debug('xsl_transformation(xmlfile, %s) returning %s.', xslfile, result)
   return result
 
 
@@ -99,10 +113,12 @@ def xsl_transformation(xmlfile, xslfile="./ohscribe.xsl"):
 # IOH now treats an underscore here as indication of a language, like _english, so change any/all underscores to dashes!
 
 def make_new_filename(input_file_name, insert):
+  app.logger.debug('make_new_filename(%s, %s) called.', input_file_name, insert)
   input_file_name.replace("_", "-")
   name, ext = os.path.splitext(input_file_name)
-  return "{name}-{insert}{ext}".format(name=name, insert=insert, ext=ext)
-
+  ret = "{name}-{insert}{ext}".format(name=name, insert=insert, ext=ext)
+  app.logger.debug('make_new_filename(%s, %s) returning %s.', input_file_name, insert, ret)
+  return ret
 
 
 # Actions here.
@@ -112,27 +128,37 @@ def make_new_filename(input_file_name, insert):
 # Cleanup the XML
 
 def do_cleanup(filename):
+  app.logger.debug('do_cleanup(%s) called.', filename)
   filepath = checkfile(filename)
   clean = make_new_filename(filepath, 'clean')
 
   try:
+    app.logger.debug('do_cleanup( ) calling open(%s) and open(%s).', filepath, clean)
     with open(filepath, 'r') as xmlfile, open(clean, 'w+') as cleanfile:
       if xmlfile.name.rsplit(".")[-1] != "xml":
+        app.logger.debug('do_cleanup( ) extension is not .xml!')
         msg = "File name should have a .xml extension!"
         flash(msg, 'warning')
 
       counter = 0
+      app.logger.debug('do_cleanup( ) line counter is: %s.', counter)
       for line in xmlfile:
         cleaned = sanitize_xml(line)
+        app.logger.debug('do_cleanup( ) counter and cleaned are: %s, %s.', counter, cleaned)
         if cleaned:
+          app.logger.debug('do_cleanup( ) writing line to cleanfile.')
           cleanfile.write(cleaned)
           counter += 1
 
     # Parse the cleaned XML per https://lxml.de/parsing.html just to see if it is valid.
+    app.logger.debug('do_cleanup( ) calling etree.XMLParser( ).')
     parser = etree.XMLParser(ns_clean=True)
+    app.logger.debug('do_cleanup( ) returned from etree.XMLParser( ).')
 
     try:
+      app.logger.debug('do_cleanup( ) calling etree.parse( ).')
       tree = etree.parse(clean, parser)
+      app.logger.debug('do_cleanup( ) returned from etree.parse( ).')
     except:
       num_errors = len(parser.error_log)
       msg = "{0} parsed with an error_log count of {1}".format(clean, num_errors)
@@ -159,45 +185,58 @@ def do_cleanup(filename):
 # Transform XML from InqScribe to IOH
 
 def do_transform(filename):
+  app.logger.debug('do_transform(%s) called.', filename)
   filepath = checkfile(filename)
 
   try:
+    app.logger.debug('do_transform(%s) calling open(%s).', filename, filepath)
     with open(filepath, 'r+') as xmlfile:
 
       # Now transform it
+      app.logger.debug('do_transform( ) calling xsl_transformation( ).')
       IOH_xml = xsl_transformation(xmlfile)
       if IOH_xml is None:
-        msg = "Error transforming file `{}'.".format(xmlfile)
+        app.logger.debug('do_transform( ) encountered a transform error.')
+        msg = "Error transforming file `{}'.".format(filepath)
         flash(msg, 'error')
-        return msg
+        return filepath, msg, "", ""
 
       ioh = make_new_filename(filepath, 'IOH')
 
+      app.logger.debug('do_transform( ) calling open(%s).', ioh)
       ioh_file = open(ioh, "w")
       ioh_file.write(str(IOH_xml))
       ioh_file.close()
       msg = "XML transformation output is in {}".format(ioh)
       flash(msg, 'info')
+      app.logger.debug('do_transform( ) transformation is in %s.', ioh)
 
+    app.logger.debug('do_transform( ) calling open(%s) as xfile.', ioh)
     with open(ioh, 'r') as xfile:
       # Number all the <cue> tags
+      app.logger.debug('do_transform( ) calling q=etree.parse( )')
       q = etree.parse(xfile)
+      app.logger.debug('do_transform( ) calling q=findall(.//cue)')
       cue_tags = q.findall('.//cue')
       num = 0
 
       for tag in cue_tags:
+        app.logger.debug('do_transform( ) calling tag.set for number %s.', num)
         tag.set('cuenum', str(num))
         num += 1
 
+      app.logger.debug('do_transform( ) calling etree.tostring( )')
       string = etree.tostring(q, pretty_print=True)
 
       iohx = make_new_filename(filepath, 'IOHx')
 
+      app.logger.debug('do_transform( ) calling open(%s) as iohx', iohx)
       ioh_file = open(iohx, "wb")
       ioh_file.write(string)
       ioh_file.close()
       msg = "XML transformation output with numbered cues is in {}".format(iohx)
       flash(msg, 'info')
+      app.logger.debug('do_transform( ) transformed output with numbered cues in %s.', iohx)
 
     with open(iohx, 'r') as transfile:
       msg = "XSLT transformation is complete and the cue-numbered results are in '{}'.".format(iohx)
@@ -215,6 +254,7 @@ def do_transform(filename):
 # Convert hh:mm:ss times to seconds
 
 def do_hms_conversion(filename):
+  app.logger.debug('do_hms_conversion(%s) called.', filename)
   filepath = checkfile(filename)
   secname = make_new_filename(filepath, 'sec')
 
@@ -251,53 +291,74 @@ def do_hms_conversion(filename):
 # Format <speaker> tags
 
 def do_speaker_tags(filename):
+  app.logger.debug('do_speaker_tags(%s) called.', filename)
   filepath = checkfile(filename)
   final = make_new_filename(filepath, 'final')
 
   try:
+    app.logger.debug('do_speaker_tags calling open(%s) and open(%s).', filepath, final)
     with open(filepath, 'r') as xmlfile, open(final, 'wb') as finalfile:
 
       # Identify all <speaker> tags
 
+      app.logger.debug('do_speaker_tags calling etree.parse(xmlfile).')
       q = etree.parse(xmlfile)
 
+      app.logger.debug('do_speaker_tags calling q.findall(.//speaker).')
       speaker_tags = q.findall('.//speaker')
       speakers = dict()
       num = 1
 
+      app.logger.debug('do_speaker_tags starting for tag in speaker_tags... loop.')
       for tag in speaker_tags:
+        app.logger.debug('do_speaker_tags calling if tag.text:')
         if tag.text:
           full = tag.text.strip()
+          app.logger.debug('do_speaker_tags full is: %s', full)
           first, rest = full.split(' ', 1)
+          app.logger.debug('do_speaker_tags first, rest are: %s, %s', first, rest)
           first = first.strip()
+          app.logger.debug('do_speaker_tags first stripped is: %s', first)
           if first not in speakers:
+            app.logger.debug('do_speaker_tags %s is NOT in speakers!', first)
             speakers[first] = {'number': num, 'class': "<span class='oh_speaker_" + str(num) + "'>", 'full_name': full}
             num += 1
 
       # Examine each <cue>. Identify speakers in the transcript.text and modify that text accordingly
 
+      app.logger.debug('do_speaker_tags calling q.findall(.//cue).')
       cue_tags = q.findall('.//cue')
 
+      app.logger.debug('do_speaker_tags starting for tag in cue_tags... loop.')
       for tag in cue_tags:
         cuenum = tag.attrib['cuenum']
+        app.logger.debug('do_speaker_tags cuenum is: %s', cuenum)
         t = tag.find('transcript')
         text = t.text.replace('\n', ' ').replace('  ', ' ').replace(' :', ':').replace(' |', '|')
+        app.logger.debug('do_speaker_tags replaced text is: %s', text)
 
         words = text.split()
         t.text = ''
         count = 0
         speakers_found = []
 
+        app.logger.debug('do_speaker_tags starting for word in words... loop.')
         for word in words:
+          app.logger.debug('do_speaker_tags for words... word is: %s', word)
           if word.endswith('|'):
-            speaker = word.strip('|')
+            app.logger.debug('do_speaker_tags word.endswith(|) so it is a speaker name.')
+            s = word.replace('_', ' ')
+            speaker = s.strip('|')
+            app.logger.debug('do_speaker_tags speaker is: %s', speaker)
 
             if speaker in speakers:
+              app.logger.debug('do_speaker_tags if speaker in speakers is true.')
               if count > 0:
                 t.text += '</span></span>'
               t.text += speakers[speaker]['class'] + speaker + ": " + "<span class='oh_speaker_text'>"
 
               if speaker not in speakers_found:
+                app.logger.debug('do_speaker_tags speaker is NOT in speakers_found!')
                 speakers_found.append(speaker)
               count += 1
 
@@ -307,12 +368,15 @@ def do_speaker_tags(filename):
               return redirect(url_for('main'))
 
           else:
+            app.logger.debug('do_speaker_tags word is not a speaker name so appending to t.text.')
             t.text += " " + word
 
         t.text += '</span></span>'
+        app.logger.debug('do_speaker_tags complete t.text is: %s', t.text)
 
         # Now build a proper <speaker> tag from the references found, and apply it
 
+        app.logger.debug('do_speaker_tags starting is speaker not in speakers_found... loop.')
         if speaker not in speakers_found:
           msg = "Speaker '{0}' was found in a <cue> {1} with NO correspinding <speaker> tag!".format(speaker, cuenum)
           flash(msg, 'warning')
@@ -326,6 +390,7 @@ def do_speaker_tags(filename):
         t = tag.find('speaker')
         t.text = speaker_tag
 
+      app.logger.debug('do_speaker_tags calling finalfile.write()')
       finalfile.write(etree.tostring(q, pretty_print=True))
 
     with open(final, 'r') as finalfile:
@@ -345,6 +410,7 @@ def do_speaker_tags(filename):
 # Analyze and report <cue> lengths
 
 def do_analyze(filename):
+  app.logger.debug('do_analyze(%s) called.', filename)
   filepath = checkfile(filename)
 
   try:
@@ -421,6 +487,7 @@ def do_analyze(filename):
 # Do all of the above, in sequence.
 
 def do_all(filename):
+  app.logger.debug('do_all(%s) called.', filename)
   filepath = checkfile(filename)
   clean, msg, details, guidance = do_cleanup(filepath)
   app.config['CURRENT_FILE'] = clean

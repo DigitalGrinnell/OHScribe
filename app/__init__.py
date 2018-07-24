@@ -1,5 +1,8 @@
 # Debugging is per https://stackoverflow.com/questions/17309889/how-to-debug-a-flask-app
 
+import os
+import logging
+from logging.handlers import RotatingFileHandler
 from os import environ
 from flask_bootstrap import Bootstrap
 from flask import Flask, flash
@@ -16,6 +19,19 @@ app.static_folder = 'static'
 app.debug = True                        # for debugging...set False to turn off the DebugToolbarExtension
 
 toolbar = DebugToolbarExtension(app)    # for debugging
+
+# From The Flask Mega-Tutorial Part VII: Error Handling
+if not os.path.exists('logs'):
+  os.mkdir('logs')
+file_handler = RotatingFileHandler('logs/ohscribe.log', maxBytes=10240, backupCount=10)
+file_handler.setFormatter(logging.Formatter(
+  '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+
+file_handler.setLevel(logging.DEBUG)    # set to INFO for less verbose output
+app.logger.addHandler(file_handler)
+app.logger.setLevel(logging.DEBUG)      # set to INFO for less verbose output
+
+app.logger.debug('OHScribe startup.')
 
 # Moved to config.py...
 #
