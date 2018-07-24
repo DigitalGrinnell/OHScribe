@@ -68,8 +68,17 @@ def checkfile(filename):
 
 
 def sanitize_xml(line):
-  line = line.replace('&lt;', '<').replace('&gt;', '>').replace(' & ', ' &amp; ').replace('<speaker>', '\n    <speaker>').strip('\n')
+  
+  lead_double = u"\u201c"
+  follow_double = u"\u201d"
+  lead_single = u"\u2018"
+  follow_single = u"\u2019"
+  
+  line = line.replace('&lt;', '<').replace('&gt;', '>').replace(' & ', ' &amp; ').replace('<speaker>', '\n    <speaker>')
+  line = line.replace(lead_double, '"').replace(follow_double, '"').replace(lead_single, "'").replace(follow_single, "'")
+  line = line.strip('\n')
   line = ' '.join(line.split())    # change any 'whitespace' characters to legitimate spaces.  Removes things like vertical tabs, 0xb.
+  
   if len(line) > 0:                # don't return any empty lines!
     return "{}\n".format(line)
   else:
@@ -103,7 +112,8 @@ def xsl_transformation(xmlfile, xslfile="/app/ohscribe.xsl"):
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
-    return redirect(url_for('main'))
+    # return redirect(url_for('main'))
+    raise
 
   app.logger.debug('xsl_transformation(xmlfile, %s) returning %s.', xslfile, result)
   return result
@@ -166,7 +176,7 @@ def do_cleanup(filename):
       error = parser.error_log[0]
       msg = "Parser error: '{0}' at line {1}, column {2}".format(error.message, error.line, error.column)
       flash(msg, 'error')
-      return redirect(url_for('main'))
+      raise
 
     with open(clean, 'r') as cleanfile:
       msg = "Clean-up is complete. {0} lines of '{1}' were processed to create '{2}'.".format(counter, filename, clean)
@@ -179,7 +189,8 @@ def do_cleanup(filename):
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
-    return redirect(url_for('main'))
+    # return redirect(url_for('main'))
+    raise
 
 
 # Transform XML from InqScribe to IOH
@@ -248,7 +259,8 @@ def do_transform(filename):
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
-    return redirect(url_for('main'))
+    # return redirect(url_for('main'))
+    raise
 
 
 # Convert hh:mm:ss times to seconds
@@ -285,7 +297,8 @@ def do_hms_conversion(filename):
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
-    return redirect(url_for('main'))
+    # return redirect(url_for('main'))
+    raise
 
 
 # Format <speaker> tags
@@ -404,7 +417,8 @@ def do_speaker_tags(filename):
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
-    return redirect(url_for('main'))
+    # return redirect(url_for('main'))
+    raise
 
 
 # Analyze and report <cue> lengths
@@ -481,7 +495,8 @@ def do_analyze(filename):
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
-    return redirect(url_for('main'))
+    # return redirect(url_for('main'))
+    raise
 
 
 # Do all of the above, in sequence.

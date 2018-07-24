@@ -40,7 +40,8 @@
       {# application content needs to be provided in the app_content block #}
       {% block app_content %}
         <h1>An unexpected error has occurred</h1>
-        <p>The administrator has been notified. Sorry for the inconvenience!</p>
+        <p>If there are errors (in red) above, please address them and try this operation again.  If not, please contract the systems administrator for
+            assistance. Sorry for the inconvenience!</p>
         <p><a href="{{ url_for('main') }}">Return to Main/Control</a></p>
       {% endblock %}
     </div>
