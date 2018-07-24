@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, redirect, url_for, request, current_app
+from flask import Flask, render_template, flash, redirect, url_for, request, send_file
 from app import app
 from app.forms import MainForm, LoginForm
 from app.actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 import sys
 import os
 import logging
+import glob
 
 
 # Route for handling the login page logic
@@ -44,9 +45,9 @@ def upload_file():
       filename = secure_filename(file.filename)
 
       folder = app.config['UPLOAD_FOLDER']
-      logging.info("folder at line 47 in routes.py is: '%s'", folder)
+      app.logger.debug("folder at line 47 in routes.py is: '%s'", folder)
       newpath = os.path.join(folder, filename)
-      logging.info("newpath at line 49 in routes.py is: '%s'", newpath)
+      app.logger.debug("newpath at line 49 in routes.py is: '%s'", newpath)
 
       try:
         file.save(newpath)
@@ -64,6 +65,20 @@ def upload_file():
 # @app.route('/uploads/<filename>')
 # def CURRENT_FILE(filename):
 #     return send_from_directory(os.environ.get('OHSCRIBE_UPLOAD_FOLDER'), filename)
+
+# Route for handling download section
+@app.route('/return-files')
+def return_files( ):
+  folder = app.config['UPLOAD_FOLDER']
+  os.chdir(folder)
+  for file in glob.glob("*final.xml"):
+
+  try:
+	return send_file(file)
+  except Exception as e:
+	return str(e)
+
+  return render_template('return-files.html', title='Return Files')
 
 
 # Route for handling the main/control page

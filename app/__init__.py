@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 host = environ.get('OHSCRIBE_HOST_ADDR')
 app.static_folder = 'static'
-app.debug = True                        # for debugging...set False to turn off the DebugToolbarExtension
+app.debug = False                        # for debugging...set False to turn off the DebugToolbarExtension
 
 toolbar = DebugToolbarExtension(app)    # for debugging
 
@@ -27,9 +27,9 @@ file_handler = RotatingFileHandler('logs/ohscribe.log', maxBytes=10240, backupCo
 file_handler.setFormatter(logging.Formatter(
   '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
 
-file_handler.setLevel(logging.DEBUG)    # set to INFO for less verbose output
+file_handler.setLevel(logging.INFO)    # INFO=less verbose output, DEBUG=more
 app.logger.addHandler(file_handler)
-app.logger.setLevel(logging.DEBUG)      # set to INFO for less verbose output
+app.logger.setLevel(logging.INFO)      # INFO=less verbose output, DEBUG=more
 
 app.logger.debug('OHScribe startup.')
 
