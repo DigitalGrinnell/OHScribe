@@ -67,18 +67,10 @@ def upload_file():
 #     return send_from_directory(os.environ.get('OHSCRIBE_UPLOAD_FOLDER'), filename)
 
 # Route for handling download section
-@app.route('/return-files')
-def return_files( ):
-  folder = app.config['UPLOAD_FOLDER']
-  os.chdir(folder)
-  for file in glob.glob("*final.xml"):
-
-  try:
-	return send_file(file)
-  except Exception as e:
-	return str(e)
-
-  return render_template('return-files.html', title='Return Files')
+@app.route('/download')
+def download_file( ):
+  target = app.config['CURRENT_FILE']
+  return send_file(target, mimetype='text/xml', attachment_filename='ohscribe_output.xml', as_attachment=True)
 
 
 # Route for handling the main/control page

@@ -4,39 +4,48 @@
 
 {% block app_content %}
 
-{#
-  <h1>Results</h1>
-  <table>
-  {% for key, value in result.items() %}
-     <tr class='bordered'>
-       <th> {{ key }} </th>
-       <td> {{ value }} </td>
-     </tr>
-  {% endfor %}
-  </table>
-#}
+  {#
+    <h1>Results</h1>
+    <table>
+    {% for key, value in result.items() %}
+       <tr class='bordered'>
+         <th> {{ key }} </th>
+         <td> {{ value }} </td>
+       </tr>
+    {% endfor %}
+    </table>
+  #}
 
-<br>
+  <br>
 
-{%  if message|length > 0 %}
-  <fieldset>
-    <legend class="custom"><span>Message</span></legend>
-    <div class="bordered message titled"> {{ message }} </div>
-  </fieldset>
-{% endif %}
+  {%  if message|length > 0 %}
+    <fieldset>
+      <legend class="custom"><span>Message</span></legend>
+      <div class="bordered message titled"> {{ message }} </div>
+    </fieldset>
+  {% endif %}
 
-{%  if details|length > 0 %}
-  <fieldset>
-    <legend class="custom"><span>Details</span></legend>
-    <pre class="bordered details titled"> {{ details }} </pre>
-  </fieldset>
-{% endif %}
+  {%  if details|length > 0 %}
+    <fieldset>
+      <legend class="custom"><span>Details</span></legend>
+      <pre class="bordered details titled"> {{ details }} </pre>
+    </fieldset>
+  {% endif %}
 
-{% if guidance|length > 0 %}
-  <fieldset>
-    <legend class="custom"><span>Guidance</span></legend>
-    <div class="bordered guidance titled"> {{ guidance }} </div>
-  </fieldset>
-{% endif %}
+  {% if guidance|length > 0 %}
+    <fieldset>
+      <legend class="custom"><span>Guidance</span></legend>
+      <div class="bordered guidance titled"> {{ guidance }} </div>
+    </fieldset>
+  {% endif %}
 
-{% endblock %}
+  <body class="body">
+     <br/>
+     <div class="container" align="left">
+       <a href="/download" target="_blank"><button class='btn btn-default'>Download your Output!</button></a>
+     </div>
+   </br>
+
+   <p>Clicking the "Download your Output!" button should open the new XML results/output in a new tab in your browser.  Use your browser's File menu and "Save Page As...", or similar feature, to save the displayed contents to a file of your choosing.  Click the "Upload an XML File" link at the top of this page to upload and process additional XML files.</p>
+
+ {% endblock %}

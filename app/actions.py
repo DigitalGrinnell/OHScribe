@@ -431,14 +431,14 @@ def do_analyze(filename):
         msg = "Analysis is complete and there were NO additional problems found in transcript `{}'.".format(filename)
         flash(msg, 'info')
 
-    # Attempt to hand the results back to the user
-    dir, file = os.path.split(filepath)
-    app.logger.info("os.path.split(%s) returned dir and file as: %s, %s", filepath, dir, file)
+    # # Attempt to hand the results back to the user
+    # dir, file = os.path.split(filepath)
+    # app.logger.info("os.path.split(%s) returned dir and file as: %s, %s", filepath, dir, file)
+    #
+    # app.logger.info("do_analyze( ) is calling send_from_directory( ) now.")
+    # return send_from_directory(directory=dir, filename=file, as_attachment=True)
 
-    app.logger.info("do_analyze( ) is calling send_from_directory( ) now.")
-    return send_from_directory(directory=dir, filename=file, as_attachment=True)
-
-    # return filepath, msg, "", ""
+    return filepath, msg, "", ""
 
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
