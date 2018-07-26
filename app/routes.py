@@ -53,6 +53,7 @@ def upload_file():
         file.save(newpath)
         flash("Your file has been successfully uploaded to {}".format(newpath), 'info')
         app.config['CURRENT_FILE'] = newpath
+        app.logger.info("Uploaded file is: %s", newpath)
         return redirect(url_for('main'))
       except:
         msg = "Unexpected error: {}".format(sys.exc_info()[0])
@@ -70,7 +71,9 @@ def upload_file():
 @app.route('/download')
 def download_file( ):
   target = app.config['CURRENT_FILE']
-  return send_file(target, mimetype='text/xml', attachment_filename='ohscribe_output.xml', as_attachment=True)
+  app.logger.info("Target output for download is: %s", target)
+  dir, filename = os.path.split(target)
+  return send_file(target, mimetype='text/xml', attachment_filename=filename, as_attachment=True)
 
 
 # Route for handling the main/control page

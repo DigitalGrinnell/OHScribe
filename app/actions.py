@@ -335,7 +335,7 @@ def do_speaker_tags(filename):
         # Now build a proper <speaker> tag from the references found, and apply it
 
         if speaker not in speakers_found:
-          msg = "Speaker '{0}' was found in <cue> {1} with NO corresponding <speaker> tag!".format(speaker, cuenum)
+          msg = "Speaker '{0}' was found in or near <cue> {1} with NO corresponding <speaker> tag!".format(speaker, cuenum)
           flash(msg, 'warning')
 
         speaker_tag = ''
@@ -460,6 +460,7 @@ def do_all(filename):
   final, msg, details, guidance = do_speaker_tags(times)
   app.config['CURRENT_FILE'] = final
   analyzed, msg, details, guidance = do_analyze(final)
+  app.logger.info("Final output is in: %s", final)
   return analyzed, msg, details, guidance
 
 
