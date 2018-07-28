@@ -1,6 +1,5 @@
 from app import app
 from flask import flash, redirect, url_for, send_from_directory
-# from werkzeug.utils import secure_filename
 import os
 import io
 import sys
@@ -10,7 +9,6 @@ from lxml import etree
 
 # Internal / support functions go here.
 # -------------------------------------------------------------------------
-
 
 def allowed_file(filename):
   ALLOWED_EXTENSIONS = set(['xml'])
@@ -279,7 +277,6 @@ def do_speaker_tags(filename):
     with open(filepath, 'r') as xmlfile, open(final, 'wb') as finalfile:
 
       # Identify all <speaker> tags
-
       q = etree.parse(xmlfile)
 
       speaker_tags = q.findall('.//speaker')
@@ -288,15 +285,20 @@ def do_speaker_tags(filename):
 
       for tag in speaker_tags:
         if tag.text:
-          full = tag.text.strip()
-          first, rest = full.split(' ', 1)
-          first = first.strip()
+          full = tag.text.strip( )
+          try:
+            first, rest = full.split(' ', 1)
+          except ValueError:
+            first = full
+
+          first = first.replace('_', ' ').strip( )      # replace any underscores with spaces and trim
+          full = full.replace('_', ' ')
+
           if first not in speakers:
             speakers[first] = {'number': num, 'class': "<span class='oh_speaker_" + str(num) + "'>", 'full_name': full}
             num += 1
 
       # Examine each <cue>. Identify speakers in the transcript.text and modify that text accordingly
-
       cue_tags = q.findall('.//cue')
 
       for tag in cue_tags:
@@ -309,9 +311,14 @@ def do_speaker_tags(filename):
         count = 0
         speakers_found = []
 
+        app.logger.debug('do_speaker_tags( ) processing text: %s', text)
+
         for word in words:
+          app.logger.debug('do_speaker_tags( ) word is: %s', word)
+
+          # Found a speaker reference (ends in '...| ')
           if word.endswith('|'):
-            s = word.replace('_', ' ')
+            s = word.replace('_', ' ')      # replace any underscores with spaces in the speaker name
             speaker = s.strip('|')
 
             if speaker in speakers:
@@ -332,19 +339,18 @@ def do_speaker_tags(filename):
 
         t.text += '</span></span>'
 
-        # Now build a proper <speaker> tag from the references found, and apply it
+        # Was there ANY speaker | reference?  If not...
+        if not speakers_found:
+          msg = "There is NO speaker identifed in <cue> {0}!  Reminder: There must be a space following the bar seperator.".format(cuenum)
+          flash(msg, 'error')
+        else:        # Now build a proper <speaker> tag from the references found, and apply it
+          speaker_tag = ''
+          for speaker in speakers_found:
+            speaker_tag += speakers[speaker]['full_name'] + ' & '
+          speaker_tag = speaker_tag.strip(' & ')
 
-        if speaker not in speakers_found:
-          msg = "Speaker '{0}' was found in or near <cue> {1} with NO corresponding <speaker> tag!".format(speaker, cuenum)
-          flash(msg, 'warning')
-
-        speaker_tag = ''
-        for speaker in speakers_found:
-          speaker_tag += speakers[speaker]['full_name'] + ' & '
-        speaker_tag = speaker_tag.strip(' & ')
-
-        t = tag.find('speaker')
-        t.text = speaker_tag
+          t = tag.find('speaker')
+          t.text = speaker_tag
 
       finalfile.write(etree.tostring(q, pretty_print=True))
 
@@ -408,18 +414,21 @@ def do_analyze(filename):
               cue_chars = 0
 
         # Done with cue text analysis... report if necessary
+        app.logger.debug('do_analyze( ) done with cue %s text analysis with %s lines.', cue_num, cue_lines)
 
         if cue_lines == 0:
           msg = "Cue `{}' is EMPTY. Remove that cue before proceeding!".format(cue_num)
           flash(msg, 'error')
-          return redirect(url_for('main'))
 
         if cue_lines > 10:
           problem_cues += str(cue_start)
           problems += 1
+
         cue_num += 1
+        app.logger.debug('do_analyze( ) advancing to cue_num %s.', cue_num)
 
       # Analysis is complete.  Report
+      app.logger.debug('do_analyze( ) analysis is complete. Number of problems is: %s', problems)
 
       if problems > 0:
         msg = "One or more long cues were found in '{}'".format(filename)
@@ -430,13 +439,6 @@ def do_analyze(filename):
       if problems == 0:
         msg = "Analysis is complete and there were NO additional problems found in transcript `{}'.".format(filename)
         flash(msg, 'info')
-
-    # # Attempt to hand the results back to the user
-    # dir, file = os.path.split(filepath)
-    # app.logger.info("os.path.split(%s) returned dir and file as: %s, %s", filepath, dir, file)
-    #
-    # app.logger.info("do_analyze( ) is calling send_from_directory( ) now.")
-    # return send_from_directory(directory=dir, filename=file, as_attachment=True)
 
     return filepath, msg, "", ""
 

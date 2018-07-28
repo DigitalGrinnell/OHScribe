@@ -20,6 +20,8 @@ services:
     environment:
       - UPLOAD_FOLDER=${OHSCRIBE_UPLOAD_FOLDER}
       - SECRET_KEY=${OHSCRIBE_SECRET_KEY}
+      - HOST_ADDR=${OHSCRIBE_HOST_ADDR}
+      - LOG_VERBOSITY=${LOG_VERBOSITY}
     labels:
       traefik.backend: ohscribe
       traefik.port: 5000

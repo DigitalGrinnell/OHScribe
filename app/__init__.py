@@ -3,22 +3,23 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
-from os import environ
 from flask_bootstrap import Bootstrap
 from flask import Flask, flash
 from config import Config
 from flask_debugtoolbar import DebugToolbarExtension  # for debugging
 
-# Constants/secrets moved to .master.env, accessed using os.environ below
-
 # Initialize the app... populate app.config[]
 app = Flask(__name__)
 app.config.from_object(Config)
-host = environ.get('OHSCRIBE_HOST_ADDR')
 app.static_folder = 'static'
-app.debug = False                        # for debugging...set False to turn off the DebugToolbarExtension
 
-toolbar = DebugToolbarExtension(app)    # for debugging
+# Set log verbosity based on environment
+if app.config['LOG_VERBOSITY'] == 'DEBUG':
+  app.debug = True                       # for debugging...set False to turn off the DebugToolbarExtension
+else:
+  app.debug = False                      # for debugging...set False to turn off the DebugToolbarExtension
+
+toolbar = DebugToolbarExtension(app)     # for debugging
 
 # From The Flask Mega-Tutorial Part VII: Error Handling
 if not os.path.exists('logs'):
@@ -27,24 +28,18 @@ file_handler = RotatingFileHandler('logs/ohscribe.log', maxBytes=10240, backupCo
 file_handler.setFormatter(logging.Formatter(
   '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
 
-file_handler.setLevel(logging.INFO)    # INFO=less verbose output, DEBUG=more
 app.logger.addHandler(file_handler)
-app.logger.setLevel(logging.INFO)      # INFO=less verbose output, DEBUG=more
+file_handler.setLevel(logging.INFO)
+app.logger.setLevel(logging.INFO)
 
-app.logger.debug('OHScribe startup.')
+if app.config['LOG_VERBOSITY'] == 'DEBUG':
+  file_handler.setLevel(logging.DEBUG)
+  app.logger.setLevel(logging.DEBUG)
 
-# Moved to config.py...
-#
-# app.config['UPLOAD_FOLDER'] = environ.get('OHSCRIBE_UPLOAD_FOLDER')
-# msg = "UPLOAD_FOLDER config item is: {}".format(app.config['UPLOAD_FOLDER'])
-# flash(msg, 'info')
-#
-# app.config['SECRET_KEY'] = environ.get('OHSCRIBE_SECRET_KEY') or 'i-hope-you-never-guess-this'
-# msg = "SECRET_KEY config item is: {}".format(app.config['SECRET_KEY'])
-# flash(msg, 'info')
-#
+app.logger.info('OHScribe startup with LOG_VERBOSITY = %s.', app.config['LOG_VERBOSITY'])
 
 bootstrap = Bootstrap(app)
+host = app.config['HOST_ADDR']
 
 from app import routes, errors, actions
 
