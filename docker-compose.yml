@@ -22,6 +22,7 @@ services:
       - SECRET_KEY=${OHSCRIBE_SECRET_KEY}
       - HOST_ADDR=${OHSCRIBE_HOST_ADDR}
       - LOG_VERBOSITY=${LOG_VERBOSITY}
+      - ADMIN_PASSWORD=${OHSCRIBE_ADMIN_PASSWORD}
     labels:
       traefik.backend: ohscribe
       traefik.port: 5000

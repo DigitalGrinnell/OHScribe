@@ -2,6 +2,7 @@
 
 import os
 import logging
+from flask_login import LoginManager
 from logging.handlers import RotatingFileHandler
 from flask_bootstrap import Bootstrap
 from flask import Flask, flash
@@ -41,9 +42,18 @@ app.logger.info('OHScribe startup with LOG_VERBOSITY = %s.', app.config['LOG_VER
 bootstrap = Bootstrap(app)
 host = app.config['HOST_ADDR']
 
+# Per https://flask-login.readthedocs.io/en/latest/
+login_manager = LoginManager( )
+login_manager.init_app(app)
+
 from app import routes, errors, actions
 
 # Use the host's IP address per https://stackoverflow.com/questions/7023052/configure-flask-dev-server-to-be-visible-across-the-network
 # Always encapsulate the '.run' call per https://stackoverflow.com/questions/29356224/error-errno-98-address-already-in-use
 if __name__ == '__main__':
   app.run(host=host, port=5000)    # for PROD host='0.0.0.0' and for DEV host='127.0.0.1'
+
+# Callback per https://flask-login.readthedocs.io/en/latest/
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
