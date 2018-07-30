@@ -1,10 +1,9 @@
 from app import app
-from flask import flash, redirect, url_for, send_from_directory
+from flask import flash
 import os
 import io
 import sys
 import re
-import logging
 from lxml import etree
 
 # Internal / support functions go here.

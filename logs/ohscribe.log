@@ -1,0 +1,77 @@
+2018-07-29 19:51:16,996 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 108, in wrapper
+    return view_func(*args, **kwargs)
+  File "/Users/markmcfate/Projects/Docker/OHScribe/app/routes.py", line 51, in upload_file
+    return render_template('upload.html', title='Upload XML File')
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
+    context, ctx.app)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
+    rv = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/Users/markmcfate/Projects/Docker/OHScribe/app/templates/upload.html", line 3, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/markmcfate/Projects/Docker/OHScribe/app/templates/base.html", line 1, in top-level template code
+    {% extends 'bootstrap/base.html' %}
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
+    {% block navbar %}
+  File "/Users/markmcfate/Projects/Docker/OHScribe/app/templates/base.html", line 16, in block "navbar"
+    <a class="navbar-brand" href="{{ url_for('login') }}">OHScribe!</a>
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/helpers.py", line 345, in url_for
+    force_external=external)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/werkzeug/routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'login'. Did you mean 'main' instead?
+2018-07-29 19:53:41,662 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
+2018-07-29 19:53:56,178 ERROR: Exception on /results [POST] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/markmcfate/Projects/Docker/OHScribe/app/routes.py", line 97, in results
+    file, msg, details, guidance = do_all(filename)
+  File "/Users/markmcfate/Projects/Docker/OHScribe/app/actions.py", line 419, in do_all
+    clean, msg, details, guidance = do_cleanup(filepath)
+  File "/Users/markmcfate/Projects/Docker/OHScribe/app/actions.py", line 98, in do_cleanup
+    with open(filepath, 'r') as xmlfile, open(clean, 'w+') as cleanfile:
+FileNotFoundError: [Errno 2] No such file or directory: ' /Users/markmcfate/data/TBD'

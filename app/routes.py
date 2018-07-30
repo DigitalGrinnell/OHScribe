@@ -1,68 +1,19 @@
-from flask import Flask, render_template, flash, redirect, url_for, request, send_file, abort
-from app import app
-from app.forms import MainForm, LoginForm
+from app import app, basic_auth
+from flask import Flask, render_template, flash, redirect, url_for, request, send_file
+from app.forms import MainForm
 from app.actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
 from werkzeug.utils import secure_filename
-import flask_login
 import sys
 import os
-import logging
-import glob
 
 
-# # Route for handling the login page logic
-# @app.route('/', methods=['POST', 'GET'])
-# @app.route('/login', methods=['POST', 'GET'])
-# def login():
-#   app.logger.debug("login( ) called with request.method == %s and LOGGED_IN is: %s", request.method, app.config['LOGGED_IN'])
-#   form = LoginForm(request.form)
-#
-#   if request.method == 'POST':
-#     if (form.username.data == "admin" and form.password.data == app.config['ADMIN_PASSWORD']):
-#       flash("Login permitted for user '{}'".format(form.username.data))
-#       app.config['LOGGED_IN'] = True
-#       app.logger.debug("login( ) called with request.method == %s and LOGGED_IN is: %s", request.method, app.config['LOGGED_IN'])
-#       return redirect(url_for('upload_file'))
-#     else:
-#       flash("Authentication failed.  Please try again or contact digital@grinnell.edu for proper credentials.", 'error')
-#       app.config['LOGGED_IN'] = False
-#       app.logger.debug("login( ) called with request.method == %s and LOGGED_IN is: %s", request.method, app.config['LOGGED_IN'])
-#
-#   return render_template('login.html', title='Sign In', form=form)
-
-
-# New route for handling the login page logic per https://flask-login.readthedocs.io/en/latest/
+# Route for handing authentication and upload selection
 @app.route('/', methods=['POST', 'GET'])
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    # Here we use a class of some kind to represent and validate our
-    # client-side form data. For example, WTForms is a library that will
-    # handle this for us, and we use a custom LoginForm to validate.
-    form = LoginForm( )
-    if form.validate_on_submit( ):
-        # Login and validate the user.  # user should be an instance of your `User` class
-        login_user(user)
-        flash('Logged in successfully.')
-
-        next = request.args.get('next')
-        # is_safe_url should check if the url is safe for redirects.  # See http://flask.pocoo.org/snippets/62/ for an example.
-        if not is_safe_url(next):
-            return abort(400)
-
-        return redirect(next or flask.url_for('upload_file'))
-    return render_template('login.html', form=form)
-
-
-# Route for handing upload selection
 @app.route('/upload', methods=['GET', 'POST'])
-@flask_login.login_required  # per https://flask-login.readthedocs.io/en/latest/
-def upload_file():
-  app.logger.debug("upload_file( ) called and LOGGED_IN is: %s", app.config['LOGGED_IN'])
+@basic_auth.required  # per http://flask-basicauth.readthedocs.io/en/latest/
 
-  # # Did the user successfully login?
-  # if not app.config['LOGGED_IN']:
-  #   flash('You must login before uploading is allowed.', 'error')
-  #   return redirect(url_for('login'))
+def upload_file():
+  app.logger.debug("upload_file( ) called")
 
   if request.method == 'POST':
 

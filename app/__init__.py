@@ -2,7 +2,7 @@
 
 import os
 import logging
-from flask_login import LoginManager
+from flask_basicauth import BasicAuth
 from logging.handlers import RotatingFileHandler
 from flask_bootstrap import Bootstrap
 from flask import Flask, flash
@@ -42,9 +42,10 @@ app.logger.info('OHScribe startup with LOG_VERBOSITY = %s.', app.config['LOG_VER
 bootstrap = Bootstrap(app)
 host = app.config['HOST_ADDR']
 
-# Per https://flask-login.readthedocs.io/en/latest/
-login_manager = LoginManager( )
-login_manager.init_app(app)
+# Per http://flask-basicauth.readthedocs.io/en/latest/
+basic_auth = BasicAuth(app)
+app.config['BASIC_AUTH_USERNAME'] = 'admin'
+
 
 from app import routes, errors, actions
 
@@ -53,7 +54,4 @@ from app import routes, errors, actions
 if __name__ == '__main__':
   app.run(host=host, port=5000)    # for PROD host='0.0.0.0' and for DEV host='127.0.0.1'
 
-# Callback per https://flask-login.readthedocs.io/en/latest/
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
+

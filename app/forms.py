@@ -18,15 +18,15 @@ class MainForm(FlaskForm):
   go = SubmitField('Do Single Action')
   exit = SubmitField('Exit')
 
-  
-class LoginForm(FlaskForm):
-  username = StringField('Username', validators=[DataRequired()])
-  password = PasswordField('Password', validators=[DataRequired()])
-  # remember_me = BooleanField('Remember Me')
-  submit = SubmitField('Sign In')
-
-
-
+#
+# class LoginForm(FlaskForm):
+#   username = StringField('Username', validators=[DataRequired()])
+#   password = PasswordField('Password', validators=[DataRequired()])
+#   # remember_me = BooleanField('Remember Me')
+#   submit = SubmitField('Sign In')
+#
+#
+#
 
 # exit = SubmitField('Exit')
 # transform = SubmitField('Transform')
