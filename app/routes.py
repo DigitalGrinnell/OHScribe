@@ -44,6 +44,9 @@ def upload_file():
         app.config['CURRENT_FILE'] = newpath
         app.logger.info("Uploaded file is: %s", newpath)
         return redirect(url_for('main'))
+      except PermissionError:
+        msg = "Permissions error. Check for necessary permissions at '{0}'.".format(newpath)
+        flash(msg, 'error')
       except:
         msg = "Unexpected error: {}".format(sys.exc_info()[0])
         flash(msg, 'error')
