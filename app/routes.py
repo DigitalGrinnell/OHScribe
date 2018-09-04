@@ -50,6 +50,7 @@ def upload_file():
       except:
         msg = "Unexpected error: {}".format(sys.exc_info()[0])
         flash(msg, 'error')
+        raise
 
   return render_template('upload.html', title='Upload XML File')
 
