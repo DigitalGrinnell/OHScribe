@@ -1,7 +1,7 @@
 version: '3.5'
 
 networks:
-  port-authority-proxy:
+  port-ability-proxy:
     external: true
 
 services:
@@ -16,7 +16,7 @@ services:
       - ./app:/app
       - ./data:/tmp/ohscribe/data
     networks:
-      - port-authority-proxy
+      - port-ability-proxy
     environment:
       - UPLOAD_FOLDER=${OHSCRIBE_UPLOAD_FOLDER}
       - SECRET_KEY=${OHSCRIBE_SECRET_KEY}
@@ -27,4 +27,5 @@ services:
       traefik.backend: ohscribe
       traefik.port: 5000
       traefik.frontend.rule: Host:${PROJECT_FULL_URL}
-      traefik.docker.network: port-authority-proxy
+      traefik.docker.network: port-ability-proxy
+
