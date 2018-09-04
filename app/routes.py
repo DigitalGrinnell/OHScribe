@@ -44,13 +44,14 @@ def upload_file():
         app.config['CURRENT_FILE'] = newpath
         app.logger.info("Uploaded file is: %s", newpath)
         return redirect(url_for('main'))
-      except PermissionError:
-        msg = "Permissions error. Check for necessary permissions at '{0}'.".format(newpath)
-        flash(msg, 'error')
       except:
-        msg = "Unexpected error: {}".format(sys.exc_info()[0])
+        msg = "Upload error. Make sure you have a 'data' folder under 'ohscribe' and that it is open for the world to write files."
         flash(msg, 'error')
         raise
+#      except:
+#        msg = "Unexpected error: {}".format(sys.exc_info()[0])
+#        flash(msg, 'error')
+#        raise
 
   return render_template('upload.html', title='Upload XML File')
 
@@ -67,7 +68,6 @@ def download_file( ):
   app.logger.info("Target output for download is: %s", target)
   dir, filename = os.path.split(target)
   return send_file(target, mimetype='text/xml', cache_timeout=0, attachment_filename=filename, as_attachment=True)
-
 
 # Route for handling the main/control page
 @app.route('/main', methods=['POST', 'GET'])
