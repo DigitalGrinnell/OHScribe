@@ -14,7 +14,7 @@ Note that the names of speakers appear in different colors in the video window c
 
 ## InqScribe Workflow
 
-A detailed description of the workflow intended for use with *OHScribe!* is provided in our [WORKFLOW.md]() document.
+A detailed description of the workflow intended for use with *OHScribe!* is provided in our [WORKFLOW.md](https://github.com/DigitalGrinnell/OHScribe/blob/master/WORKFLOW.md) document.
 
 
 ## The GUI
