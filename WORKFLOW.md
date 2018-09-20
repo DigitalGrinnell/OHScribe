@@ -1,6 +1,16 @@
 
 ## InqScribe IOH Transcription Workflow
 
+Grinnell College employs the transcription workflow described here when preparing oral histories for ingest into Digital Grinnell.  This workflow includes a copmmercially available software tool called [InqScribe](https://www.inqscribe.com) and at Grinnell transcribers also frequently use a *VEC USB Footpedal* to help control playback of audio to be transcribed.
+
+## Workflow Description
+
+A typical transcription session generally involves the following steps...
+
+OHScribe creates a new cue every time it encounters a timecode, so every timecode should be followed immediately by a newline, speaker name and pipe character. For areas of the recording that are dense with speaker changes, no timecode is needed to transition to the next speaker, i.e. the transcriber can represent a change in speaker by entering a newline and the speaker name and pipe character to start the next speaker's dialogue. This will result in a cue that has mutliple speakers.
+
+## InqScribe Snippets and Triggers (Shortcuts)
+
 [InqScribe](https://www.inqscribe.com) allows a transcriber to define and use [Snippets](http://docs.inqscribe.com/2.2/snippets.html), short bits of frequently-repeated text, with associated triggers or keyboard [Shortcuts](http://docs.inqscribe.com/2.2/keyboardshortcuts.html) that make it easy to quickly add key elements to a transcript.  The following are samples of *Snippets* and their corresponding *Triggers*/*Shortcuts* used in conjunction with our workflow.
 
 ![file-inqscribesnippet1-png](https://gist.githubusercontent.com/McFateM/f4e061eb17ce6d645e51c9d0f2a93814/raw/ff7e69a4a5953149a7dd8f3a86f9565c2e4e7017/InqScribeSnippet1.png)
@@ -26,7 +36,6 @@ Note that a *Raw Timecode* has no associated speaker name as it's intended to be
 
 This example *Raw Timecode* snippet is named `{$TIME}` and it is assigned to the `Enter` trigger which generally corresponds to the *Enter* or *Return* key on the keyboard.  
 
-OHScribe creates a new cue every time it encounters a timecode, so every timecode should be followed immediately by a newline, speaker name and pipe character. For areas of the recording that are dense with speaker changes, no timecode is needed to transition to the next speaker, i.e. the transcriber can represent a change in speaker by entering a newline and the speaker name and pipe character to start the next speaker's dialogue. This will result in a cue that has mutliple speakers.
 
 ## Cruft
 
