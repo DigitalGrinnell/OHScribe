@@ -180,50 +180,38 @@ Note the message/status portion of the window just above the `Main / Control Scr
 
 Once an XML file has been successfully uploaded for processing, the user is presented with a six individual processing options, or a seventh option to `Do All of the Above`.  **Users should ALWAYS choose `Do All of the Above` unless there are special circumstances and they have been instructed otherwise.**  
 
+Typical use of OHScribe! follows these steps.
+
+  1) In the __Upload an XML File__ screen click the `Browse` button and navigate to a transcript XML file prepared in and exported from InqScribe.  
+
+    This action opens the selected XML file for processing with the path to the file reflected in the box at the top of the GUI.
+
+  2) In the __Main / Control Screen__ window click the __Do All of the Above__ button.  
+
+    This inokes the six actions documented below.  If successful it will transform the XML exported from InqScribe into the XML form required for IOH ingest, giving the user an option to download the transformed file.
+
+  3) Click the __Download__ button.
+
+    This action converts \<start> and \<end> values from hours:minutes:seconds notation to the decimal seconds notation required for IOH. The changes are saved directly in the selected **IOH-** file. This file should be suitable for ingest into IOH.
+
+### Individual Actions
+
 *OHScribe!* divides the transformation of a transcript into six individual steps represented by the following *Action* choices:
 
-#### Clean-Up the XML
-This action checks that the uploaded file has a .xml extension and scans the file looking for special characters which are not allowed in valid XML.
+  - **Clean-Up the XML** - This action checks that the uploaded file has a .xml extension and subsequently parses the XML to verify its validity.  
 
- 
-You typically use this script like so:
+  - **Transform XML to IOH** - This action transforms the valid XML creating a `<cues>` and enclosed `<cue>` tags from `<scene>` tags.
 
-1) Click the __Browse__ button and navigate to a transcript XML file prepared in and exported from InqScribe.  
+  - **Convert hh:mm:ss to Seconds** - This action converts all of the *in* and *out* time codes from hours-minutes-seconds (hh:mm:ss.s) notation to necessary `<start>` and `<end>` tags expressed as the number of seconds measured from the beginning of the transcribed audio or video stream.
 
-    > This action opens the selected XML file for processing with the path to the file reflected in the box at the top of the GUI.
+  - **Format Speaker Tags** - This action transforms all of the *speaker tags* and *speaker IDs* from the original transcription into IOH-formatted speaker tags.
 
-2) Click the __Transform InqScribe to IOH XML__ button.  
-
-    > This action invokes the XSLT in __Transform_InqScribe_to_IOH.xsl__ to transform the InqScribe XML \<transcript> and \<scene> tags into \<cues> and \<cue> tags reqiured for IOH ingest. It also transforms 'in' and 'out' attributes to \<start> and \<end> tags, and wraps the text of each \<scene> inside \<transcript> tags within each \<cue>. Changes are saved in a new XML file named to match the input filename prefixed by **IOH-**.  The new file is automatically 'selected' and its path now appears in the box at the top of the GUI.
-
-3) Click the __Convert hh:mm:ss to Seconds__ button.
-
-    > This action converts \<start> and \<end> values from hours:minutes:seconds notation to the decimal seconds notation required for IOH. The changes are saved directly in the selected **IOH-** file. This file should be suitable for ingest into IOH.
-
-4) Optionally click the __Format Speakers__ button.
-
-    > This action detects any/all \<speaker> tags in the XML file and enumerates the speakers for subsequent formatting.  It then re-reads the file looking for the first name (one word only!) of an enumerated speaker followed by a pipe (vertical bar character). Pipes are converted to colons.  The following are all valid samples of speaker identifiers and transcript text taken from our example:
-
-        Heather | Okay, so..
-        Margo| Cool.
-        Maggie | Where you live.
-        Jenny| My name is Jenny
-
-    >The preceeding transcript snippet would be transformed to read as follows:
-
-        Heather: Okay, so..
-        Margo: Cool.
-        Maggie: Where you live.
-        Jenny: My name is Jenny
-
-    > If there are no errors, the format changes are written directly into the selected **IOH-** file.  This file should be suitable for ingest into IOH with formatted speaker names.
-
-
+  - **Analyze Cue Times** - This final action checks each of the `<cue>` tag contents against a fixed target of *10 lines*.  Cues with more than 10 lines of captioning may overwhelm or even overflow the underlying image or video content.
 
 
 ## CSS Required for Speaker Formatting
 
-To take advantage of the script's "speaker formatting" capabilities you must add the following CSS, or something very similar, to your theme.  This CSS produces coloring and formatting like that shown in the example above.
+To take advantage of the script's "speaker formatting" capabilities you must add the following CSS, or something very similar, to the theme of the site where Islandora Oral Histories are displayed.  This CSS produces coloring and formatting like that shown in the example above.
 
 ~~~
 /* Color, display and font additions for Oral Histories */
@@ -261,33 +249,3 @@ span.oh_speaker_5 {
   color: #ffbf00;     /* orange */
 }
 ~~~
-
-## New "Reformat an Old Transcript" Feature
-
-In June 2017 an additional "Reformat an Old Transcript" feature was added to the script.  This feature may be specific to Grinnell College and to Digital Grinnell (https://digital.grinnell.edu), but it could easily be re-purposed for other, similar features.
-
-The feature, as currently written, is designed to add speaker-formatting to older XML.  Specificaly, it converts XML of the form...
-
-~~~
-<cues>
-  <cue>
-    <speaker>Camarin Madigan</speaker>
-    <start>0.16</start>
-    <end>45.29</end>
-    <transcript>My name is Camarin Madigan. When I went to Grinnell my name was... </transcript>
-  </cue>
-  ...
-</cues>
-~~~
-
-...into speaker-formatted XML of the form...
-
-~~~
-<cues>
-  <cue>
-    <speaker>Camarin Madigan</speaker>
-    <start>0.16</start>
-    <end>45.29</end>
-    <transcript>&lt;span class='oh_speaker_1'&gt;Camarin: &lt;span class='oh_speaker_text'&gt;My name is Camarin Madigan. When I went to Grinnell my name was...&lt;/span&gt;&lt;/span&gt;</transcript>
-  </cue>
-  ~~~
