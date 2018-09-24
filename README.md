@@ -158,20 +158,34 @@ In this format each `<cue>` tag within the enclosing `<cues>` tag represents one
 
 **OHScribe!** is accessible at https://ohscribe.grinnell.edu and should run in any web browser.  It permits a user to upload an XML file, output from the aforementioned workflow, and if successful, it provides an output file in IOH-compatible XML format as a download.  Since upload and download of content is provided the site will present the user with a required login screen like this:
 
-  
+![Authentication Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeAuthWindow.png)
 
- Once installed you should run the script using a command like the following (you can easily create an alias and use that if you like):
+Interested users of **OHScribe!** should [request credentials via email to *digital@grinnell.edu*](mailto:digital@grinnell.edu?subject=OHScribe Credentials).  
 
-~~~
-python /path/to/script/Transform_InqScribe_to_IOH.py
-~~~
+### Uploading XML
 
-Doing so should launch a simple GUI that looks like this:
+Once authorized, **OHScribe!** presents the user with a file upload form like so:
 
-![screen shot 2017-06-23 at 9 15 33 am](https://user-images.githubusercontent.com/8472769/27486523-80966e2a-57f6-11e7-9399-ab9ec15e6dd8.png)
+![Upload Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeUpload.png)
+
+Selecting the `Browse...` button will open a file-selection window on the local host.  The user should select a single .XML transcript file for upload and click the `Upload` key to send it to the *OHScribe!* server.
+
+A successful file upload produces `Main/Control` screen like this:
+
+![Main / Control After Upload](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeMainControl.png)
+
+Note the message/status portion of the window just above the `Main / Control Screen` title.  The message here in green print indicates a successful upload.  
 
 ## Typical Use
 
+Once an XML file has been successfully uploaded for processing, the user is presented with a six individual processing options, or a seventh option to `Do All of the Above`.  **Users should ALWAYS choose `Do All of the Above` unless there are special circumstances and they have been instructed otherwise.**  
+
+*OHScribe!* divides the transformation of a transcript into six individual steps represented by the following *Action* choices:
+
+#### Clean-Up the XML
+This action checks that the uploaded file has a .xml extension and scans the file looking for special characters which are not allowed in valid XML.
+
+ 
 You typically use this script like so:
 
 1) Click the __Browse__ button and navigate to a transcript XML file prepared in and exported from InqScribe.  
