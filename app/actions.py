@@ -65,6 +65,11 @@ def xsl_transformation(xmlfile, xslfile="/app/ohscribe.xsl"):
       doc = etree.parse(f)
       result = transform(doc)
 
+  except ValueError as err:
+    msg = "XML Value error: {}".format(repr(err))
+    flash(msg, 'error')
+    raise
+
   except:
     msg = "Unexpected error: {}".format(sys.exc_info()[0])
     flash(msg, 'error')
@@ -125,7 +130,7 @@ def do_cleanup(filename):
       msg = "Clean-up is complete. {0} lines of '{1}' were processed to create '{2}'.".format(counter, filename, clean)
       flash(msg, 'info')
       detail = " ".join(cleanfile.readlines( )[0:10])
-      guidance = "Please return to Main/Control and engage the 'Transform' feature to change '{}' into proper IOH XML format.".format(clean)
+      guidance = "Please download your 'clean' output, upload that file, and engage the 'Transform' feature to change '{}' into proper IOH XML format.".format(clean)
 
     return clean, msg, detail, guidance
 
@@ -182,7 +187,7 @@ def do_transform(filename):
     with open(iohx, 'r') as transfile:
       msg = "XSLT transformation is complete and the cue-numbered results are in '{}'.".format(iohx)
       detail = " ".join(transfile.readlines( )[0:10])
-      guidance = "Please return to Main/Control and engage the 'Convert hh:mm:ss...' feature to change time references in '{}'".format(ioh_file)
+      guidance = "Please download your 'transformed' output, upload that file, and engage the 'Convert hh:mm:ss...' feature to change time references in '{}'".format(ioh_file)
 
     return iohx, msg, detail, guidance
 
@@ -219,7 +224,7 @@ def do_hms_conversion(filename):
     with open(secname, 'r') as secfile:
       msg = "Conversion of hh:mm:ss times to seconds is complete.  Results are in '{}'.".format(secname)
       detail = " ".join(secfile.readlines()[0:10])
-      guidance = "Please return to Main/Control and engage the 'Format Speaker Tags' feature to change speaker tags in '{}'".format(secfile)
+      guidance = "Please download your 'time-converted' output, upload that file, and engage the 'Format Speaker Tags' feature to change speaker tags in '{}'".format(secfile)
 
     return secname, msg, detail, guidance
 
@@ -321,7 +326,7 @@ def do_speaker_tags(filename):
       msg = "Speaker formatting in transcript '{}' is complete.".format(final)
       flash(msg, 'info')
       detail = " ".join(finalfile.readlines()[0:20])
-      guidance = "Please return to Main/Control and engage the 'Analyze' feature on '{}' to flag <cues> that are potentially too long.".format(final)
+      guidance = "Please download your 'speaker-tagged' output, upload that file, and engage the 'Analyze' feature on '{}' to flag <cues> that are potentially too long.".format(final)
 
     return final, msg, detail, guidance
 

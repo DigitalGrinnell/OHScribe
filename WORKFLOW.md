@@ -13,7 +13,7 @@ OHScribe creates a new cue every time it encounters a timecode, so every timecod
 
 [InqScribe](https://www.inqscribe.com) allows a transcriber to define and use [Snippets](http://docs.inqscribe.com/2.2/snippets.html), short bits of frequently-repeated text, with associated triggers or keyboard [Shortcuts](http://docs.inqscribe.com/2.2/keyboardshortcuts.html) that make it easy to quickly add key elements to a transcript.  The following are samples of *Snippets* and their corresponding *Triggers*/*Shortcuts* used in conjunction with our workflow.
 
-![file-inqscribesnippet1-png](https://gist.githubusercontent.com/McFateM/f4e061eb17ce6d645e51c9d0f2a93814/raw/ff7e69a4a5953149a7dd8f3a86f9565c2e4e7017/InqScribeSnippet1.png)
+![file-inqscribesnippet1-png](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/InqScribeSnippet1.png)
 
 The above image is an example of a *Snippet* we refer to as a 'Speaker Timecode'.  When triggered, this snippet will insert:
 
@@ -26,11 +26,11 @@ If a speaker has a double first name, the name will need to be hyphentated becau
 
 Note also that in this example our *Speaker Timecode* snippet is named `Darrell Fisher` and it is assigned to trigger `KP1` which has a corresponding keyboard shortcut. The name of the timecode snippet is not important, and can be left vague/general, as with the `Interviewer` example.
 
-Any additional speakers can be represented in the same way by selecting 'Add' and then filling in the correct information similarly to the example above. 
+Any additional speakers can be represented in the same way by selecting 'Add' and then filling in the correct information similarly to the example above.
 
 Each time a new speaker is introduced, there must be `<speaker> FirstName LastName </speaker>` line added between the timecode and the `FirstName | `. Each speaker should only have one instance of speaker tags in the InqScribe file.  
 
-![file-inqscribesnippet1-png](https://gist.githubusercontent.com/McFateM/f4e061eb17ce6d645e51c9d0f2a93814/raw/ff7e69a4a5953149a7dd8f3a86f9565c2e4e7017/InqScribeSnippet2.png)
+![file-inqscribesnippet2-png](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/InqScribeSnippet2.png)
 
 The second image, immediately above, is an example of a *Snippet* we refer to as a 'Raw Timecode'.  When triggered, this snippet will insert:
 

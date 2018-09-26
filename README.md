@@ -176,9 +176,9 @@ A successful file upload produces `Main/Control` screen like this:
 
 Note the message/status portion of the window just above the `Main / Control Screen` title.  The message here in green print indicates a successful upload.  
 
-## Typical Use
+## Typical/Recommended Use
 
-Once an XML file has been successfully uploaded for processing, the user is presented with a six individual processing options, or a seventh option to `Do All of the Above`.  **Users should ALWAYS choose `Do All of the Above` unless there are special circumstances and they have been instructed otherwise.**  
+Once an XML file has been successfully uploaded for processing, the user is presented with a six individual or single actions, or a seventh option to `Do All of the Above`.  **Users should ALWAYS choose `Do All of the Above` unless there are special circumstances and they have been instructed otherwise.**  
 
 Typical use of OHScribe! follows these steps.
 
@@ -194,20 +194,43 @@ Typical use of OHScribe! follows these steps.
 
     This action converts \<start> and \<end> values from hours:minutes:seconds notation to the decimal seconds notation required for IOH. The changes are saved directly in the selected **IOH-** file. This file should be suitable for ingest into IOH.
 
-### Individual Actions
+### Single Actions
 
-*OHScribe!* divides the transformation of a transcript into six individual steps represented by the following *Action* choices:
+*OHScribe!* divides the transformation of a transcript into six _ordered_, individual steps represented by the following single *Action* choices:
 
-  - **Clean-Up the XML** - This action checks that the uploaded file has a .xml extension and subsequently parses the XML to verify its validity.  
+  1) **Clean-Up the XML** - This action checks that the uploaded file has a .xml extension and subsequently parses the XML to verify its validity.  
 
-  - **Transform XML to IOH** - This action transforms the valid XML creating a `<cues>` and enclosed `<cue>` tags from `<scene>` tags.
+  2) **Transform XML to IOH** - This action transforms the valid XML creating a `<cues>` and enclosed `<cue>` tags from `<scene>` tags.
 
-  - **Convert hh:mm:ss to Seconds** - This action converts all of the *in* and *out* time codes from hours-minutes-seconds (hh:mm:ss.s) notation to necessary `<start>` and `<end>` tags expressed as the number of seconds measured from the beginning of the transcribed audio or video stream.
+  3) **Convert hh:mm:ss to Seconds** - This action converts all of the *in* and *out* time codes from hours-minutes-seconds (hh:mm:ss.s) notation to necessary `<start>` and `<end>` tags expressed as the number of seconds measured from the beginning of the transcribed audio or video stream.
 
-  - **Format Speaker Tags** - This action transforms all of the *speaker tags* and *speaker IDs* from the original transcription into IOH-formatted speaker tags.
+  4) **Format Speaker Tags** - This action transforms all of the *speaker tags* and *speaker IDs* from the original transcription into IOH-formatted speaker tags.
 
-  - **Analyze Cue Times** - This final action checks each of the `<cue>` tag contents against a fixed target of *10 lines*.  Cues with more than 10 lines of captioning may overwhelm or even overflow the underlying image or video content.
+  5) **Analyze Cue Times** - This final action checks each of the `<cue>` tag contents against a fixed target of *10 lines*.  Cues with more than 10 lines of captioning may overwhelm or even overflow the underlying image or video content.
 
+Note that when a single action is performed the user must take steps to download *intermediate* results and upload those back to OHScribe! in order to perform the next step.  Since this can become rather tedious, the option to `Do All of the Above` is recommended.
+
+A single action can be performed by clicking the radio button corresponding to the desired action, and clicking the `Do Single Action` button near the bottom of the *Main / Control Screen* as shown below.
+
+![Do Single Action](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeOutputSingleAction.png)
+
+### Action Results
+
+Results of a `Do All of the Above` action typically include status output in a box at the top of the window, a *Message* box explaining the outcome, and a *Download your Output!* button with instructions.  The window typically looks something like this:
+
+![Do All Results](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeOutputNoErrors.png)
+
+Single actions produce slightly different results which may also include `Details` of the output, and `Guidance` for follow-up actions as shown below.
+
+![Single Action Result](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribe-CleanUp.png)
+
+### Errors
+
+Processing errors are generally presented with red text appearing in the status box at the top of the window, like so:
+
+![Errors](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeOutputErrors.png)
+
+Unexpected or unresolvable errors encountered in **OHScribe!** should be [reported to the author via email to *digital@grinnell.edu*](mailto:digital@grinnell.edu?subject=OHScribe Error) and/or added to the *Issue* queue at https://github.com/DigitalGrinnell/OHScribe/issues.   
 
 ## CSS Required for Speaker Formatting
 
