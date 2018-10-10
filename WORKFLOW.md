@@ -5,7 +5,7 @@ Grinnell College employs the transcription workflow described here when preparin
 
 ## Training Video
 
-An 11.5 minute long ![training video](https://www.youtube.com/watch?v=MlGTPPN2uAA&feature=youtu.be) is available to reinforce the concepts presented below.  The video moves very quickly, compressing a 2-hour transcription session down into 11.5 minutes.  You may find it necessary to slow the playback down, or rewind and repeat portions of the video, using the controls available in your browser. 
+An 11.5 minute long [![training video](http://img.youtube.com/vi/MlGTPPN2uAA/0.jpg)](http://www.youtube.com/watch?v=MlGTPPN2uAA "Grinnell College Digital Oral History Transcription Workflow") is available to reinforce the concepts presented below.  The video moves very quickly, compressing a 2-hour transcription session down into 11.5 minutes.  You may find it necessary to slow the playback down, or rewind and repeat portions of the video, using the controls available in your browser. 
 
 ## Workflow Description
 
