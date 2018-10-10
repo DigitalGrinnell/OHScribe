@@ -2,7 +2,7 @@
 
 This is a *Python 3* and *Flask* web application designed to transform oral history transcripts, presumably created using [InqScribe](https://www.inqscribe.com), into XML suitable for ingest into the **[Islandora Oral Histories Solution Pack](https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories)** to populate a TRANSCRIPT datastream and its derivatives.  *Islandora Oral Histories* and the aforementioned solution pack are commonly referred to as **IOH** throughout this document.
 
-**OHScribe!** is intended to be used as part of a broader IOH transcription workflow developed at *Grinnell College*.  The workflow documented in the section titled [InqScribe Workflow](#inqscribe-workflow) may be of significant interest to individuals tasked with transcribing IOH audio recordings.
+**OHScribe!** is intended to be used as part of a broader IOH transcription workflow developed at *Grinnell College*.  The workflow documented in the section titled [InqScribe Workflow](#inqscribe-workflow) may be of significant interest to individuals tasked with transcribing IOH audio recordings. The aforementioned workflow document now includes a link to an 11.5 minute long training video.
 
 ### Formatted IOH Example
 
