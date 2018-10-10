@@ -1,4 +1,5 @@
-# OHScribe!
+# OHScribe!  
+https://ohscribe.grinnell.edu
 
 This is a *Python 3* and *Flask* web application designed to transform oral history transcripts, presumably created using [InqScribe](https://www.inqscribe.com), into XML suitable for ingest into the **[Islandora Oral Histories Solution Pack](https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories)** to populate a TRANSCRIPT datastream and its derivatives.  *Islandora Oral Histories* and the aforementioned solution pack are commonly referred to as **IOH** throughout this document.
 
@@ -156,7 +157,7 @@ In this format each `<cue>` tag within the enclosing `<cues>` tag represents one
 
 ## Running OHScribe!
 
-**OHScribe!** is accessible at https://ohscribe.grinnell.edu and should run in any web browser.  It permits a user to upload an XML file, output from the aforementioned workflow, and if successful, it provides an output file in IOH-compatible XML format as a download.  Since upload and download of content is provided the site will present the user with a required login screen like this:
+**OHScribe!** is accessible at https://ohscribe.grinnell.edu and should run in any web browser.  It permits a user to upload an XML file (presumably this is output from the aforementioned workflow), and if successful, it provides an output file in IOH-compatible XML format as a download.  Since upload and download of content is provided the site will present the user with a required login screen like this:
 
 ![Authentication Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeAuthWindow.png)
 
