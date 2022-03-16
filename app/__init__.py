@@ -12,6 +12,9 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.static_folder = 'static'
 
+# Required for older WSGI deployments per https://docs.google.com/document/d/1W57Pf48E5z1Zg8dsoWrZd1FxkHIqCSrgStXAvqLGQYQ/edit
+application = app
+
 # Set log verbosity based on environment
 if app.config['LOG_VERBOSITY'] == 'DEBUG':
   app.debug = True    # for debugging...set False to turn off the DebugToolbarExtension
@@ -57,5 +60,3 @@ from app import routes, errors, actions
 # Always encapsulate the '.run' call per https://stackoverflow.com/questions/29356224/error-errno-98-address-already-in-use
 if __name__ == '__main__':
   app.run(host=host, port=5000)    # for PROD host='0.0.0.0' and for DEV host='127.0.0.1'
-
-
