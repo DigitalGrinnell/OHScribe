@@ -1,2 +1,2 @@
-from app import app
-application = app
+from app import routes
+application = routes.main()
