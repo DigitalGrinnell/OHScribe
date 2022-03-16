@@ -12,8 +12,9 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.static_folder = 'static'
 
-# Required for older WSGI deployments per https://docs.google.com/document/d/1W57Pf48E5z1Zg8dsoWrZd1FxkHIqCSrgStXAvqLGQYQ/edit
-application = app
+## Moved to wsgi.py
+## Required for older WSGI deployments per https://docs.google.com/document/d/1W57Pf48E5z1Zg8dsoWrZd1FxkHIqCSrgStXAvqLGQYQ/edit
+#application = app
 
 # Set log verbosity based on environment
 if app.config['LOG_VERBOSITY'] == 'DEBUG':
