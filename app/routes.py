@@ -1,17 +1,26 @@
-from app import app, basic_auth
-from flask import Flask, render_template, flash, redirect, url_for, request, send_file
+from app import app
+from flask import render_template, flash, redirect, url_for, request, send_file
 from app.forms import MainForm
 from app.actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
 from werkzeug.utils import secure_filename
 import sys
 import os
 
+# ## From https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+# @app.route('/')
+# @app.route('/index')
+# def index():
+#     return "Hello, World!"
 
-# Route for handing authentication and upload selection
-@app.route('/', methods=['POST', 'GET'])
+## Line below was subordinate to `@app.route('/upload', methods=['GET', 'POST'])`
+# @basic_auth.required  # per http://flask-basicauth.readthedocs.io/en/latest/
+
+## Route for handing authentication and upload selection
+# @app.route('/login', methods=['POST', 'GET'])
+# @app.route('/logout', methods=['POST', 'GET'])
+
 @app.route('/upload', methods=['GET', 'POST'])
-@basic_auth.required  # per http://flask-basicauth.readthedocs.io/en/latest/
-
+# @htpasswd.required
 def upload_file():
   app.logger.debug("upload_file( ) called")
 
@@ -34,9 +43,9 @@ def upload_file():
       filename = secure_filename(file.filename)
 
       folder = app.config['UPLOAD_FOLDER']
-      app.logger.debug("folder at line 47 in routes.py is: '%s'", folder)
+      app.logger.debug("folder at line 47 in .simple_routes.py is: '%s'", folder)
       newpath = os.path.join(folder, filename)
-      app.logger.debug("newpath at line 49 in routes.py is: '%s'", newpath)
+      app.logger.debug("newpath at line 49 in .simple_routes.py is: '%s'", newpath)
 
       try:
         file.save(newpath)
@@ -70,6 +79,7 @@ def download_file( ):
   return send_file(target, mimetype='text/xml', cache_timeout=0, attachment_filename=filename, as_attachment=True)
 
 # Route for handling the main/control page
+@app.route('/', methods=['POST', 'GET'])
 @app.route('/main', methods=['POST', 'GET'])
 def main( ):
   form = MainForm(request.form)

@@ -2,12 +2,10 @@
 
 import os
 import logging
-from flask_basicauth import BasicAuth
+from flask import Flask
 from logging.handlers import RotatingFileHandler
 from flask_bootstrap import Bootstrap
-from flask import Flask, flash
 from config import Config
-from flask_debugtoolbar import DebugToolbarExtension  # for debugging
 
 # Initialize the app... populate app.config[]
 app = Flask(__name__)
@@ -16,11 +14,9 @@ app.static_folder = 'static'
 
 # Set log verbosity based on environment
 if app.config['LOG_VERBOSITY'] == 'DEBUG':
-  app.debug = True                       # for debugging...set False to turn off the DebugToolbarExtension
+  app.debug = True    # for debugging...set False to turn off the DebugToolbarExtension
 else:
-  app.debug = False                      # for debugging...set False to turn off the DebugToolbarExtension
-
-toolbar = DebugToolbarExtension(app)     # for debugging
+  app.debug = False   # for debugging...set False to turn off the DebugToolbarExtension
 
 # From The Flask Mega-Tutorial Part VII: Error Handling
 if not os.path.exists('logs'):
@@ -42,11 +38,19 @@ app.logger.info('OHScribe startup with LOG_VERBOSITY = %s.', app.config['LOG_VER
 bootstrap = Bootstrap(app)
 host = app.config['HOST_ADDR']
 
-# Per http://flask-basicauth.readthedocs.io/en/latest/
-basic_auth = BasicAuth(app)
-app.config['BASIC_AUTH_USERNAME'] = 'admin'
+## Per https://github.com/flask-extensions/Flask-SimpleLogin
+# SimpleLogin(app)    ...perhaps it is too simple?
 
+## Per http://flask-basicauth.readthedocs.io/en/latest/
+# basic_auth = BasicAuth(app)     ...broken and no longer maintained
+# app.config['BASIC_AUTH_USERNAME'] = 'admin'
 
+## Per https://pypi.org/project/flask-htpasswd/
+# app.config['FLASK_HTPASSWD_PATH'] = '/Users/mcfatem/.htpasswd'
+# app.config['FLASK_SECRET'] = 'Hey Hey Kids, secure me!'
+# htpasswd.init_app(app)
+
+# from app import simple_routes, errors, actions
 from app import routes, errors, actions
 
 # Use the host's IP address per https://stackoverflow.com/questions/7023052/configure-flask-dev-server-to-be-visible-across-the-network
