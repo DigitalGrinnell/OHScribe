@@ -82,3 +82,4 @@ FileNotFoundError: [Errno 2] No such file or directory: ' /Users/markmcfate/data
 2022-03-11 15:56:09,956 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:36]
 2022-03-11 15:59:04,925 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/app/routes.py:25]
 2022-03-16 09:04:33,642 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:36]
+2022-03-16 14:35:33,700 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:39]
