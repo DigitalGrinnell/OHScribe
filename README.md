@@ -5,6 +5,11 @@ This is a *Python 3* and *Flask* web application designed to transform oral hist
 
 **OHScribe!** is intended to be used as part of a broader IOH transcription workflow developed at *Grinnell College*.  The workflow documented in the section titled [InqScribe Workflow](#inqscribe-workflow) may be of significant interest to individuals tasked with transcribing IOH audio recordings. The aforementioned workflow document now includes a link to an 11.5 minute long training video.
 
+# Docker Version!
+
+March 2022:  This `with-docker` branch of the code includes a _Docker_ configuration that is NOT verified to work properly.
+
+
 ### Formatted IOH Example
 
 The aforementioned workflow, application, and accompanying CSS (provided below) are intended to deliver oral histories that look something like this:
