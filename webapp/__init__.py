@@ -68,5 +68,4 @@ app.logger.info('OHScribe "host" = %s.', host)
 # Use the host's IP address per https://stackoverflow.com/questions/7023052/configure-flask-dev-server-to-be-visible-across-the-network
 # Always encapsulate the '.run' call per https://stackoverflow.com/questions/29356224/error-errno-98-address-already-in-use
 if __name__ == '__main__':
-  # app.run(host=host, port=5000)    # for PROD host='0.0.0.0' and for DEV host='127.0.0.1'
-  app.run(host='0.0.0.0')
+  app.run(host=host, port=5000) 
