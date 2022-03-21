@@ -1,3 +1,13 @@
+## Per https://help.pythonanywhere.com/pages/Flask/
+
+import sys
+path = '/var/www/webroot/ROOT'
+if path not in sys.path:
+   sys.path.insert(0, path)
+
+from webapp import app as application
+
+
 # # per https://flask.palletsprojects.com/en/2.0.x/deploying/mod_wsgi/
 #
 # from webapp import app as application
@@ -17,5 +27,3 @@
 #
 # # import flask app but need to call it "application" for WSGI to work
 # from webapp import app as application  # noqa
-
-from ROOT.webapp import app as application
