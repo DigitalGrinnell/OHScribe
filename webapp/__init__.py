@@ -5,16 +5,13 @@ import logging
 from flask import Flask
 from logging.handlers import RotatingFileHandler
 from flask_bootstrap import Bootstrap
-# from config import Config
 
 ## Was previously in config.py
-#from os import environ
-
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or '/tmp'
     LOG_VERBOSITY = os.environ.get('LOG_VERBOSITY') or 'DEBUG'
-    HOST_ADDR = os.environ.get('HOST_ADDR') or '127.0.0.1'
+    HOST_ADDR = os.environ.get('HOST_ADDR') or '0.0.0.0'  # 127.0.0.1 for DEV, 0.0.0.0 for PROD
     BASIC_AUTH_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'p@$$w0rd'
     CURRENT_FILE = 'TBD'
     DEBUG_TB_INTERCEPT_REDIRECTS = False
