@@ -12,7 +12,7 @@ class Config(object):
     UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or '/tmp'
     LOG_VERBOSITY = os.environ.get('LOG_VERBOSITY') or 'DEBUG'
     HOST_ADDR = os.environ.get('HOST_ADDR') or '0.0.0.0'  # 127.0.0.1 for DEV, 0.0.0.0 for PROD
-    # HOST_ADDR = os.environ.get('MASTER_IP') or '0.0.0.0'  
+    # HOST_ADDR = os.environ.get('MASTER_IP') or '0.0.0.0'
     BASIC_AUTH_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'p@$$w0rd'
     CURRENT_FILE = 'TBD'
     DEBUG_TB_INTERCEPT_REDIRECTS = False
@@ -68,4 +68,5 @@ app.logger.info('OHScribe "host" = %s.', host)
 # Use the host's IP address per https://stackoverflow.com/questions/7023052/configure-flask-dev-server-to-be-visible-across-the-network
 # Always encapsulate the '.run' call per https://stackoverflow.com/questions/29356224/error-errno-98-address-already-in-use
 if __name__ == '__main__':
-  app.run(host=host, port=5000)
+  # app.run(host=host, port=5000)
+  app.run( )
