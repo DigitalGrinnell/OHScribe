@@ -48,6 +48,7 @@ app.logger.info('OHScribe startup with LOG_VERBOSITY = %s.', app.config['LOG_VER
 
 bootstrap = Bootstrap(app)
 host = app.config['HOST_ADDR']
+app.logger.info('OHScribe "host" = %s.', host)
 
 ## Per https://github.com/flask-extensions/Flask-SimpleLogin
 # SimpleLogin(app)    ...perhaps it is too simple?
