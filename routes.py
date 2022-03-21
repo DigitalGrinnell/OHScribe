@@ -6,11 +6,11 @@ from werkzeug.utils import secure_filename
 import sys
 import os
 
-# ## From https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
-# @app.route('/')
-# @app.route('/index')
-# def index():
-#     return "Hello, World!"
+## From https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+@app.route('/')
+@app.route('/index')
+def index():
+    return "Hello, World!"
 
 ## Line below was subordinate to `@app.route('/upload', methods=['GET', 'POST'])`
 # @basic_auth.required  # per http://flask-basicauth.readthedocs.io/en/latest/
@@ -79,8 +79,7 @@ def download_file( ):
   return send_file(target, mimetype='text/xml', cache_timeout=0, attachment_filename=filename, as_attachment=True)
 
 # Route for handling the main/control page
-@app.route('/', methods=['POST', 'GET'])
-# @app.route('/main', methods=['POST', 'GET'])
+@app.route('/main', methods=['POST', 'GET'])
 def main( ):
   form = MainForm(request.form)
   if request.method == 'POST':
