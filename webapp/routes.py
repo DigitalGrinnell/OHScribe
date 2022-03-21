@@ -1,7 +1,7 @@
-from app import app
+from webapp import app
 from flask import render_template, flash, redirect, url_for, request, send_file
-from app.forms import MainForm
-from app.actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
+from webapp.forms import MainForm
+from webapp.actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
 from werkzeug.utils import secure_filename
 import sys
 import os

@@ -1,4 +1,4 @@
-from app import app
+from webapp import app
 
 # import os.path
 # import fileinput

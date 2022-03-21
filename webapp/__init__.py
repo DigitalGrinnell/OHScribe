@@ -63,8 +63,8 @@ host = app.config['HOST_ADDR']
 # app.config['FLASK_SECRET'] = 'Hey Hey Kids, secure me!'
 # htpasswd.init_app(app)
 
-# from app import simple_routes, errors, actions
-from app import routes, errors, actions
+# from webapp import simple_routes, errors, actions
+from webapp import routes, errors, actions
 
 # Use the host's IP address per https://stackoverflow.com/questions/7023052/configure-flask-dev-server-to-be-visible-across-the-network
 # Always encapsulate the '.run' call per https://stackoverflow.com/questions/29356224/error-errno-98-address-already-in-use
