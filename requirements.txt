@@ -2,7 +2,7 @@ Flask == 2.0.3
 Flask-Bootstrap == 3.3.7.1
 Flask-DebugToolbar == 0.10.1
 Flask-WTF == 0.14.2
-itsdangerous == 0.24
+itsdangerous >= 2.0
 Jinja2 == 3.0.3
 MarkupSafe >= 2.0
 visitor == 0.1.3
