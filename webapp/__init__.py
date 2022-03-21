@@ -5,7 +5,8 @@ import logging
 from flask import Flask
 from logging.handlers import RotatingFileHandler
 from flask_bootstrap import Bootstrap
-from ROOT.config import Config
+# from config import Config
+import config
 
 # Initialize the app... populate app.config[]
 app = Flask(__name__)
