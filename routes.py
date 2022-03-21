@@ -80,7 +80,7 @@ def download_file( ):
 
 # Route for handling the main/control page
 @app.route('/', methods=['POST', 'GET'])
-@app.route('/main', methods=['POST', 'GET'])
+# @app.route('/main', methods=['POST', 'GET'])
 def main( ):
   form = MainForm(request.form)
   if request.method == 'POST':
