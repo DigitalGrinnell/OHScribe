@@ -5,7 +5,7 @@ path = '/var/www/webroot/ROOT'
 if path not in sys.path:
    sys.path.insert(0, path)
 
-from webapp import app as application
+from ohscribe import app as application
 
 
 # # per https://flask.palletsprojects.com/en/2.0.x/deploying/mod_wsgi/
