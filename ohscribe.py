@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
 # from ohscribe import app
 # from flask import render_template, flash, redirect, url_for, request, send_file
-# from forms import MainForm
+from forms import MainForm
 # from actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
 # from werkzeug.utils import secure_filename
 # import sys
