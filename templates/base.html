@@ -1,7 +1,4 @@
-
-{{super()}}
-  <link rel="stylesheet" href="{{url_for('.static', filename='mystyle.css')}}">
-{% endblock %}
+<link rel="stylesheet" href="{{url_for('.static', filename='mystyle.css')}}">
 
 {% block title %}
     {% if title %}{{ title }} - OHScribe!{% else %}Welcome to OHScribe!{% endif %}
