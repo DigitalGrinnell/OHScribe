@@ -1,59 +1,112 @@
-2018-07-29 17:10:51,394 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:12:37,828 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:15:21,667 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:16:26,115 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:17:52,579 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:22:12,989 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:24:05,905 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:26:05,426 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:29:26,116 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:30:08,666 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:37:02,716 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:38:39,407 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:39:28,063 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:14:14,319 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:15:23,296 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:25:12,350 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
+2022-03-21 21:22:38,081 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
 Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 107, in wrapper
-    if self.authenticate():
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 80, in authenticate
-    self.check_credentials(auth.username, auth.password)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 67, in check_credentials
-    correct_password = current_app.config['BASIC_AUTH_PASSWORD']
-KeyError: 'BASIC_AUTH_PASSWORD'
-2018-07-29 19:39:55,600 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:39:58,527 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 166, in main
+    return render_template('main.html', title='Controls'), #form=form)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 147, in render_template
+    return _render(
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 128, in _render
+    rv = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 1291, in render
+    self.environment.handle_exception()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 3, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 22, in top-level template code
+    {% block content %}
+  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 35, in block 'content'
+    {% block app_content %}{% endblock %}
+  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 7, in block 'app_content'
+    <form action="{{ url_for('results') }}" method="POST">
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 338, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 325, in url_for
+    rv = url_adapter.build(
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/werkzeug/routing.py", line 2315, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'results'. Did you mean 'static' instead?
+2022-03-21 21:22:38,929 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
 Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 107, in wrapper
-    if self.authenticate():
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 80, in authenticate
-    self.check_credentials(auth.username, auth.password)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 67, in check_credentials
-    correct_password = current_app.config['BASIC_AUTH_PASSWORD']
-KeyError: 'BASIC_AUTH_PASSWORD'
-2018-07-29 19:50:58,203 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 166, in main
+    return render_template('main.html', title='Controls'), #form=form)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 147, in render_template
+    return _render(
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 128, in _render
+    rv = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 1291, in render
+    self.environment.handle_exception()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 3, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 22, in top-level template code
+    {% block content %}
+  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 35, in block 'content'
+    {% block app_content %}{% endblock %}
+  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 7, in block 'app_content'
+    <form action="{{ url_for('results') }}" method="POST">
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 338, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 325, in url_for
+    rv = url_adapter.build(
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/werkzeug/routing.py", line 2315, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'results'. Did you mean 'static' instead?
+2022-03-21 21:22:40,697 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:102]
+2022-03-21 21:24:47,435 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:47]
+2022-03-21 21:24:49,275 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 163, in main
+    form = MainForm(request.form)
+NameError: name 'MainForm' is not defined
+2022-03-21 21:24:55,273 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 163, in main
+    form = MainForm(request.form)
+NameError: name 'MainForm' is not defined
+2022-03-21 21:24:56,902 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 163, in main
+    form = MainForm(request.form)
+NameError: name 'MainForm' is not defined
+2022-03-21 21:24:57,836 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:102]
