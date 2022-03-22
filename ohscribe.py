@@ -117,12 +117,13 @@ def upload_file():
 
     # Good to go...
     if file and allowed_file(file.filename):
-      filename = secure_filename(file.filename)
+      # filename = secure_filename(file.filename)
+      filename = file.filename
 
       folder = app.config['UPLOAD_FOLDER']
-      app.logger.debug("folder at line 47 in .simple_routes.py is: '%s'", folder)
+      app.logger.debug("folder at line 124 is: '%s'", folder)
       newpath = os.path.join(folder, filename)
-      app.logger.debug("newpath at line 49 in .simple_routes.py is: '%s'", newpath)
+      app.logger.debug("newpath at line 126 is: '%s'", newpath)
 
       try:
         file.save(newpath)
