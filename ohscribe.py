@@ -160,9 +160,9 @@ if __name__ == '__main__':
 # @app.route('/main', methods=['POST', 'GET'])
 @app.route('/', methods=['POST', 'GET'])
 def main( ):
-  #form = MainForm(request.form)
-  if request.method == 'POST':
-    return redirect(url_for('results'))
+  # form = MainForm(request.form)
+  # if request.method == 'POST':
+  #   return redirect(url_for('results'))
   return render_template('main.html', title='Controls'), #form=form)
 
 
