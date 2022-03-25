@@ -7,6 +7,9 @@ from logging.handlers import RotatingFileHandler
 # from flask_bootstrap import Bootstrap
 
 ## Was previously in config.py
+from werkzeug.utils import send_from_directory
+
+
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or '/tmp'
@@ -46,7 +49,7 @@ if app.config['LOG_VERBOSITY'] == 'DEBUG':
 
 app.logger.info('OHScribe startup with LOG_VERBOSITY = %s.', app.config['LOG_VERBOSITY'])
 
-if __name__ == '__main__':
+if __name__ == '__main__':      # development?  Returns false in production, I think.
     app.run()
 
 # bootstrap = Bootstrap(app)
@@ -279,8 +282,12 @@ def sanitize_xml(line):
 # Transform any XML with a XSLT
 # Lifted from https://gist.github.com/revolunet/1154906
 
-def xsl_transformation(xmlfile, xslfile="ohscribe.xsl"):
-
+def xsl_transformation(xmlfile):
+  if __name__ == '__main__':  # development?  Returns false in production, I think.
+    xslfile = "ohscribe.xsl"
+  else:
+    xslfile = "/var/www/webroot/ROOT/ohscribe.xsl"
+    
   try:
     with open(xslfile, 'r') as xsl:
       xslt = xsl.read( )
