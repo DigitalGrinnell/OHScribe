@@ -287,7 +287,15 @@ def xsl_transformation(xmlfile):
     xslfile = "ohscribe.xsl"
   else:
     xslfile = "/var/www/webroot/ROOT/ohscribe.xsl"
-    
+  
+  # lifted from https://www.geeksforgeeks.org/file-searching-using-python/
+  dir_path = os.path.dirname(os.path.realpath(__file__))
+  for root, dirs, files in os.walk(dir_path):
+    for file in files:
+      if file.endswith('ohscribe.xsl'):
+        xslfile = root + '/' + str(file)
+        print(xslfile)
+
   try:
     with open(xslfile, 'r') as xsl:
       xslt = xsl.read( )
