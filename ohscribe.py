@@ -195,6 +195,7 @@ def results( ):
   try:
     if result['actions'] and result['go']:
       action = str(result['actions'])
+      app.logger.info("/results action is: %s", action)
       if action == "cleanup":
         file, msg, details, guidance = do_cleanup(filename)
         app.config['CURRENT_FILE'] = file

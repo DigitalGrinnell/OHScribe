@@ -43,3 +43,4 @@ NameError: name 'MainForm' is not defined
 2022-03-25 13:45:48,959 DEBUG: do_cleanup(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:339]
 2022-03-25 13:45:48,960 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:247]
 2022-03-25 13:45:48,960 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) returning /tmp/Lynne_Simcox_64_transcript.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:255]
+2022-03-25 13:50:10,591 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:50]
