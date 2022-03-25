@@ -6,6 +6,9 @@ from flask import Flask, render_template, request, url_for, flash, redirect, sen
 from logging.handlers import RotatingFileHandler
 # from flask_bootstrap import Bootstrap
 
+# adding global variable 'current_file' now that the code is in a single file
+current_file = 'TBD'      # the name of the file to be processed next
+
 ## Was previously in config.py
 from werkzeug.utils import send_from_directory
 
@@ -102,6 +105,7 @@ if __name__ == '__main__':      # development?  Returns false in production, I t
 @app.route('/upload', methods=['GET', 'POST'])
 # @htpasswd.required
 def upload_file():
+  global current_file
   app.logger.debug("upload_file( ) called")
 
   if request.method == 'POST':
@@ -132,6 +136,7 @@ def upload_file():
         file.save(newpath)
         flash("Your file has been successfully uploaded to {}".format(newpath), 'info')
         app.config['CURRENT_FILE'] = newpath
+        current_file = newpath
         app.logger.info("Uploaded file is: %s", newpath)
         return redirect(url_for('main'))
       except:
@@ -154,7 +159,10 @@ def CURRENT_FILE(filename):
 # Route for handling download section
 @app.route('/download')
 def download_file( ):
-  target = app.config['CURRENT_FILE']
+  global current_file
+  # target = app.config['CURRENT_FILE']
+  target = current_file
+
   app.logger.info("Target output for download is: %s", target)
   dir, filename = os.path.split(target)
   return send_file(target, mimetype='text/xml', cache_timeout=0, attachment_filename=filename, as_attachment=True)
@@ -171,6 +179,7 @@ def main( ):
 # Route for handling the results page
 @app.route('/results', methods=['POST', 'GET'])
 def results( ):
+  global current_file
   result = request.form
   method = request.method
 
@@ -181,7 +190,8 @@ def results( ):
   else:
     exit(0)
 
-  filename = app.config['CURRENT_FILE']
+  # filename = app.config['CURRENT_FILE']
+  filename = current_file
 
   try:
     result['all']
@@ -189,7 +199,8 @@ def results( ):
     pass
   else:
     file, msg, details, guidance = do_all(filename)
-    app.config['CURRENT_FILE'] = file
+    # app.config['CURRENT_FILE'] = file
+    current_file = file
     return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
 
   try:
@@ -198,23 +209,28 @@ def results( ):
       app.logger.info("/results action is: %s", action)
       if action == "cleanup":
         file, msg, details, guidance = do_cleanup(filename)
-        app.config['CURRENT_FILE'] = file
+        # app.config['CURRENT_FILE'] = file
+        current_file = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "transform":
         file, msg, details, guidance = do_transform(filename)
-        app.config['CURRENT_FILE'] = file
+        # app.config['CURRENT_FILE'] = file
+        current_file = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "convert":
         file, msg, details, guidance = do_hms_conversion(filename)
-        app.config['CURRENT_FILE'] = file
+        # app.config['CURRENT_FILE'] = file
+        current_file = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "speakers":
         file, msg, details, guidance = do_speaker_tags(filename)
-        app.config['CURRENT_FILE'] = file
+        # app.config['CURRENT_FILE'] = file
+        current_file = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "analyze":
         file, msg, details, guidance = do_analyze(filename)
-        app.config['CURRENT_FILE'] = file
+        # app.config['CURRENT_FILE'] = file
+        current_file = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
 
   except:
@@ -661,16 +677,21 @@ def do_analyze(filename):
 # Do all of the above, in sequence.
 
 def do_all(filename):
+  global current_file
   app.logger.debug('do_all(%s) called.', filename)
   filepath = checkfile(filename)
   clean, msg, details, guidance = do_cleanup(filepath)
-  app.config['CURRENT_FILE'] = clean
+  # app.config['CURRENT_FILE'] = clean
+  current_file = clean
   xformed, msg, details, guidance = do_transform(clean)
-  app.config['CURRENT_FILE'] = xformed
+  # app.config['CURRENT_FILE'] = xformed
+  current_file = xformed
   times, msg, details, guidance = do_hms_conversion(xformed)
-  app.config['CURRENT_FILE'] = times
+  # app.config['CURRENT_FILE'] = times
+  current_file = times
   final, msg, details, guidance = do_speaker_tags(times)
-  app.config['CURRENT_FILE'] = final
+  # app.config['CURRENT_FILE'] = final
+  current_file = final
   analyzed, msg, details, guidance = do_analyze(final)
   app.logger.info("Final output is in: %s", final)
   return analyzed, msg, details, guidance

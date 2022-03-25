@@ -1,76 +1,4 @@
-2022-03-21 21:22:38,081 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 166, in main
-    return render_template('main.html', title='Controls'), #form=form)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 147, in render_template
-    return _render(
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 128, in _render
-    rv = template.render(context)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 1291, in render
-    self.environment.handle_exception()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 925, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 3, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 22, in top-level template code
-    {% block content %}
-  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 35, in block 'content'
-    {% block app_content %}{% endblock %}
-  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 7, in block 'app_content'
-    <form action="{{ url_for('results') }}" method="POST">
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/werkzeug/routing.py", line 2315, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'results'. Did you mean 'static' instead?
-2022-03-21 21:22:38,929 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 166, in main
-    return render_template('main.html', title='Controls'), #form=form)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 147, in render_template
-    return _render(
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/templating.py", line 128, in _render
-    rv = template.render(context)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 1291, in render
-    self.environment.handle_exception()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/jinja2/environment.py", line 925, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 3, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 22, in top-level template code
-    {% block content %}
-  File "/Users/mcfatem/GitHub/OHScribe/templates/base.html", line 35, in block 'content'
-    {% block app_content %}{% endblock %}
-  File "/Users/mcfatem/GitHub/OHScribe/templates/main.html", line 7, in block 'app_content'
-    <form action="{{ url_for('results') }}" method="POST">
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 338, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/helpers.py", line 325, in url_for
-    rv = url_adapter.build(
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/werkzeug/routing.py", line 2315, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'results'. Did you mean 'static' instead?
-2022-03-21 21:22:40,697 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:102]
-2022-03-21 21:24:47,435 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:47]
-2022-03-21 21:24:49,275 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
+2022-03-21 21:24:59,719 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
 Traceback (most recent call last):
   File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
@@ -83,30 +11,70 @@ Traceback (most recent call last):
   File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 163, in main
     form = MainForm(request.form)
 NameError: name 'MainForm' is not defined
-2022-03-21 21:24:55,273 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 163, in main
-    form = MainForm(request.form)
-NameError: name 'MainForm' is not defined
-2022-03-21 21:24:56,902 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 163, in main
-    form = MainForm(request.form)
-NameError: name 'MainForm' is not defined
-2022-03-21 21:24:57,836 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:102]
+2022-03-21 21:27:23,782 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:47]
+2022-03-21 21:27:38,805 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:102]
+2022-03-21 21:27:54,456 DEBUG: do_cleanup(TBD) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:324]
+2022-03-21 21:27:54,456 DEBUG: checkfile(TBD) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:244]
+2022-03-21 21:27:54,457 DEBUG: checkfile(TBD) returning /tmp/TBD. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:252]
+2022-03-21 21:38:56,166 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:47]
+2022-03-21 21:39:09,598 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:102]
+2022-03-21 21:39:20,571 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:102]
+2022-03-21 21:39:20,574 DEBUG: folder at line 124 is: '/tmp' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:124]
+2022-03-21 21:39:20,575 DEBUG: newpath at line 126 is: '/tmp/oai2_22_8.xml' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:126]
+2022-03-21 21:39:20,576 INFO: Uploaded file is: /tmp/oai2_22_8.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:132]
+2022-03-21 21:39:31,975 DEBUG: do_cleanup(/tmp/oai2_22_8.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:324]
+2022-03-21 21:39:31,975 DEBUG: checkfile(/tmp/oai2_22_8.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:244]
+2022-03-21 21:39:31,976 DEBUG: checkfile(/tmp/oai2_22_8.xml) returning /tmp/oai2_22_8.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:252]
+2022-03-25 11:54:09,859 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:50]
+2022-03-25 11:54:17,607 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:105]
+2022-03-25 11:54:30,717 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:105]
+2022-03-25 11:54:30,721 DEBUG: folder at line 124 is: '/tmp' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:127]
+2022-03-25 11:54:30,722 DEBUG: newpath at line 126 is: '/tmp/Lynne_Simcox_64_transcript.xml' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:129]
+2022-03-25 11:54:30,723 INFO: Uploaded file is: /tmp/Lynne_Simcox_64_transcript.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:135]
+2022-03-25 11:54:34,676 DEBUG: do_cleanup(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:331]
+2022-03-25 11:54:34,677 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:247]
+2022-03-25 11:54:34,677 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) returning /tmp/Lynne_Simcox_64_transcript.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:255]
+2022-03-25 13:45:34,051 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:50]
+2022-03-25 13:45:39,955 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:105]
+2022-03-25 13:45:46,294 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:105]
+2022-03-25 13:45:46,299 DEBUG: folder at line 124 is: '/tmp' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:127]
+2022-03-25 13:45:46,300 DEBUG: newpath at line 126 is: '/tmp/Lynne_Simcox_64_transcript.xml' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:129]
+2022-03-25 13:45:46,301 INFO: Uploaded file is: /tmp/Lynne_Simcox_64_transcript.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:135]
+2022-03-25 13:45:48,959 DEBUG: do_cleanup(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:339]
+2022-03-25 13:45:48,960 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:247]
+2022-03-25 13:45:48,960 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) returning /tmp/Lynne_Simcox_64_transcript.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:255]
+2022-03-25 13:50:10,591 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:50]
+2022-03-25 14:17:37,095 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:53]
+2022-03-25 14:17:41,855 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:109]
+2022-03-25 14:17:47,778 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:109]
+2022-03-25 14:17:47,784 DEBUG: folder at line 124 is: '/tmp' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:131]
+2022-03-25 14:17:47,784 DEBUG: newpath at line 126 is: '/tmp/Lynne_Simcox_64_transcript.xml' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:133]
+2022-03-25 14:17:47,785 INFO: Uploaded file is: /tmp/Lynne_Simcox_64_transcript.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:140]
+2022-03-25 14:17:52,049 INFO: /results action is: cleanup [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:209]
+2022-03-25 14:17:52,050 DEBUG: do_cleanup(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:356]
+2022-03-25 14:17:52,050 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-25 14:17:52,050 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) returning /tmp/Lynne_Simcox_64_transcript.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:272]
+2022-03-25 14:17:57,528 INFO: Target output for download is: /tmp/Lynne_Simcox_64_transcript-clean.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:166]
+2022-03-25 14:18:05,725 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:109]
+2022-03-25 14:18:15,301 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:109]
+2022-03-25 14:18:15,305 DEBUG: folder at line 124 is: '/tmp' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:131]
+2022-03-25 14:18:15,305 DEBUG: newpath at line 126 is: '/tmp/Lynne_Simcox_64_transcript-clean.xml' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:133]
+2022-03-25 14:18:15,306 INFO: Uploaded file is: /tmp/Lynne_Simcox_64_transcript-clean.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:140]
+2022-03-25 14:18:17,957 INFO: /results action is: transform [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:209]
+2022-03-25 14:18:17,958 DEBUG: do_transform(/tmp/Lynne_Simcox_64_transcript-clean.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:404]
+2022-03-25 14:18:17,958 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript-clean.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-25 14:18:17,958 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript-clean.xml) returning /tmp/Lynne_Simcox_64_transcript-clean.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:272]
+2022-03-25 14:18:32,930 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:109]
+2022-03-25 14:18:39,800 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:109]
+2022-03-25 14:18:39,804 DEBUG: folder at line 124 is: '/tmp' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:131]
+2022-03-25 14:18:39,804 DEBUG: newpath at line 126 is: '/tmp/Lynne_Simcox_64_transcript.xml' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:133]
+2022-03-25 14:18:39,805 INFO: Uploaded file is: /tmp/Lynne_Simcox_64_transcript.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:140]
+2022-03-25 14:18:42,099 DEBUG: do_all(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:681]
+2022-03-25 14:18:42,099 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-25 14:18:42,100 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) returning /tmp/Lynne_Simcox_64_transcript.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:272]
+2022-03-25 14:18:42,100 DEBUG: do_cleanup(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:356]
+2022-03-25 14:18:42,100 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-25 14:18:42,100 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript.xml) returning /tmp/Lynne_Simcox_64_transcript.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:272]
+2022-03-25 14:18:42,113 DEBUG: do_transform(/tmp/Lynne_Simcox_64_transcript-clean.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:404]
+2022-03-25 14:18:42,113 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript-clean.xml) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-25 14:18:42,114 DEBUG: checkfile(/tmp/Lynne_Simcox_64_transcript-clean.xml) returning /tmp/Lynne_Simcox_64_transcript-clean.xml. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:272]
