@@ -27,7 +27,6 @@ app.static_folder = 'static'
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-session['target_file'] = 'TBD'
 
 # Set log verbosity based on environment
 if app.config['LOG_VERBOSITY'] == 'DEBUG':
@@ -105,7 +104,6 @@ if __name__ == '__main__':      # development?  Returns false in production, I t
 @app.route('/upload', methods=['GET', 'POST'])
 # @htpasswd.required
 def upload_file():
-  global current_file
   app.logger.debug("upload_file( ) called")
 
   if request.method == 'POST':
