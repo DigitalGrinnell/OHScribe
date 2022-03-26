@@ -2,16 +2,13 @@
 
 import os
 import logging
-from flask import Flask, render_template, request, url_for, flash, redirect, send_file
+from flask import Flask, render_template, request, url_for, flash, redirect, send_file, session
 from logging.handlers import RotatingFileHandler
+from flask_session import Session
 # from flask_bootstrap import Bootstrap
-
-# adding global variable 'current_file' now that the code is in a single file
-# current_file = 'TBD'      # the name of the file to be processed next
 
 ## Was previously in config.py
 from werkzeug.utils import send_from_directory
-
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
@@ -20,14 +17,16 @@ class Config(object):
     # HOST_ADDR = os.environ.get('HOST_ADDR') or '0.0.0.0'  # 127.0.0.1 for DEV, 0.0.0.0 for PROD
     # HOST_ADDR = os.environ.get('MASTER_IP') or '0.0.0.0'
     BASIC_AUTH_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'p@$$w0rd'
-    CURRENT_FILE = 'TBD'
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 
-# Initialize the app... populate app.config[]
+# Initialize the app... populate app.config[] and session[] keys
 app = Flask(__name__)
 app.config.from_object(Config)
 app.static_folder = 'static'
+SESSION_TYPE = 'redis'
+Session(app)
+session['target_file'] = 'TBD'
 
 # Set log verbosity based on environment
 if app.config['LOG_VERBOSITY'] == 'DEBUG':
@@ -135,9 +134,8 @@ def upload_file():
       try:
         file.save(newpath)
         flash("Your file has been successfully uploaded to {}".format(newpath), 'info')
-        app.config['CURRENT_FILE'] = newpath
-        current_file = newpath
-        app.logger.info("Uploaded file (also now current_file) is: %s", current_file)
+        session['target_file'] = newpath
+        app.logger.info("Uploaded file is: %s", newpath)
         return redirect(url_for('main'))
       except:
         msg = "Upload error. Make sure you have a 'data' folder under 'ohscribe' and that it is open for the world to write files."
@@ -159,11 +157,8 @@ def CURRENT_FILE(filename):
 # Route for handling download section
 @app.route('/download')
 def download_file( ):
-  global current_file
-  # target = app.config['CURRENT_FILE']
-  target = current_file
-
-  app.logger.info("Target output for download is: %s", target)
+  target = session.get('target_file', 'Not Set')
+  app.logger.info("download_file( ) target for download is: %s", target)
   dir, filename = os.path.split(target)
   return send_file(target, mimetype='text/xml', cache_timeout=0, attachment_filename=filename, as_attachment=True)
 
@@ -171,8 +166,8 @@ def download_file( ):
 @app.route('/main', methods=['POST', 'GET'])
 @app.route('/', methods=['POST', 'GET'])
 def main( ):
-  global current_file
-  app.logger.debug("main() and current_file is: '%s'", current_file)
+  target = session.get('target_file', 'Not Set')
+  app.logger.debug("main() and target_file is: '%s'", target)
   form = MainForm(request.form)
   if request.method == 'POST':
     return redirect(url_for('results'))
@@ -181,7 +176,6 @@ def main( ):
 # Route for handling the results page
 @app.route('/results', methods=['POST', 'GET'])
 def results( ):
-  global current_file
   result = request.form
   method = request.method
 
@@ -192,8 +186,7 @@ def results( ):
   else:
     exit(0)
 
-  # filename = app.config['CURRENT_FILE']
-  filename = current_file
+  filename = session.get('target_file', 'Not Set')
 
   try:
     result['all']
@@ -201,8 +194,7 @@ def results( ):
     pass
   else:
     file, msg, details, guidance = do_all(filename)
-    # app.config['CURRENT_FILE'] = file
-    current_file = file
+    session['target_file'] = file
     return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
 
   try:
@@ -211,28 +203,23 @@ def results( ):
       app.logger.info("/results action is: %s", action)
       if action == "cleanup":
         file, msg, details, guidance = do_cleanup(filename)
-        # app.config['CURRENT_FILE'] = file
-        current_file = file
+        session['target_file'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "transform":
         file, msg, details, guidance = do_transform(filename)
-        # app.config['CURRENT_FILE'] = file
-        current_file = file
+        session['target_file'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "convert":
         file, msg, details, guidance = do_hms_conversion(filename)
-        # app.config['CURRENT_FILE'] = file
-        current_file = file
+        session['target_file'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "speakers":
         file, msg, details, guidance = do_speaker_tags(filename)
-        # app.config['CURRENT_FILE'] = file
-        current_file = file
+        session['target_file'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
       elif action == "analyze":
         file, msg, details, guidance = do_analyze(filename)
-        # app.config['CURRENT_FILE'] = file
-        current_file = file
+        session['target_file'] = file
         return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
 
   except:
@@ -685,17 +672,13 @@ def do_all(filename):
   app.logger.debug('do_all(%s) called.', filename)
   filepath = checkfile(filename)
   clean, msg, details, guidance = do_cleanup(filepath)
-  # app.config['CURRENT_FILE'] = clean
-  current_file = clean
+  session['target_file'] = clean
   xformed, msg, details, guidance = do_transform(clean)
-  # app.config['CURRENT_FILE'] = xformed
-  current_file = xformed
+  session['target_file'] = xformed
   times, msg, details, guidance = do_hms_conversion(xformed)
-  # app.config['CURRENT_FILE'] = times
-  current_file = times
+  session['target_file'] = times
   final, msg, details, guidance = do_speaker_tags(times)
-  # app.config['CURRENT_FILE'] = final
-  current_file = final
+  session['target_file'] = final
   analyzed, msg, details, guidance = do_analyze(final)
   app.logger.info("Final output is in: %s", final)
   return analyzed, msg, details, guidance
