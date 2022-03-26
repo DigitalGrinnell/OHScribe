@@ -356,9 +356,11 @@ def do_cleanup(filename):
   app.logger.debug('do_cleanup(%s) called.', filename)
   filepath = checkfile(filename)
   clean = make_new_filename(filepath, 'clean')
+  app.logger.debug('do_cleanup(%s) returns %s as clean filename.', filename, clean)
 
   try:
     with open(filepath, 'r') as xmlfile, open(clean, 'w+') as cleanfile:
+      app.logger.debug('do_cleanup(%s) opened %s as xmlfile and %s as cleanfile.', filename, filepath, clean)
       if xmlfile.name.rsplit(".")[-1] != "xml":
         msg = "File name should have a .xml extension!"
         flash(msg, 'warning')
