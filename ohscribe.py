@@ -171,6 +171,8 @@ def download_file( ):
 @app.route('/main', methods=['POST', 'GET'])
 @app.route('/', methods=['POST', 'GET'])
 def main( ):
+  global current_file
+  app.logger.debug("main() and current_file is: '%s'", current_file)
   form = MainForm(request.form)
   if request.method == 'POST':
     return redirect(url_for('results'))
