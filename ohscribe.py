@@ -2,7 +2,7 @@
 
 import os
 import logging
-from flask import Flask, render_template, request, url_for, flash, redirect, send_file, session
+from flask import Flask, render_template, request, url_for, flash, redirect, send_file, request, session
 from logging.handlers import RotatingFileHandler
 from flask_session import Session
 # from flask_bootstrap import Bootstrap
@@ -24,7 +24,8 @@ class Config(object):
 app = Flask(__name__)
 app.config.from_object(Config)
 app.static_folder = 'static'
-SESSION_TYPE = 'redis'
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 session['target_file'] = 'TBD'
 
