@@ -7,7 +7,7 @@ from logging.handlers import RotatingFileHandler
 # from flask_bootstrap import Bootstrap
 
 # adding global variable 'current_file' now that the code is in a single file
-current_file = 'TBD'      # the name of the file to be processed next
+# current_file = 'TBD'      # the name of the file to be processed next
 
 ## Was previously in config.py
 from werkzeug.utils import send_from_directory
@@ -137,7 +137,7 @@ def upload_file():
         flash("Your file has been successfully uploaded to {}".format(newpath), 'info')
         app.config['CURRENT_FILE'] = newpath
         current_file = newpath
-        app.logger.info("Uploaded file is: %s", newpath)
+        app.logger.info("Uploaded file (also now current_file) is: %s", current_file)
         return redirect(url_for('main'))
       except:
         msg = "Upload error. Make sure you have a 'data' folder under 'ohscribe' and that it is open for the world to write files."
