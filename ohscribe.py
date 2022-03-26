@@ -2,6 +2,7 @@
 
 import os
 import logging
+import locale
 from flask import Flask, render_template, request, url_for, flash, redirect, send_file, request, session
 from logging.handlers import RotatingFileHandler
 from flask_session import Session
@@ -18,7 +19,10 @@ class Config(object):
     # HOST_ADDR = os.environ.get('MASTER_IP') or '0.0.0.0'
     BASIC_AUTH_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'p@$$w0rd'
     DEBUG_TB_INTERCEPT_REDIRECTS = False
-
+    
+# from https://gankrin.org/fix-unicodeencodeerror-ascii-codec-cant-encode-character/
+os.environ["PYTHONIOENCODING"] = "utf-8"
+scriptLocale=locale.setlocale(category=locale.LC_ALL, locale="en_GB.UTF-8")
 
 # Initialize the app... populate app.config[] and session[] keys
 app = Flask(__name__)
