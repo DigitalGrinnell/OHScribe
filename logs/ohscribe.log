@@ -34,3 +34,31 @@
 2022-03-26 12:42:52,640 DEBUG: do_analyze( ) advancing to cue_num 86. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
 2022-03-26 12:42:52,640 DEBUG: do_analyze( ) analysis is complete. Number of problems is: 19 [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:651]
 2022-03-26 12:42:59,321 INFO: download_file( ) target for download is: /tmp/sample-from-InqScribe-clean-IOHx-sec-final.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:164]
+2022-03-29 08:43:03,766 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:56]
+2022-03-29 08:43:07,542 DEBUG: main() and target_file is: 'Not Set' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:173]
+2022-03-29 08:43:16,887 DEBUG: main() and target_file is: 'Not Set' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:173]
+2022-03-29 08:56:08,226 DEBUG: do_all(Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:675]
+2022-03-29 08:56:08,226 DEBUG: checkfile(Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:256]
+2022-03-29 08:56:08,227 DEBUG: checkfile(Not Set) returning /tmp/Not Set. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-29 08:56:08,227 DEBUG: do_cleanup(/tmp/Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:348]
+2022-03-29 08:56:08,227 DEBUG: checkfile(/tmp/Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:256]
+2022-03-29 08:56:08,227 DEBUG: checkfile(/tmp/Not Set) returning /tmp/Not Set. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-29 08:56:08,228 DEBUG: do_cleanup(/tmp/Not Set) returns /tmp/Not Set-clean as clean filename. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:351]
+2022-03-29 08:56:08,228 ERROR: Exception on /results [POST] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 199, in results
+    file, msg, details, guidance = do_all(filename)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 677, in do_all
+    clean, msg, details, guidance = do_cleanup(filepath)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 354, in do_cleanup
+    with open(filepath, 'r') as xmlfile, open(clean, 'w+') as cleanfile:
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/Not Set'
+2022-03-29 08:56:13,539 DEBUG: main() and target_file is: 'Not Set' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:173]

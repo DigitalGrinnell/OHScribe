@@ -1,7 +1,8 @@
+flask_session/
 *.zip
 .idea
 .env
-app/__pycache__
+__pycache__/
 venv/
 data/
 logs/
