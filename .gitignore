@@ -1,8 +1,10 @@
-.idea
-.env
-app/__pycache__
+.DS_Store/
+flask_session/
+__pycache__/
 venv/
 data/
 logs/
+*.zip
+.idea
+.env
 .mov
-

@@ -1,243 +1,5 @@
-# Debugging is per https://stackoverflow.com/questions/17309889/how-to-debug-a-flask-app
-
-import os
-import logging
-import locale
-from flask import Flask, render_template, request, url_for, flash, redirect, send_file, request, session
-from logging.handlers import RotatingFileHandler
-from flask_session import Session
-# from flask_bootstrap import Bootstrap
-
-## Was previously in config.py
-from werkzeug.utils import send_from_directory
-
-class Config(object):
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER') or '/tmp'
-    LOG_VERBOSITY = os.environ.get('LOG_VERBOSITY') or 'DEBUG'
-    # HOST_ADDR = os.environ.get('HOST_ADDR') or '0.0.0.0'  # 127.0.0.1 for DEV, 0.0.0.0 for PROD
-    # HOST_ADDR = os.environ.get('MASTER_IP') or '0.0.0.0'
-    BASIC_AUTH_PASSWORD = os.environ.get('ADMIN_PASSWORD') or 'p@$$w0rd'
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
-    
-# from https://gankrin.org/fix-unicodeencodeerror-ascii-codec-cant-encode-character/
-os.environ["PYTHONIOENCODING"] = "utf-8"
-scriptLocale=locale.setlocale(category=locale.LC_ALL, locale="en_GB.UTF-8")
-
-# Initialize the app... populate app.config[] and session[] keys
-app = Flask(__name__)
-app.config.from_object(Config)
-app.static_folder = 'static'
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
-
-# Set log verbosity based on environment
-if app.config['LOG_VERBOSITY'] == 'DEBUG':
-  app.debug = True    # for debugging...set False to turn off the DebugToolbarExtension
-else:
-  app.debug = False   # for debugging...set False to turn off the DebugToolbarExtension
-
-# From The Flask Mega-Tutorial Part VII: Error Handling
-if not os.path.exists('logs'):
-  os.mkdir('logs')
-file_handler = RotatingFileHandler('logs/ohscribe.log', maxBytes=10240, backupCount=10)
-file_handler.setFormatter(logging.Formatter(
-  '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-
-app.logger.addHandler(file_handler)
-file_handler.setLevel(logging.INFO)
-app.logger.setLevel(logging.INFO)
-
-if app.config['LOG_VERBOSITY'] == 'DEBUG':
-  file_handler.setLevel(logging.DEBUG)
-  app.logger.setLevel(logging.DEBUG)
-
-app.logger.info('OHScribe startup with LOG_VERBOSITY = %s.', app.config['LOG_VERBOSITY'])
-
-if __name__ == '__main__':      # development?  Returns false in production, I think.
-    app.run()
-
-# bootstrap = Bootstrap(app)
-# host = app.config['HOST_ADDR']
-# app.logger.info('OHScribe "host" = %s.', host)
-
-## Per https://github.com/flask-extensions/Flask-SimpleLogin
-# SimpleLogin(app)    ...perhaps it is too simple?
-
-## Per http://flask-basicauth.readthedocs.io/en/latest/
-# basic_auth = BasicAuth(app)     ...broken and no longer maintained
-# app.config['BASIC_AUTH_USERNAME'] = 'admin'
-
-## Per https://pypi.org/project/flask-htpasswd/
-# app.config['FLASK_HTPASSWD_PATH'] = '/Users/mcfatem/.htpasswd'
-# app.config['FLASK_SECRET'] = 'Hey Hey Kids, secure me!'
-# htpasswd.init_app(app)
-
-# from webapp import simple_routes, errors, actions
-# from webapp import routes, errors, actions
-
-
-
-
-
-
-
-## --------- routes.py ------------
-
-# from ohscribe import app
-# from flask import render_template, flash, redirect, url_for, request, send_file
-# from forms import MainForm
-# from actions import do_cleanup, do_transform, do_hms_conversion, do_speaker_tags, do_analyze, do_all, allowed_file
-# from werkzeug.utils import secure_filename
-# import sys
-# import os
-
-# ## From https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
-# @app.route('/')
-# def index():
-#     return "Hello, World!"
-
-## Line below was subordinate to `@app.route('/upload', methods=['GET', 'POST'])`
-# @basic_auth.required  # per http://flask-basicauth.readthedocs.io/en/latest/
-
-## Route for handing authentication and upload selection
-# @app.route('/login', methods=['POST', 'GET'])
-# @app.route('/logout', methods=['POST', 'GET'])
-
-@app.route('/upload', methods=['GET', 'POST'])
-# @htpasswd.required
-def upload_file():
-  app.logger.debug("upload_file( ) called")
-
-  if request.method == 'POST':
-
-    # Check if the post request has the file part
-    if 'file' not in request.files:
-      flash('No file part', 'error')
-      return redirect(request.url)
-
-    file = request.files['file']
-
-    # If user does not select file, browser also submit an empty part without filename
-    if file.filename == '':
-      flash('No selected file', 'error')
-      return redirect(request.url)
-
-    # Good to go...
-    if file and allowed_file(file.filename):
-      # filename = secure_filename(file.filename)
-      filename = file.filename
-
-      folder = app.config['UPLOAD_FOLDER']
-      app.logger.debug("folder at line 124 is: '%s'", folder)
-      newpath = os.path.join(folder, filename)
-      app.logger.debug("newpath at line 126 is: '%s'", newpath)
-
-      try:
-        file.save(newpath)
-        flash("Your file has been successfully uploaded to {}".format(newpath), 'info')
-        session['target_file'] = newpath
-        app.logger.info("Uploaded file is: %s", newpath)
-        return redirect(url_for('main'))
-      except:
-        msg = "Upload error. Make sure you have a 'data' folder under 'ohscribe' and that it is open for the world to write files."
-        flash(msg, 'error')
-        raise
-#      except:
-#        msg = "Unexpected error: {}".format(sys.exc_info()[0])
-#        flash(msg, 'error')
-#        raise
-
-  return render_template('upload.html', title='Upload XML File')
-
-
-# Route for displaying the uploaded file
-@app.route('/uploads/<filename>')
-def CURRENT_FILE(filename):
-    return send_from_directory(os.environ.get('OHSCRIBE_UPLOAD_FOLDER'), filename)
-
-# Route for handling download section
-@app.route('/download')
-def download_file( ):
-  target = session.get('target_file', 'Not Set')
-  app.logger.info("download_file( ) target for download is: %s", target)
-  dir, filename = os.path.split(target)
-  return send_file(target, mimetype='text/xml', cache_timeout=0, attachment_filename=filename, as_attachment=True)
-
-# Route for handling the main/control page
-@app.route('/main', methods=['POST', 'GET'])
-@app.route('/', methods=['POST', 'GET'])
-def main( ):
-  target = session.get('target_file', 'Not Set')
-  app.logger.debug("main() and target_file is: '%s'", target)
-  form = MainForm(request.form)
-  if request.method == 'POST':
-    return redirect(url_for('results'))
-  return render_template('main.html', title='Controls', form=form)
-
-# Route for handling the results page
-@app.route('/results', methods=['POST', 'GET'])
-def results( ):
-  result = request.form
-  method = request.method
-
-  try:
-    result['exit']
-  except:
-    pass
-  else:
-    exit(0)
-
-  filename = session.get('target_file', 'Not Set')
-
-  try:
-    result['all']
-  except:
-    pass
-  else:
-    file, msg, details, guidance = do_all(filename)
-    session['target_file'] = file
-    return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
-
-  try:
-    if result['actions'] and result['go']:
-      action = str(result['actions'])
-      app.logger.info("/results action is: %s", action)
-      if action == "cleanup":
-        file, msg, details, guidance = do_cleanup(filename)
-        session['target_file'] = file
-        return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
-      elif action == "transform":
-        file, msg, details, guidance = do_transform(filename)
-        session['target_file'] = file
-        return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
-      elif action == "convert":
-        file, msg, details, guidance = do_hms_conversion(filename)
-        session['target_file'] = file
-        return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
-      elif action == "speakers":
-        file, msg, details, guidance = do_speaker_tags(filename)
-        session['target_file'] = file
-        return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
-      elif action == "analyze":
-        file, msg, details, guidance = do_analyze(filename)
-        session['target_file'] = file
-        return render_template("results.html", result=result, message=msg, details=details, guidance=guidance)
-
-  except:
-    msg = "Unexpected error: {}".format(sys.exc_info()[0])
-    flash(msg, 'error')
-    return redirect(url_for('main'))
-
-
-
-
-
-
-
-## --------- actions.py ------------
-
+from ohscribe import app
+from flask import flash
 import os
 import io
 import sys
@@ -291,19 +53,7 @@ def sanitize_xml(line):
 # Transform any XML with a XSLT
 # Lifted from https://gist.github.com/revolunet/1154906
 
-def xsl_transformation(xmlfile):
-  if __name__ == '__main__':  # development?  Returns false in production, I think.
-    xslfile = "ohscribe.xsl"
-  else:
-    xslfile = "/var/www/webroot/ROOT/ohscribe.xsl"
-  
-  # lifted from https://www.geeksforgeeks.org/file-searching-using-python/
-  dir_path = os.path.dirname(os.path.realpath(__file__))
-  for root, dirs, files in os.walk(dir_path):
-    for file in files:
-      if file.endswith('ohscribe.xsl'):
-        xslfile = root + '/' + str(file)
-        print(xslfile)
+def xsl_transformation(xmlfile, xslfile="/app/ohscribe.xsl"):
 
   try:
     with open(xslfile, 'r') as xsl:
@@ -348,11 +98,9 @@ def do_cleanup(filename):
   app.logger.debug('do_cleanup(%s) called.', filename)
   filepath = checkfile(filename)
   clean = make_new_filename(filepath, 'clean')
-  app.logger.debug('do_cleanup(%s) returns %s as clean filename.', filename, clean)
 
   try:
     with open(filepath, 'r') as xmlfile, open(clean, 'w+') as cleanfile:
-      app.logger.debug('do_cleanup(%s) opened %s as xmlfile and %s as cleanfile.', filename, filepath, clean)
       if xmlfile.name.rsplit(".")[-1] != "xml":
         msg = "File name should have a .xml extension!"
         flash(msg, 'warning')
@@ -671,17 +419,16 @@ def do_analyze(filename):
 # Do all of the above, in sequence.
 
 def do_all(filename):
-  global current_file
   app.logger.debug('do_all(%s) called.', filename)
   filepath = checkfile(filename)
   clean, msg, details, guidance = do_cleanup(filepath)
-  session['target_file'] = clean
+  app.config['CURRENT_FILE'] = clean
   xformed, msg, details, guidance = do_transform(clean)
-  session['target_file'] = xformed
+  app.config['CURRENT_FILE'] = xformed
   times, msg, details, guidance = do_hms_conversion(xformed)
-  session['target_file'] = times
+  app.config['CURRENT_FILE'] = times
   final, msg, details, guidance = do_speaker_tags(times)
-  session['target_file'] = final
+  app.config['CURRENT_FILE'] = final
   analyzed, msg, details, guidance = do_analyze(final)
   app.logger.info("Final output is in: %s", final)
   return analyzed, msg, details, guidance
@@ -795,78 +542,3 @@ def do_all(filename):
 #     return redirect(url_for('main'))
 #
 #   return result
-
-
-
-
-
-
-
-
-## --------- errors.py ------------
-
-@app.errorhandler(401)
-def unauthorized(error):
-    return render_template('401.html'), 401
-
-@app.errorhandler(404)
-def not_found_error(error):
-    return render_template('404.html'), 404
-
-@app.errorhandler(405)
-def method_not_allowed(error):
-    return render_template('405.html'), 405
-
-@app.errorhandler(500)
-def internal_error(error):
-    return render_template('500.html'), 500
-
-
-
-
-
-## --------- forms.py ------------
-
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
-from wtforms.validators import DataRequired
-from flask_wtf.file import FileField
-
-class MainForm(FlaskForm):
-  # browse = FileField('Select an XML File to Upload')
-
-  actions = RadioField('Action', choices=[
-    ('cleanup','Clean-Up the XML'),
-    ('transform', 'Transform XML to IOH'),
-    ('convert','Convert hh:mm:ss to Seconds'),
-    ('speakers', 'Format Speaker Tags'),
-    ('analyze', 'Analyze Cue Times')])
-
-  all = SubmitField('Do All of the Above')
-  go = SubmitField('Do Single Action')
-  exit = SubmitField('Exit')
-
-#
-# class LoginForm(FlaskForm):
-#   username = StringField('Username', validators=[DataRequired()])
-#   password = PasswordField('Password', validators=[DataRequired()])
-#   # remember_me = BooleanField('Remember Me')
-#   submit = SubmitField('Sign In')
-#
-#
-#
-
-# exit = SubmitField('Exit')
-# transform = SubmitField('Transform')
-# convert = SubmitField('Convert hh:mm:ss to Seconds')
-# formatSpeakers = SubmitField('Format Speakers')
-# string = StringField('This field accepts a string', validators=[DataRequired()])
-#     password = PasswordField('This field accepts a password', validators=[DataRequired()])
-#     checkbox = BooleanField('This is a checkbox')
-#     file1 = FileField('Select any File')
-# #   file2 = FileField('Select an XML File', [validators.regexp(u'^[^/\\]\.xml$')])  #
-# #   file2 = FileField('Select an XML File', validators=[Regexp(u'^[^/\\]\.xml$')])  #
-#     button1 = SubmitField('This is button1')
-#     button2 = SubmitField('This is button2')
-#     button3 = SubmitField('This is button3')
-#     submit = SubmitField('This is the Submit button')

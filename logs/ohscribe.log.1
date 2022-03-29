@@ -1,59 +1,77 @@
-2018-07-29 17:10:51,394 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:12:37,828 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:15:21,667 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:16:26,115 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:17:52,579 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:22:12,989 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:24:05,905 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:26:05,426 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:29:26,116 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:30:08,666 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:37:02,716 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:38:39,407 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 17:39:28,063 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:14:14,319 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:15:23,296 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:25:12,350 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 107, in wrapper
-    if self.authenticate():
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 80, in authenticate
-    self.check_credentials(auth.username, auth.password)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 67, in check_credentials
-    correct_password = current_app.config['BASIC_AUTH_PASSWORD']
-KeyError: 'BASIC_AUTH_PASSWORD'
-2018-07-29 19:39:55,600 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:39:58,527 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 107, in wrapper
-    if self.authenticate():
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 80, in authenticate
-    self.check_credentials(auth.username, auth.password)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 67, in check_credentials
-    correct_password = current_app.config['BASIC_AUTH_PASSWORD']
-KeyError: 'BASIC_AUTH_PASSWORD'
-2018-07-29 19:50:58,203 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
+2022-03-26 12:42:52,623 DEBUG: do_analyze( ) advancing to cue_num 31. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,626 DEBUG: do_analyze( ) done with cue 31 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,626 DEBUG: do_analyze( ) advancing to cue_num 32. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,626 DEBUG: do_analyze( ) done with cue 32 text analysis with 11 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,626 DEBUG: do_analyze( ) advancing to cue_num 33. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,626 DEBUG: do_analyze( ) done with cue 33 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,626 DEBUG: do_analyze( ) advancing to cue_num 34. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,626 DEBUG: do_analyze( ) done with cue 34 text analysis with 6 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) advancing to cue_num 35. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) done with cue 35 text analysis with 6 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) advancing to cue_num 36. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) done with cue 36 text analysis with 9 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) advancing to cue_num 37. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) done with cue 37 text analysis with 9 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) advancing to cue_num 38. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) done with cue 38 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,627 DEBUG: do_analyze( ) advancing to cue_num 39. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) done with cue 39 text analysis with 11 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) advancing to cue_num 40. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) done with cue 40 text analysis with 12 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) advancing to cue_num 41. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) done with cue 41 text analysis with 6 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) advancing to cue_num 42. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) done with cue 42 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) advancing to cue_num 43. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,628 DEBUG: do_analyze( ) done with cue 43 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) advancing to cue_num 44. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) done with cue 44 text analysis with 5 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) advancing to cue_num 45. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) done with cue 45 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) advancing to cue_num 46. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) done with cue 46 text analysis with 13 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) advancing to cue_num 47. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) done with cue 47 text analysis with 11 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,629 DEBUG: do_analyze( ) advancing to cue_num 48. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) done with cue 48 text analysis with 9 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) advancing to cue_num 49. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) done with cue 49 text analysis with 12 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) advancing to cue_num 50. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) done with cue 50 text analysis with 13 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) advancing to cue_num 51. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) done with cue 51 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,630 DEBUG: do_analyze( ) advancing to cue_num 52. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) done with cue 52 text analysis with 9 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) advancing to cue_num 53. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) done with cue 53 text analysis with 14 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) advancing to cue_num 54. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) done with cue 54 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) advancing to cue_num 55. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) done with cue 55 text analysis with 10 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,631 DEBUG: do_analyze( ) advancing to cue_num 56. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) done with cue 56 text analysis with 15 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) advancing to cue_num 57. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) done with cue 57 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) advancing to cue_num 58. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) done with cue 58 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) advancing to cue_num 59. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) done with cue 59 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,632 DEBUG: do_analyze( ) advancing to cue_num 60. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) done with cue 60 text analysis with 11 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) advancing to cue_num 61. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) done with cue 61 text analysis with 6 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) advancing to cue_num 62. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) done with cue 62 text analysis with 9 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) advancing to cue_num 63. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) done with cue 63 text analysis with 5 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) advancing to cue_num 64. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,633 DEBUG: do_analyze( ) done with cue 64 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) advancing to cue_num 65. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) done with cue 65 text analysis with 9 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) advancing to cue_num 66. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) done with cue 66 text analysis with 6 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) advancing to cue_num 67. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) done with cue 67 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) advancing to cue_num 68. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) done with cue 68 text analysis with 10 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,634 DEBUG: do_analyze( ) advancing to cue_num 69. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]

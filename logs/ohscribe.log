@@ -1,85 +1,65 @@
-2018-07-29 19:51:16,996 ERROR: Exception on / [GET] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
+2022-03-26 12:42:52,635 DEBUG: do_analyze( ) done with cue 69 text analysis with 12 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) advancing to cue_num 70. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) done with cue 70 text analysis with 12 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) advancing to cue_num 71. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) done with cue 71 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) advancing to cue_num 72. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) done with cue 72 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) advancing to cue_num 73. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,637 DEBUG: do_analyze( ) done with cue 73 text analysis with 10 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) advancing to cue_num 74. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) done with cue 74 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) advancing to cue_num 75. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) done with cue 75 text analysis with 6 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) advancing to cue_num 76. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) done with cue 76 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) advancing to cue_num 77. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) done with cue 77 text analysis with 12 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,638 DEBUG: do_analyze( ) advancing to cue_num 78. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) done with cue 78 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) advancing to cue_num 79. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) done with cue 79 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) advancing to cue_num 80. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) done with cue 80 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) advancing to cue_num 81. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) done with cue 81 text analysis with 9 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,639 DEBUG: do_analyze( ) advancing to cue_num 82. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) done with cue 82 text analysis with 7 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) advancing to cue_num 83. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) done with cue 83 text analysis with 6 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) advancing to cue_num 84. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) done with cue 84 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) advancing to cue_num 85. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) done with cue 85 text analysis with 8 lines. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:637]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) advancing to cue_num 86. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:648]
+2022-03-26 12:42:52,640 DEBUG: do_analyze( ) analysis is complete. Number of problems is: 19 [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:651]
+2022-03-26 12:42:59,321 INFO: download_file( ) target for download is: /tmp/sample-from-InqScribe-clean-IOHx-sec-final.xml [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:164]
+2022-03-29 08:43:03,766 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:56]
+2022-03-29 08:43:07,542 DEBUG: main() and target_file is: 'Not Set' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:173]
+2022-03-29 08:43:16,887 DEBUG: main() and target_file is: 'Not Set' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:173]
+2022-03-29 08:56:08,226 DEBUG: do_all(Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:675]
+2022-03-29 08:56:08,226 DEBUG: checkfile(Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:256]
+2022-03-29 08:56:08,227 DEBUG: checkfile(Not Set) returning /tmp/Not Set. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-29 08:56:08,227 DEBUG: do_cleanup(/tmp/Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:348]
+2022-03-29 08:56:08,227 DEBUG: checkfile(/tmp/Not Set) called. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:256]
+2022-03-29 08:56:08,227 DEBUG: checkfile(/tmp/Not Set) returning /tmp/Not Set. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:264]
+2022-03-29 08:56:08,228 DEBUG: do_cleanup(/tmp/Not Set) returns /tmp/Not Set-clean as clean filename. [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:351]
+2022-03-29 08:56:08,228 ERROR: Exception on /results [POST] [in /Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py:1457]
 Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 2073, in wsgi_app
     response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1518, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1516, in full_dispatch_request
     rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_basicauth.py", line 108, in wrapper
-    return view_func(*args, **kwargs)
-  File "/Users/markmcfate/Projects/Docker/OHScribe/app/routes.py", line 51, in upload_file
-    return render_template('upload.html', title='Upload XML File')
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
-    context, ctx.app)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
-    rv = template.render(context)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/Users/markmcfate/Projects/Docker/OHScribe/app/templates/upload.html", line 3, in top-level template code
-    {% extends "base.html" %}
-  File "/Users/markmcfate/Projects/Docker/OHScribe/app/templates/base.html", line 1, in top-level template code
-    {% extends 'bootstrap/base.html' %}
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
-    {%- block html %}
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
-    {% block body -%}
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
-    {% block navbar %}
-  File "/Users/markmcfate/Projects/Docker/OHScribe/app/templates/base.html", line 16, in block "navbar"
-    <a class="navbar-brand" href="{{ url_for('login') }}">OHScribe!</a>
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/helpers.py", line 345, in url_for
-    force_external=external)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/werkzeug/routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'login'. Did you mean 'main' instead?
-2018-07-29 19:53:41,662 INFO: OHScribe startup with LOG_VERBOSITY = INFO. [in /Users/markmcfate/Projects/Docker/OHScribe/app/__init__.py:40]
-2018-07-29 19:53:56,178 ERROR: Exception on /results [POST] [in /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Users/markmcfate/Projects/Docker/OHScribe/app/routes.py", line 97, in results
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/flask/app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 199, in results
     file, msg, details, guidance = do_all(filename)
-  File "/Users/markmcfate/Projects/Docker/OHScribe/app/actions.py", line 419, in do_all
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 677, in do_all
     clean, msg, details, guidance = do_cleanup(filepath)
-  File "/Users/markmcfate/Projects/Docker/OHScribe/app/actions.py", line 98, in do_cleanup
+  File "/Users/mcfatem/GitHub/OHScribe/ohscribe.py", line 354, in do_cleanup
     with open(filepath, 'r') as xmlfile, open(clean, 'w+') as cleanfile:
-FileNotFoundError: [Errno 2] No such file or directory: ' /Users/markmcfate/data/TBD'
-2022-03-11 15:49:13,584 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:41]
-2022-03-11 15:50:12,306 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:41]
-2022-03-11 15:53:25,674 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:36]
-2022-03-11 15:55:04,604 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:36]
-2022-03-11 15:56:09,956 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:36]
-2022-03-11 15:59:04,925 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/app/routes.py:25]
-2022-03-16 09:04:33,642 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:36]
-2022-03-16 14:35:33,700 INFO: OHScribe startup with LOG_VERBOSITY = DEBUG. [in /Users/mcfatem/GitHub/OHScribe/app/__init__.py:39]
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/Not Set'
+2022-03-29 08:56:13,539 DEBUG: main() and target_file is: 'Not Set' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:173]
+2022-03-29 10:14:56,797 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:111]
