@@ -1,5 +1,11 @@
 # OHScribe! Development History
 
+## Move to Reclaim Cloud
+
+In March 2022 a move was made to migrate the __OHScribe!__ application to a new host, __Reclaim Cloud__ (RC).  Numerous changes were implemented to get the code working properly in RC's version of a `wsgi` production environment.  Intended functionality remains unchanged, as does most of the layout, theme, and behavior.
+
+## Early History
+
 **OHScribe!** was developed to replace my old **Transform_InqScribe_to_IOH** (https://github.com/DigitalGrinnell/Transform_InqScribe_to_IOH) application, hereto abbreviated as *TIIOH*.  *TIIOH* is a Python 2 desktop application with lots of obscure dependencies. It was described as...
 
 ```

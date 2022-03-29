@@ -7,4 +7,4 @@ venv/
 data/
 logs/
 .mov
-
+.DS_Store
