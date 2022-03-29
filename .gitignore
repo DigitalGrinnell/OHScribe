@@ -1,10 +1,10 @@
+.DS_Store/
 flask_session/
-*.zip
-.idea
-.env
 __pycache__/
 venv/
 data/
 logs/
+*.zip
+.idea
+.env
 .mov
-.DS_Store

@@ -15,7 +15,7 @@ Note that the names of speakers appear in different colors in the video window c
 
 ## InqScribe IOH Transcription Workflow
 
-A detailed description of the workflow intended for use with *OHScribe!* is provided in our [WORKFLOW.md](https://github.com/DigitalGrinnell/OHScribe/blob/master/WORKFLOW.md) document.
+A detailed description of the workflow intended for use with *OHScribe!* is provided in our [WORKFLOW.md](https://github.com/DigitalGrinnell/OHScribe/blob/main/WORKFLOW.md) document.
 
 ## Workflow Output
 
@@ -159,7 +159,7 @@ In this format each `<cue>` tag within the enclosing `<cues>` tag represents one
 
 **OHScribe!** is accessible at https://ohscribe.grinnell.edu and should run in any web browser.  It permits a user to upload an XML file (presumably this is output from the aforementioned workflow), and if successful, it provides an output file in IOH-compatible XML format as a download.  Since upload and download of content is provided the site will present the user with a required login screen like this:
 
-![Authentication Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeAuthWindow.png)
+![Authentication Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeAuthWindow.png)
 
 Interested users of **OHScribe!** should [request credentials via email to *digital@grinnell.edu*](mailto:digital@grinnell.edu?subject=OHScribe Credentials).  
 
@@ -167,13 +167,13 @@ Interested users of **OHScribe!** should [request credentials via email to *digi
 
 Once authorized, **OHScribe!** presents the user with a file upload form like so:
 
-![Upload Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeUpload.png)
+![Upload Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeUpload.png)
 
 Selecting the `Browse...` button will open a file-selection window on the local host.  The user should select a single .XML transcript file for upload and click the `Upload` key to send it to the *OHScribe!* server.
 
 A successful file upload produces `Main/Control` screen like this:
 
-![Main / Control After Upload](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeMainControl.png)
+![Main / Control After Upload](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeMainControl.png)
 
 Note the message/status portion of the window just above the `Main / Control Screen` title.  The message here in green print indicates a successful upload.  
 
@@ -213,23 +213,23 @@ Note that when a single action is performed the user must take steps to download
 
 A single action can be performed by clicking the radio button corresponding to the desired action, and clicking the `Do Single Action` button near the bottom of the *Main / Control Screen* as shown below.
 
-![Do Single Action](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeOutputSingleAction.png)
+![Do Single Action](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeOutputSingleAction.png)
 
 ### Action Results
 
 Results of a `Do All of the Above` action typically include status output in a box at the top of the window, a *Message* box explaining the outcome, and a *Download your Output!* button with instructions.  The window typically looks something like this:
 
-![Do All Results](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeOutputNoErrors.png)
+![Do All Results](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeOutputNoErrors.png)
 
 Single actions produce slightly different results which may also include `Details` of the output, and `Guidance` for follow-up actions as shown below.
 
-![Single Action Result](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribe-CleanUp.png)
+![Single Action Result](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribe-CleanUp.png)
 
 ### Errors
 
 Processing errors are generally presented with red text appearing in the status box at the top of the window, like so:
 
-![Errors](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/master/docs/OHScribeOutputErrors.png)
+![Errors](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeOutputErrors.png)
 
 Unexpected or unresolvable errors encountered in **OHScribe!** should be [reported to the author via email to *digital@grinnell.edu*](mailto:digital@grinnell.edu?subject=OHScribe Error) and/or added to the *Issue* queue at https://github.com/DigitalGrinnell/OHScribe/issues.   
 

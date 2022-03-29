@@ -62,3 +62,4 @@ Traceback (most recent call last):
     with open(filepath, 'r') as xmlfile, open(clean, 'w+') as cleanfile:
 FileNotFoundError: [Errno 2] No such file or directory: '/tmp/Not Set'
 2022-03-29 08:56:13,539 DEBUG: main() and target_file is: 'Not Set' [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:173]
+2022-03-29 10:14:56,797 DEBUG: upload_file( ) called [in /Users/mcfatem/GitHub/OHScribe/ohscribe.py:111]
