@@ -1,9 +1,14 @@
-# OHScribe!  
-https://ohscribe.grinnell.edu
+[Digital.Grinnell](https://digital.grinnell.edu) features a fair number of transcribed digital oral histories. Most are interviews conducted with Grinnelleans as they return to campus annually for alumni [Reunion](https://alumni.grinnell.edu/events/reunion-and-alumni-college) or Grinnell's [Multicultural Reunion](http://magazine.grinnell.edu/news/evolution-multicultural-reunion).
+
+> What follows is largely sharable "public" content lifted from a "private" GitHub repository at https://github.com/McFateM/OHScribe, the README.md and WORKFLOW.md files in particular.
+
+## OHScribe!
+
+https://ohscribe.us.reclaim.cloud/  __Note: This link is the new production home for **OHScribe!** as of March 2022.  It is now hosted on **Reclaim Cloud**. The old address, https://ohscribe.grinnell.edu, is no longer in service.__
 
 This is a *Python 3* and *Flask* web application designed to transform oral history transcripts, presumably created using [InqScribe](https://www.inqscribe.com), into XML suitable for ingest into the **[Islandora Oral Histories Solution Pack](https://github.com/Islandora-Labs/islandora_solution_pack_oralhistories)** to populate a TRANSCRIPT datastream and its derivatives.  *Islandora Oral Histories* and the aforementioned solution pack are commonly referred to as **IOH** throughout this document.
 
-**OHScribe!** is intended to be used as part of a broader IOH transcription workflow developed at *Grinnell College*.  The workflow documented in the section titled [InqScribe Workflow](#inqscribe-workflow) may be of significant interest to individuals tasked with transcribing IOH audio recordings. The aforementioned workflow document now includes a link to an 11.5 minute long training video.
+**OHScribe!** is intended to be used as part of a broader IOH transcription workflow developed at *Grinnell College*.  The workflow documented in the section titled [The Digital.Grinnell Oral History Workflow](#the-digitalgrinnell-oral-history-workflow) may be of significant interest to individuals tasked with transcribing IOH audio recordings. The aforementioned workflow document now includes a link to an 11.5 minute long training video.
 
 ### Formatted IOH Example
 
@@ -13,13 +18,19 @@ The aforementioned workflow, application, and accompanying CSS (provided below) 
 
 Note that the names of speakers appear in different colors in the video window captions, and speaker names appear in bold in the indexed transcript below the video.  Each speaker and corresponding text appears on a new line, and captions are superimposed over a thumbnail image of the speaker(s).
 
-## InqScribe IOH Transcription Workflow
+### InqScribe IOH Transcription Workflow
 
 A detailed description of the workflow intended for use with *OHScribe!* is provided in our [WORKFLOW.md](https://github.com/DigitalGrinnell/OHScribe/blob/main/WORKFLOW.md) document.
 
-## Workflow Output
+### Workflow Output
 
 The workflow documented in the aforementioned *WORKFLOW.md* should produce an XML formatted transcript which resembles the structure of the following example.
+
+
+{{% box %}}
+Note that a sample of transcript XML, suitable for testing, now exists in the _OHScribe!_ codebase at https://github.com/DigitalGrinnell/OHScribe/blob/reclaim/test/sample-from-InqScribe.xml.
+{{% /box %}}
+
 
 ~~~
  <transcript>
@@ -63,7 +74,7 @@ Maggie | Yeah.</scene>
 
 Key parts of this exported transcript example are described in the sections below.
 
-### `<scene>` Tags
+#### `<scene>` Tags
 
 `<scene>` tags enclose data indicating who is speaking along with transcribed text from the recording. `<scene>` tags also include attributes indicating the position or scene's *id*, *in* and *out* times provided in hours-minutes-seconds, or *hh:mm:ss.s* notation, and one or more optional `<speaker>` tags.
 
@@ -74,9 +85,9 @@ Key parts of this exported transcript example are described in the sections belo
 </scene>
 ~~~
 
-The example `<scene>` tag shown above carries an *id* of '1', it's the first scene in the transcript, with *in* and *out* times provided in hours-minutes-seconds, or *hh:mm:ss.s* notation.  The *in* and *out* attributes indicate when the transcribed text is heard in the audio stream.  This scene also encloses a `<speaker>` tag which, in this case, identifies the speaker "Heather", as an individual with a full name of "Heather Riggs".   
+The example `<scene>` tag shown above carries an *id* of '1', it's the first scene in the transcript, with *in* and *out* times provided in hours-minutes-seconds, or *hh:mm:ss.s* notation.  The *in* and *out* attributes indicate when the transcribed text is heard in the audio stream.  This scene also encloses a `<speaker>` tag which, in this case, identifies the speaker "Heather", as an individual with a full name of "Heather Riggs".
 
-The text of this scene, a single sentence, opens with a required `speaker ID`, the name of the speaker, *Heather*, followed by a pipe (|) delimiter.  
+The text of this scene, a single sentence, opens with a required `speaker ID`, the name of the speaker, *Heather*, followed by a pipe (|) delimiter.
 
 This demonstrates an important rule... **Each line of transcribed text MUST begin with a *speaker ID*, a given/first name, or single word identifying the speaker, followed by a pipe delimiter.**
 
@@ -87,27 +98,27 @@ This demonstrates an important rule... **Each line of transcribed text MUST begi
   Jenny | They started a fetish party.
   Maggie | Really? They still have fetish?
   Jenny | I never went to that one. Maybe I was too close-minded.
-  Maggie | Yeah.  
-</scene>  
+  Maggie | Yeah.
+</scene>
 ~~~
 
-The example `<scene>` tag shown above, with an *id* of '11', includes *in* and *out* time attributes, and seven lines of transcribed text.  Each line begins with a *speaker ID*, in this case the given/first name of the speaker followed by a pipe (|) delimiter.  Note that this scene has NO `<speaker>` tags because the speakers: Heather, Maggie, and Jenny; all have corresponding `<speaker>` tags inside previous scenes.   
+The example `<scene>` tag shown above, with an *id* of '11', includes *in* and *out* time attributes, and seven lines of transcribed text.  Each line begins with a *speaker ID*, in this case the given/first name of the speaker followed by a pipe (|) delimiter.  Note that this scene has NO `<speaker>` tags because the speakers: Heather, Maggie, and Jenny; all have corresponding `<speaker>` tags inside previous scenes.
 
-### `<speaker>` Tags
+#### `<speaker>` Tags
 
-`<speaker>` tags are used to identify each speaker in a transcript by providing their full name, and associating the given/first name portion of their full name with subsequent *speaker ID* prefixes.  
+`<speaker>` tags are used to identify each speaker in a transcript by providing their full name, and associating the given/first name portion of their full name with subsequent *speaker ID* prefixes.
 
 **At least one `<speaker>` tag must appear for each *speaker ID* used in the transcript, and a speaker's tag must appear BEFORE any/all corresponding *speaker ID*s.**
 
-A `<speaker>` must occur only within an enclosing `<scene>` tag.  
+A `<speaker>` must occur only within an enclosing `<scene>` tag.
 
-### Speaker ID
+#### Speaker ID
 
 As previously mentioned, a *speaker ID* identifies a speaker by their given/first name or some single-word identifying term, like "Interviewer"or "Interviewee".  Each *speaker ID* consists of a given/first name, or other single-word identifier, followed by a pipe (|) delimiter.
 
-Spaces around pipe delimiters are recommended, but not required.    
+Spaces around pipe delimiters are recommended, but not required.
 
-## XML for Ingest into IOH
+### XML for Ingest into IOH
 
 The Islandora Oral Histories (IOH) solution pack expects a TRANSCRIPT datastream of `<cues>` formatted like the following for successful ingest.
 
@@ -153,19 +164,23 @@ The Islandora Oral Histories (IOH) solution pack expects a TRANSCRIPT datastream
 
 In this format each `<cue>` tag within the enclosing `<cues>` tag represents one `<scene>` from the previously documented workflow output.  Like a `<scene>`, each `<cue>` identifies a speaker, a start and end time, and one or more lines of transcribed text.
 
-**OHScribe!** can be used to transform output from the documented workflow into this format for ingest.  
+**OHScribe!** can be used to transform output from the documented workflow into this format for ingest.
 
-## Running OHScribe!
+### Running OHScribe!
 
-**OHScribe!** is accessible at https://ohscribe.grinnell.edu and should run in any web browser.  It permits a user to upload an XML file (presumably this is output from the aforementioned workflow), and if successful, it provides an output file in IOH-compatible XML format as a download.  Since upload and download of content is provided the site will present the user with a required login screen like this:
+**OHScribe!** is accessible at https://ohscribe.us.reclaim.cloud and should run in any web browser.  It permits a user to upload an XML file (presumably this is output from the aforementioned workflow), and if successful, it provides an output file in IOH-compatible XML format as a download.  
+
+{{% obsolete "This feature is no longer necessary in __Reclaim Cloud__." %}}
+Since upload and download of content is provided the site will present the user with a required login screen like this:
 
 ![Authentication Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeAuthWindow.png)
 
-Interested users of **OHScribe!** should [request credentials via email to *digital@grinnell.edu*](mailto:digital@grinnell.edu?subject=OHScribe Credentials).  
+Interested users of **OHScribe!** should [request credentials via email to *digital@grinnell.edu*](mailto:digital@grinnell.edu?subject=OHScribe Credentials).
+{{% /obsolete %}}
 
-### Uploading XML
+#### Uploading XML
 
-Once authorized, **OHScribe!** presents the user with a file upload form like so:
+~~Once authorized,~~ **OHScribe!** presents the user with a file upload form like so:
 
 ![Upload Window](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeUpload.png)
 
@@ -175,19 +190,19 @@ A successful file upload produces `Main/Control` screen like this:
 
 ![Main / Control After Upload](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeMainControl.png)
 
-Note the message/status portion of the window just above the `Main / Control Screen` title.  The message here in green print indicates a successful upload.  
+Note the message/status portion of the window just above the `Main / Control Screen` title.  The message here in green print indicates a successful upload.
 
-## Typical/Recommended Use
+### Typical/Recommended Use
 
-Once an XML file has been successfully uploaded for processing, the user is presented with a six individual or single actions, or a seventh option to `Do All of the Above`.  **Users should ALWAYS choose `Do All of the Above` unless there are special circumstances and they have been instructed otherwise.**  
+Once an XML file has been successfully uploaded for processing, the user is presented with a six individual or single actions, or a seventh option to `Do All of the Above`.  **Users should ALWAYS choose `Do All of the Above` unless there are special circumstances and they have been instructed otherwise.**
 
 Typical use of OHScribe! follows these steps.
 
-  1) In the __Upload an XML File__ screen click the `Browse` button and navigate to a transcript XML file prepared in and exported from InqScribe.  
+  1) In the __Upload an XML File__ screen click the `Browse` button and navigate to a transcript XML file prepared in and exported from InqScribe.
 
     This action opens the selected XML file for processing with the path to the file reflected in the box at the top of the GUI.
 
-  2) In the __Main / Control Screen__ window click the __Do All of the Above__ button.  
+  2) In the __Main / Control Screen__ window click the __Do All of the Above__ button.
 
     This inokes the six actions documented below.  If successful it will transform the XML exported from InqScribe into the XML form required for IOH ingest, giving the user an option to download the transformed file.
 
@@ -195,11 +210,11 @@ Typical use of OHScribe! follows these steps.
 
     This action converts \<start> and \<end> values from hours:minutes:seconds notation to the decimal seconds notation required for IOH. The changes are saved directly in the selected **IOH-** file. This file should be suitable for ingest into IOH.
 
-### Single Actions
+#### Single Actions
 
 *OHScribe!* divides the transformation of a transcript into six _ordered_, individual steps represented by the following single *Action* choices:
 
-  1) **Clean-Up the XML** - This action checks that the uploaded file has a .xml extension and subsequently parses the XML to verify its validity.  
+  1) **Clean-Up the XML** - This action checks that the uploaded file has a .xml extension and subsequently parses the XML to verify its validity.
 
   2) **Transform XML to IOH** - This action transforms the valid XML creating a `<cues>` and enclosed `<cue>` tags from `<scene>` tags.
 
@@ -215,7 +230,7 @@ A single action can be performed by clicking the radio button corresponding to t
 
 ![Do Single Action](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeOutputSingleAction.png)
 
-### Action Results
+#### Action Results
 
 Results of a `Do All of the Above` action typically include status output in a box at the top of the window, a *Message* box explaining the outcome, and a *Download your Output!* button with instructions.  The window typically looks something like this:
 
@@ -224,6 +239,112 @@ Results of a `Do All of the Above` action typically include status output in a b
 Single actions produce slightly different results which may also include `Details` of the output, and `Guidance` for follow-up actions as shown below.
 
 ![Single Action Result](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribe-CleanUp.png)
+
+#### Errors
+
+Processing errors are generally presented with red text appearing in the status box at the top of the window, like so:
+
+![Errors](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/OHScribeOutputErrors.png)
+
+Unexpected or unresolvable errors encountered in **OHScribe!** should be [reported to the author via email to *digital@grinnell.edu*](mailto:digital@grinnell.edu?subject=OHScribe Error) and/or added to the *Issue* queue at https://github.com/DigitalGrinnell/OHScribe/issues.
+
+### CSS Required for Speaker Formatting
+
+To take advantage of the script's "speaker formatting" capabilities you must add the following CSS, or something very similar, to the theme of the site where Islandora Oral Histories are displayed.  This CSS produces coloring and formatting like that shown in the example above.
+
+~~~
+/* Color, display and font additions for Oral Histories */
+div.tier.active span {
+  font-weight: bold;
+}
+div.tier.active span,
+div.tier.active span span.oh_speaker_text {
+  color: black !important;
+}
+div.tier.active span span.oh_speaker_text {
+  font-weight: normal !important;
+}
+span.oh_speaker_text {
+  color: #ffff00 !important;     /* yellow */
+}
+span.oh_speaker_1 {
+  display: block;
+  color: #00ffff;     /* aqua */
+}
+span.oh_speaker_2 {
+  display: block;
+  color: #80ff00;     /* bright green */
+}
+span.oh_speaker_3 {
+  display: block;
+  color: #ff0000;     /* bright red */
+}
+span.oh_speaker_4 {
+  display: block;
+  color: #ff00ff;     /* fuchsia */
+}
+span.oh_speaker_5 {
+  display: block;
+  color: #ffbf00;     /* orange */
+}
+~~~
+
+## The Digital.Grinnell Oral History Workflow
+
+### InqScribe IOH Transcription Workflow
+
+Grinnell College employs the transcription workflow described here when preparing oral histories for ingest into Digital Grinnell.  This workflow includes a commercially available software tool called [InqScribe](https://www.inqscribe.com) and at Grinnell transcribers also frequently use a *VEC USB Footpedal* to help control playback of audio to be transcribed.
+
+### Training Video
+
+An 11.5 minute long is available to reinforce the concepts presented below.
+
+[![training video](http://img.youtube.com/vi/MlGTPPN2uAA/0.jpg)](http://www.youtube.com/watch?v=MlGTPPN2uAA "Grinnell College Digital Oral History Transcription Workflow")
+
+The video moves very quickly, compressing a 2-hour transcription session down into 11.5 minutes.  You may find it necessary to slow the playback down, or rewind and repeat portions of the video, using the controls available in your browser.
+
+### Workflow Description
+
+A typical transcription session generally involves the following steps...
+
+OHScribe creates a new cue every time it encounters a timecode, so every timecode should be followed immediately by a newline, speaker name and pipe character. For areas of the recording that are dense with speaker changes, no timecode is needed to transition to the next speaker, i.e. the transcriber can represent a change in speaker by entering a newline, the speaker name and pipe character to start the next speaker's dialogue. This will result in a cue that has mutliple speakers.
+
+### InqScribe Snippets and Triggers (Shortcuts)
+
+[InqScribe](https://www.inqscribe.com) allows a transcriber to define and use [Snippets](http://docs.inqscribe.com/2.2/snippets.html), short bits of frequently-repeated text, with associated triggers or keyboard [Shortcuts](http://docs.inqscribe.com/2.2/keyboardshortcuts.html) that make it easy to quickly add key elements to a transcript.  The following are samples of *Snippets* and their corresponding *Triggers*/*Shortcuts* used in conjunction with our workflow.
+
+![file-inqscribesnippet1-png](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/InqScribeSnippet1.png)
+
+The above image is an example of a *Snippet* we refer to as a 'Speaker Timecode'.  When triggered, this snippet will insert:
+
+  - A timecode, the `${TIME}` variable portion of the snippet, and
+  - A name identifying the speaker providing the transcribed text that will follow.
+
+In this example the speaker's name is 'Darrell' and that name is followed by a *REQUIRED* space and a pipe character, the vertical bar, in the portion that reads `Darrell | `. There is a space after the pipe character so as to allow the thranscriber to simply press the triger and then immediately start to type the dialogue into InqScribe. OHScribe does not currently correctly parse a pipe character from other text unless it is surrounded by spaces on either side.
+
+If a speaker has a double first name, the name will need to be hyphentated because OHScribe will only identify one word/name, separated from others by spaces, as the trigger name for the speaker. The first name in the `<speaker> FirstName LastName </speaker>` tag MUST match the name that follows after the timecode.
+
+Note also that in this example our *Speaker Timecode* snippet is named `Darrell Fisher` and it is assigned to trigger `KP1` which has a corresponding keyboard shortcut. The name of the timecode snippet is not important, and can be left vague/general, as with the `Interviewer` example.
+
+Any additional speakers can be represented in the same way by selecting 'Add' and then filling in the correct information similarly to the example above.
+
+Each time a new speaker is introduced, there must be `<speaker> FirstName LastName </speaker>` line added between the timecode and the `FirstName | `. Each speaker should only have one instance of speaker tags in the InqScribe file.
+
+![file-inqscribesnippet2-png](https://raw.githubusercontent.com/DigitalGrinnell/OHScribe/main/docs/InqScribeSnippet2.png)
+
+The second image, immediately above, is an example of a *Snippet* we refer to as a 'Raw Timecode'.  When triggered, this snippet will insert:
+
+  - A timecode, the value of the `${TIME}` variable referenced in the snippet, and nothing else.
+
+Note that a *Raw Timecode* has no associated speaker name as it's intended to be used when the speaker name is unknown, or when there isn't time during transcription to pause for identification of the next speaker.
+
+This example *Raw Timecode* snippet is named `{$TIME}` and it is assigned to the `Enter` trigger which generally corresponds to the *Enter* or *Return* key on the keyboard.
+
+### Export to XML
+
+Once the transcription and timecodes are in place, save the InqScribe file and export it to an XML file by selecting `File -> Export -> XML`.
+
+
 
 ### Errors
 

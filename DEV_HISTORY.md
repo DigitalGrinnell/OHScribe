@@ -2,7 +2,59 @@
 
 ## Move to Reclaim Cloud
 
-In March 2022 a move was made to migrate the __OHScribe!__ application to a new host, __Reclaim Cloud__ (RC).  Numerous changes were implemented to get the code working properly in RC's version of a `wsgi` production environment.  Intended functionality remains unchanged, as does most of the layout, theme, and behavior.
+In March 2022 a move was made to migrate the __OHScribe!__ application to a new host, [Reclaim Cloud](https://reclaim.cloud/) (RC).  A few changes were required to get the code working properly in RC's version of a `wsgi` production environment.  Intended functionality remains unchanged, as does most of the layout, theme, and behavior.
+
+### Necessary Changes for Reclaim Cloud
+
+_Reclaim Cloud_ employs a [Jelastic](https://jelastic.com/) interface for PaaS configuration.  There's helpful documentation in one of Jelastic's blog posts, [Python Cloud Hosting with Jelastic Paas](https://jelastic.com/blog/python-cloud-hosting/), but it lacks anything specific to [Flask](https://flask.palletsprojects.com/en/2.1.x/) or the [Web Server Gateway Interface](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface) (WSGI) production server that RC provides.
+
+There are many flavors of WSGI and subsequently many ways to configure it. I found the official Flask documentation at https://flask.palletsprojects.com/en/2.0.x/deploying/ to be most helpful.  However, that documentation presents 6 different techniques for working with 6 different cloud providers like _Heroku_, _Google_, _AWS_, _Azure_, and _PythonAnywhere_.  I tried all 6, and as luck would have it, the _last of the six_ worked.  _Jelastic_ is not mentioned in any of this documentation (not that I could find anyway), but if you follow the _PythonAnywhere_ example it works!
+
+Ultimately I found the documents at https://help.pythonanywhere.com/pages/Flask/ to be most helpful.
+
+### `wsgi.py` Holds the Key
+
+To successfully run a Python/Flask app in a _Jelastic_/WSGI environment I found it necessary to create a new `wsgi.py` file, and mine reads like this:
+
+```wsgi.py
+## Per https://help.pythonanywhere.com/pages/Flask/
+
+import sys
+path = '/var/www/webroot/ROOT'
+if path not in sys.path:
+   sys.path.insert(0, path)
+
+from ohscribe import app as application
+```
+
+I also merged all of my previously "distributed" code (copies are now found in files named `.obsolete/routes.py`, `.obsolete/forms.py`, `.obsolete,errors.py`, `.obsolete/actions.py`, and `app.py`) into a single source code file named `ohscribe.py`.  This move wasn't entirely necessary but it does make path-handling easier in the production environment.
+
+The critical portions of `ohscribe.py` that correspond with `wsgi.py` read like this:
+
+```ohscirbe.py
+# Initialize the app... populate app.config[] and session[] keys
+app = Flask(__name__)
+app.config.from_object(Config)
+app.static_folder = 'static'
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+```
+
+...and...
+
+```ohscribe.py
+if __name__ == '__main__':    # development?  Returns false in production, I think.
+    app.run()
+```
+
+### Implement `Session` from `flask_session`
+
+The final necessary change required that I engage the `flask_session` library and make use of a web `Session` to persist user selections and data from one operation to the next.  See `ohscribe.py` for additional details.
+
+| Attention! |
+| --- |
+| Most of what follows is **obsolete**, replaced by the features and deployment details outlined above. |
 
 ## Early History
 

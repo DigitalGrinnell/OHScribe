@@ -1,4 +1,3 @@
-
 ## InqScribe IOH Transcription Workflow
 
 Grinnell College employs the transcription workflow described here when preparing oral histories for ingest into Digital Grinnell.  This workflow includes a commercially available software tool called [InqScribe](https://www.inqscribe.com) and at Grinnell transcribers also frequently use a *VEC USB Footpedal* to help control playback of audio to be transcribed.
